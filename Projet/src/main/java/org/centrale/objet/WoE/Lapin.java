@@ -22,7 +22,7 @@ public class Lapin extends Monstre{
         ptPar = 0;
         pageAtt = 50;
         pagePar = 70;
-        pos = new Point2D();       
+        pos = new Point2D(0,0);       
     }
     
     /**

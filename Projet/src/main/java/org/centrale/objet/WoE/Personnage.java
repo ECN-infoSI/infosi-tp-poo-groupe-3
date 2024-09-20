@@ -190,7 +190,8 @@ public class Personnage {
      * Constructeur de l'objet personnage
      * @param perso
      */
-    public void Personnage(Personnage perso){
+        
+    public Personnage(Personnage perso){
         nom = perso.getNom();
         ptVie = perso.getPtVie();
         degatAtt = perso.getDegatAtt();
@@ -204,7 +205,8 @@ public class Personnage {
     /**
      * Constructeur de l'objet personnage
      */
-    public void Personnage(){
+        
+    public Personnage(){
         nom = "";
         ptVie = 0;
         degatAtt = 0;
@@ -212,7 +214,7 @@ public class Personnage {
         pagePar = 0;
         pageAtt = 0;
         distAttMax = 0;
-        pos = new Point2D();
+        pos = new Point2D(0,0);
     }
     
     /**

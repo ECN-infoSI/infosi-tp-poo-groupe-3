@@ -22,22 +22,46 @@ public class Paysan extends Personnage{
      * @param p
      * @param nbFl
      */
-    public void Paysan(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFl){
-        this.Personnage(n, pV, dA, pPar, paAtt, paPar, dMax, p);
+
+    public Paysan(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFl){
+        nom = n;
+        ptVie = pV;
+        degatAtt = dA;
+        ptPar = pPar;
+        pagePar = paPar;
+        pageAtt = paAtt;
+        distAttMax = dMax;
+        pos = p;
     }
     
     /**
      *
      * @param p
      */
-    public void Paysan(Paysan p){
-        this.Personnage(p);
+    
+    public Paysan(Paysan p){
+        nom = p.getNom();
+        ptVie = p.getPtVie();
+        degatAtt = p.getDegatAtt();
+        ptPar = p.getPtPar();
+        pagePar = p.getPagePar();
+        pageAtt = p.getPageAtt();
+        distAttMax = p.getDistAttMax();
+        pos = new Point2D(p.getPos());
     }
     
     /**
      *
      */
-    public void Paysan(){
-        this.Personnage();
+    
+    public Paysan(){
+        nom = "";
+        ptVie = 0;
+        degatAtt = 0;
+        ptPar = 0;
+        pagePar = 0;
+        pageAtt = 0;
+        distAttMax = 0;
+        pos = new Point2D(0,0);
     }
 }

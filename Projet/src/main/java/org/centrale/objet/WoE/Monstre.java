@@ -53,7 +53,7 @@ public class Monstre {
         ptPar = 0;
         pageAtt = 0;
         pagePar = 0;
-        pos = new Point2D();       
+        pos = new Point2D(0,0);       
     }
     
     /**
@@ -194,7 +194,7 @@ public class Monstre {
             xAl = genAl.nextInt(2)-1;
             yAl = genAl.nextInt(2)-1;
         }
-    pos.Translate(xAl, yAl);
+        pos.Translate(xAl, yAl);
     }
     
     /**

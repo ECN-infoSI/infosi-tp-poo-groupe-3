@@ -15,6 +15,9 @@ public class TestPoint2D {
      * @param args
      */
     public static void main(String[] args){
+    
+        /**public static void main(String[] args){
+
         Point2D p1 = new Point2D();
         p1.affiche();
         Point2D p2 = new Point2D(1, 1);
@@ -30,5 +33,7 @@ public class TestPoint2D {
         System.out.println("la distance entre p2 et p3 est "+d1+".");
         float d2 = p2.distance(p1);
         System.out.println("la distance entre p1 et p2 est "+d2+".");
+    }
+    **/
     }
 }
