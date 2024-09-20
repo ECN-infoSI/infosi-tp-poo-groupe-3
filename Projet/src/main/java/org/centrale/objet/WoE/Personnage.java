@@ -7,8 +7,9 @@ package org.centrale.objet.WoE;
 import java.util.Random;
 /**
  *
- * @author thoma
+ * @author thomas
  */
+
 public class Personnage {
     protected String nom;
     protected int ptVie;
@@ -75,6 +76,17 @@ public class Personnage {
         this.pos = pos;
     }
     
+    /** 
+     * Constructeur de l'objet Personnage.
+     * @param n     Nom du personnage
+     * @param pV    Nombre de points de vie du personnage
+     * @param dA    Nombre de dégats que le personnage peut infliger en attaquant
+     * @param pPar  Nombre de points d'aptitude à parer du personnage
+     * @param paAtt Pourcentage d'attaque du personnage
+     * @param paPar Pourcentage de parade du personnage
+     * @param dMax  Distance maximale d'attaque du personnage
+     * @param p     Position du personnage dans le monde
+     */
     public void Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
         nom = n;
         ptVie = pV;
