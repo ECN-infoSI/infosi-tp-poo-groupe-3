@@ -13,11 +13,13 @@ public class World {
     public Lapin bug2;
     public Archer robin;
     public Paysan peon;
+    public Archer guillaumeT;
     
     public World(){
         bug1 = new Lapin();
         bug2 = new Lapin();
         robin = new Archer();
+        guillaumeT = new Archer(robin);
         peon = new Paysan();
     }
     

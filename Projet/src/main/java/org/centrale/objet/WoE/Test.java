@@ -12,11 +12,14 @@ public class Test {
     public static void main(String[] args){
         World monde = new World();
         monde = monde.creerMondeAlea();
-        monde.bug1.affiche();
+        /**monde.bug1.affiche();
         monde.peon.affiche();
         monde.bug1.deplace();
         monde.peon.deplace();
         monde.bug1.affiche();
-        monde.peon.affiche();
+        monde.peon.affiche();**/
+        monde.robin.deplace();
+        monde.robin.affiche();
+        monde.guillaumeT.affiche();
     }
 }
