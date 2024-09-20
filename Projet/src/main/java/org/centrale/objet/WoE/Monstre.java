@@ -104,7 +104,7 @@ public class Monstre {
             xAl = genAl.nextInt(2)-1;
             yAl = genAl.nextInt(2)-1;
         }
-    pos.Translate(xAl, yAl);
+        pos.Translate(xAl, yAl);
     }
     
     public void affiche(){

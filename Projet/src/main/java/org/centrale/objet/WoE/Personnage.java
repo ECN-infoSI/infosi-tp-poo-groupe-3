@@ -75,7 +75,7 @@ public class Personnage {
         this.pos = pos;
     }
     
-    public void Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
+    public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
         nom = n;
         ptVie = pV;
         degatAtt = dA;
@@ -86,7 +86,7 @@ public class Personnage {
         pos = p;
     }
     
-    public void Personnage(Personnage perso){
+    public Personnage(Personnage perso){
         nom = perso.getNom();
         ptVie = perso.getPtVie();
         degatAtt = perso.getDegatAtt();
@@ -97,7 +97,7 @@ public class Personnage {
         pos = new Point2D(perso.getPos());
     }
     
-    public void Personnage(){
+    public Personnage(){
         nom = "";
         ptVie = 0;
         degatAtt = 0;
