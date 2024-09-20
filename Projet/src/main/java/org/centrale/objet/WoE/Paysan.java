@@ -9,7 +9,7 @@ package org.centrale.objet.WoE;
  * @author thomas
  */
 public class Paysan extends Personnage{
-    public void Paysan(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFl){
+    public Paysan(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFl){
         nom = n;
         ptVie = pV;
         degatAtt = dA;
