@@ -10,7 +10,7 @@ import java.util.Random;
  * @author thomas
  */
 
-public class Personnage {
+public class Personnage extends Creature {
 
     /**
      * Nom du personnage
