@@ -9,7 +9,7 @@ import java.util.Random;
  *
  * @author titou
  */
-public class Monstre {
+public class Monstre extends Creature {
 
     /**
      *
