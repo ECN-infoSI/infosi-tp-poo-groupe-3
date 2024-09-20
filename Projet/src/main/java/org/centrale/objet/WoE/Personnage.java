@@ -175,7 +175,7 @@ public class Personnage extends Creature {
      * @param dMax  Distance maximale d'attaque du personnage
      * @param p     Position du personnage dans le monde
      */
-    public void Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
+    public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
         nom = n;
         ptVie = pV;
         degatAtt = dA;

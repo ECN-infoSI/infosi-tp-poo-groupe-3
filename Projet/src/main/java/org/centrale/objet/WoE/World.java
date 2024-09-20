@@ -35,11 +35,14 @@ public class World {
      */
     public World creerMondeAlea(){
         World Monmonde = new World();
-        while(!((bug1.pos!=bug2.pos)&&(bug1.pos!=robin.pos)&&(bug1.pos!=peon.pos)&&(bug2.pos!=robin.pos)&&(bug2.pos!=peon.pos)&&(peon.pos!=robin.pos))){
+        while(!((bug1.pos!=bug2.pos)&&(bug1.pos!=robin.pos)&&(bug1.pos!=peon.pos)&&(bug1.pos!=grosBill.pos)&&(bug1.pos!=Wolfie.pos)&&(bug2.pos!=robin.pos)&&(bug2.pos!=grosBill.pos)&&(bug2.pos!=Wolfie.pos)&&(bug2.pos!=peon.pos)&&(peon.pos!=robin.pos)&&(peon.pos!=grosBill.pos)&&(peon.pos!=Wolfie.pos)&&(grosBill.pos!=robin.pos)&&(Wolfie.pos!=robin.pos)&&(grosBill.pos!=Wolfie.pos))){
             Monmonde.bug1.deplace();
             Monmonde.bug2.deplace();
             Monmonde.robin.deplace();
             Monmonde.peon.deplace();
+            Monmonde.grosBill.deplace();
+            Monmonde.Wolfie.deplace();
+            Monmonde.guillaumeT.deplace();
         }
         return Monmonde;
     }
