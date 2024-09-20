@@ -18,7 +18,7 @@ public class Lapin extends Monstre{
      *par défault le lapin se situe au centre du monde et n'a pas de ptVie ni de degAtt
      */
         ptVie = 10;
-        degAtt = 1;
+        degatAtt = 1;
         ptPar = 0;
         pageAtt = 50;
         pagePar = 70;
@@ -31,7 +31,7 @@ public class Lapin extends Monstre{
      */
     public Lapin(Lapin l){
         ptVie = l.ptVie;
-        degAtt = l.degAtt;
+        degatAtt = l.degatAtt;
         ptPar = l.ptPar;
         pageAtt = l.pageAtt;
         pagePar = l.pagePar;
@@ -49,7 +49,7 @@ public class Lapin extends Monstre{
      */
     public Lapin(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
         this.ptVie = ptVie;
-        this.degAtt = degAtt;
+        this.degatAtt = degAtt;
         this.ptPar = ptPar;
         this.pageAtt = pageAtt;
         this.pagePar = pagePar;

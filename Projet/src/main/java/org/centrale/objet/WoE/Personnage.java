@@ -18,151 +18,19 @@ public class Personnage extends Creature {
     protected String nom;
 
     /**
-     * Nombre de points de vie
-     */
-    protected int ptVie;
-
-    /**
-     * Dégats infligés par attaque
-     */
-    protected int degatAtt;
-
-    /**
-     * Points de parade
-     */
-    protected int ptPar;
-
-    /**
-     * Pourcentage de parade
-     */
-    protected int pagePar;
-
-    /**
-     * Pourcentage d'attaque
-     */
-    protected int pageAtt;
-
-    /**
      * Portée maximale d'une attaque
      */
     protected int distAttMax;
 
-    /**
-     * Position du personnage
-     */
-    protected Point2D pos;
-
-    /**
-     *
-     * @return le nombre de point de vie du personnage
-     */
-    public int getPtVie() {
-        return ptVie;
-    }
-
-    /**
-     * 
-     * @param ptVie
-     */
-    public void setPtVie(int ptVie) {
-        this.ptVie = ptVie;
-    }
-
-    /**
-     *
-     * @return le nombre de dégat d'attaque
-     */
-    public int getDegatAtt() {
-        return degatAtt;
-    }
-
-    /**
-     *
-     * @param degatAtt
-     */
-    public void setDegatAtt(int degatAtt) {
-        this.degatAtt = degatAtt;
-    }
-
-    /**
-     *
-     * @return le nombre de point de parade
-     */
-    public int getPtPar() {
-        return ptPar;
-    }
-
-    /**
-     *
-     * @param ptPar
-     */
-    public void setPtPar(int ptPar) {
-        this.ptPar = ptPar;
-    }
-
-    /**
-     *
-     * @return le pourcentage de parade
-     */
-    public int getPagePar() {
-        return pagePar;
-    }
-
-    /**
-     *
-     * @param pagePar
-     */
-    public void setPagePar(int pagePar) {
-        this.pagePar = pagePar;
-    }
-
-    /**
-     *
-     * @return le pourcentage d'attaque
-     */
-    public int getPageAtt() {
-        return pageAtt;
-    }
-
-    /**
-     *
-     * @param pageAtt
-     */
-    public void setPageAtt(int pageAtt) {
-        this.pageAtt = pageAtt;
-    }
-
-    /**
-     *
-     * @return la portée maximale d'une attaque
-     */
     public int getDistAttMax() {
         return distAttMax;
     }
 
-    /**
-     *
-     * @param distAttMax
-     */
     public void setDistAttMax(int distAttMax) {
         this.distAttMax = distAttMax;
     }
 
-    /**
-     *
-     * @return la position du personnage
-     */
-    public Point2D getPos() {
-        return pos;
-    }
-
-    /**
-     *
-     * @param pos
-     */
-    public void setPos(Point2D pos) {
-        this.pos = pos;
-    }
+    
     
     /** 
      * Constructeur de l'objet Personnage.
@@ -175,15 +43,9 @@ public class Personnage extends Creature {
      * @param dMax  Distance maximale d'attaque du personnage
      * @param p     Position du personnage dans le monde
      */
-    public void Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
+    public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
         nom = n;
-        ptVie = pV;
-        degatAtt = dA;
-        ptPar = pPar;
-        pagePar = paPar;
-        pageAtt = paAtt;
         distAttMax = dMax;
-        pos = p;
     }
     
     /**
