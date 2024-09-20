@@ -120,6 +120,10 @@ public class Personnage {
         Random genAl = new Random();
         int xAl = genAl.nextInt(2)-1;
         int yAl = genAl.nextInt(2)-1;
+        while ((xAl == 0)&&(yAl == 0)){
+            xAl = genAl.nextInt(2)-1;
+            yAl = genAl.nextInt(2)-1;
+        }
         pos.Translate(xAl, yAl);
     }
     

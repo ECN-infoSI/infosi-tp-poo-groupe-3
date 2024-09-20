@@ -98,9 +98,13 @@ public class Monstre {
     
     public void deplace(){
         Random genAl = new Random();
-        int dx = genAl.nextInt(2)-1;
-        int dy = genAl.nextInt(2)-1;
-        pos.Translate(dx, dy);
+        int xAl = genAl.nextInt(2)-1;
+        int yAl = genAl.nextInt(2)-1;
+        while ((xAl == 0)&&(yAl == 0)){
+            xAl = genAl.nextInt(2)-1;
+            yAl = genAl.nextInt(2)-1;
+        }
+    pos.Translate(xAl, yAl);
     }
     
     public void affiche(){
