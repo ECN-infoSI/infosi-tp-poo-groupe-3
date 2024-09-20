@@ -14,6 +14,9 @@ public class World {
     private Archer robin;
     private Paysan peon;
     
+    /**
+     *
+     */
     public World(){
         bug1 = new Lapin();
         bug2 = new Lapin();
@@ -21,6 +24,9 @@ public class World {
         peon = new Paysan();
     }
     
+    /**
+     *
+     */
     public void creerMondeAlea(){
         World Monmonde = new World();
         while(!((bug1.pos!=bug2.pos)&&(bug1.pos!=robin.pos)&&(bug1.pos!=peon.pos)&&(bug2.pos!=robin.pos)&&(bug2.pos!=peon.pos)&&(peon.pos!=robin.pos))){

@@ -9,6 +9,10 @@ package org.centrale.objet.WoE;
  * @author titou
  */
 public class Lapin extends Monstre{
+
+    /**
+     *
+     */
     public Lapin(){
         /**
      *par défault le lapin se situe au centre du monde et n'a pas de ptVie ni de degAtt
@@ -21,6 +25,10 @@ public class Lapin extends Monstre{
         pos = new Point2D();       
     }
     
+    /**
+     *
+     * @param l
+     */
     public Lapin(Lapin l){
         ptVie = l.ptVie;
         degAtt = l.degAtt;
@@ -30,6 +38,15 @@ public class Lapin extends Monstre{
         this.pos = new Point2D(l.getPos());
     }
     
+    /**
+     *
+     * @param ptVie
+     * @param degAtt
+     * @param ptPar
+     * @param pageAtt
+     * @param pagePar
+     * @param pos
+     */
     public Lapin(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
         this.ptVie = ptVie;
         this.degAtt = degAtt;

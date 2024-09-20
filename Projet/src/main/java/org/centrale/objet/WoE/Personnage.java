@@ -11,67 +11,155 @@ import java.util.Random;
  */
 
 public class Personnage {
+
+    /**
+     * Nom du personnage
+     */
     protected String nom;
+
+    /**
+     * Nombre de points de vie
+     */
     protected int ptVie;
+
+    /**
+     * Dégats infligés par attaque
+     */
     protected int degatAtt;
+
+    /**
+     * Points de parade
+     */
     protected int ptPar;
+
+    /**
+     * Pourcentage de parade
+     */
     protected int pagePar;
+
+    /**
+     * Pourcentage d'attaque
+     */
     protected int pageAtt;
+
+    /**
+     * Portée maximale d'une attaque
+     */
     protected int distAttMax;
+
+    /**
+     * Position du personnage
+     */
     protected Point2D pos;
 
+    /**
+     *
+     * @return le nombre de point de vie du personnage
+     */
     public int getPtVie() {
         return ptVie;
     }
 
+    /**
+     * 
+     * @param ptVie
+     */
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
 
+    /**
+     *
+     * @return le nombre de dégat d'attaque
+     */
     public int getDegatAtt() {
         return degatAtt;
     }
 
+    /**
+     *
+     * @param degatAtt
+     */
     public void setDegatAtt(int degatAtt) {
         this.degatAtt = degatAtt;
     }
 
+    /**
+     *
+     * @return le nombre de point de parade
+     */
     public int getPtPar() {
         return ptPar;
     }
 
+    /**
+     *
+     * @param ptPar
+     */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
 
+    /**
+     *
+     * @return le pourcentage de parade
+     */
     public int getPagePar() {
         return pagePar;
     }
 
+    /**
+     *
+     * @param pagePar
+     */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
     }
 
+    /**
+     *
+     * @return le pourcentage d'attaque
+     */
     public int getPageAtt() {
         return pageAtt;
     }
 
+    /**
+     *
+     * @param pageAtt
+     */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
     }
 
+    /**
+     *
+     * @return la portée maximale d'une attaque
+     */
     public int getDistAttMax() {
         return distAttMax;
     }
 
+    /**
+     *
+     * @param distAttMax
+     */
     public void setDistAttMax(int distAttMax) {
         this.distAttMax = distAttMax;
     }
 
+    /**
+     *
+     * @return la position du personnage
+     */
     public Point2D getPos() {
         return pos;
     }
 
+    /**
+     *
+     * @param pos
+     */
     public void setPos(Point2D pos) {
         this.pos = pos;
     }
@@ -98,6 +186,10 @@ public class Personnage {
         pos = p;
     }
     
+    /**
+     * Constructeur de l'objet personnage
+     * @param perso
+     */
     public void Personnage(Personnage perso){
         nom = perso.getNom();
         ptVie = perso.getPtVie();
@@ -109,6 +201,9 @@ public class Personnage {
         pos = new Point2D(perso.getPos());
     }
     
+    /**
+     * Constructeur de l'objet personnage
+     */
     public void Personnage(){
         nom = "";
         ptVie = 0;
@@ -120,14 +215,25 @@ public class Personnage {
         pos = new Point2D();
     }
     
+    /**
+     *
+     * @return le nom
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     *
+     * @param nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
     
+    /**
+     * Déplace le personnage sur une case adjacente à sa position.
+     */
     public void deplace(){
         Random genAl = new Random();
         int xAl = genAl.nextInt(2)-1;
@@ -139,6 +245,9 @@ public class Personnage {
         pos.Translate(xAl, yAl);
     }
     
+    /**
+     * Affiche les caractéristiques du personnage
+     */
     public void affiche(){
         System.out.println("nom : "+nom+"\n;points de vie : "+ptVie);
         System.out.println("\n;degats d'attaque : "+degatAtt);

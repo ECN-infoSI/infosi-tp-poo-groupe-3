@@ -11,11 +11,27 @@ package org.centrale.objet.WoE;
 public class Archer extends Personnage{
     private int nbFleche;
     
+    /**
+     *
+     * @param n
+     * @param pV
+     * @param dA
+     * @param pPar
+     * @param paAtt
+     * @param paPar
+     * @param dMax
+     * @param p
+     * @param nbFl
+     */
     public void Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFl){
         this.Personnage(n, pV, dA, pPar, paAtt, paPar, dMax, p);
         nbFleche = nbFl;
     }
     
+    /**
+     *
+     * @param a
+     */
     public void Archer(Archer a){
         nom = a.getNom();
         ptVie = a.getPtVie();
@@ -27,7 +43,10 @@ public class Archer extends Personnage{
         pos = new Point2D(a.getPos());
     }
     
-    public void Archer(){
+    /**
+     *
+     */
+    public Archer(){
         nom = "";
         ptVie = 0;
         degatAtt = 0;

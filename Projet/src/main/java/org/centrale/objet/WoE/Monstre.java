@@ -10,14 +10,40 @@ import java.util.Random;
  * @author titou
  */
 public class Monstre {
+
+    /**
+     *
+     */
     protected int ptVie;
+
+    /**
+     *
+     */
     protected int degAtt;
+
+    /**
+     *
+     */
     protected int ptPar;
+
+    /**
+     *
+     */
     protected int pageAtt;
+
+    /**
+     *
+     */
     protected int pagePar;
+
+    /**
+     *
+     */
     protected Point2D pos;
     
-    
+    /**
+     *
+     */
     public Monstre(){
         /**
      *par défault le monstre se situe au centre du monde et n'a pas de ptVie ni de degAtt
@@ -30,6 +56,10 @@ public class Monstre {
         pos = new Point2D();       
     }
     
+    /**
+     *
+     * @param m
+     */
     public Monstre(Monstre m){
         ptVie = m.ptVie;
         degAtt = m.degAtt;
@@ -39,6 +69,15 @@ public class Monstre {
         this.pos = new Point2D(m.getPos());
     }
     
+    /**
+     *
+     * @param ptVie
+     * @param degAtt
+     * @param ptPar
+     * @param pageAtt
+     * @param pagePar
+     * @param pos
+     */
     public Monstre(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
         this.ptVie = ptVie;
         this.degAtt = degAtt;
@@ -48,54 +87,105 @@ public class Monstre {
         this.pos = new Point2D(pos);       
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPtVie() {
         return ptVie;
     }
 
+    /**
+     *
+     * @param ptVie
+     */
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDegAtt() {
         return degAtt;
     }
 
+    /**
+     *
+     * @param degAtt
+     */
     public void setDegAtt(int degAtt) {
         this.degAtt = degAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPtPar() {
         return ptPar;
     }
 
+    /**
+     *
+     * @param ptPar
+     */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPageAtt() {
         return pageAtt;
     }
 
+    /**
+     *
+     * @param pageAtt
+     */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPagePar() {
         return pagePar;
     }
 
+    /**
+     *
+     * @param pagePar
+     */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
     }
 
+    /**
+     *
+     * @return
+     */
     public Point2D getPos() {
         return pos;
     }
 
+    /**
+     *
+     * @param pos
+     */
     public void setPos(Point2D pos) {
         this.pos = pos;
     }
     
+    /**
+     *
+     */
     public void deplace(){
         Random genAl = new Random();
         int xAl = genAl.nextInt(2)-1;
@@ -107,6 +197,9 @@ public class Monstre {
     pos.Translate(xAl, yAl);
     }
     
+    /**
+     *
+     */
     public void affiche(){
         System.out.println("ptVie = "+ptVie+"\n;degAtt = "+degAtt+"\n;ptPar = "+ptPar+"\n;pageAtt = "+pageAtt+"\n;pagePar = " +pagePar);
         pos.affiche();

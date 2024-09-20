@@ -9,6 +9,11 @@ package org.centrale.objet.WoE;
  * @author titou
  */
 public class TestPoint2D {
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args){
         Point2D p1 = new Point2D();
         p1.affiche();
