@@ -105,7 +105,7 @@ public class Personnage {
         pagePar = 0;
         pageAtt = 0;
         distAttMax = 0;
-        pos = new Point2D();
+        pos = new Point2D(0,0);
     }
     
     public String getNom() {

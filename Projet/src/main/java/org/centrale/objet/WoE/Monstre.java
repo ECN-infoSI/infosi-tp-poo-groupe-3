@@ -27,7 +27,7 @@ public class Monstre {
         ptPar = 0;
         pageAtt = 0;
         pagePar = 0;
-        pos = new Point2D();       
+        pos = new Point2D(0,0);       
     }
     
     public Monstre(Monstre m){
