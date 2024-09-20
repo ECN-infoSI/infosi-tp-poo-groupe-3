@@ -14,6 +14,8 @@ public class World {
     public Archer robin;
     public Paysan peon;
     public Archer guillaumeT;
+    public Guerrier grosBill;
+    public Loup Wolfie;
     
     /**
      *
@@ -24,6 +26,8 @@ public class World {
         robin = new Archer();
         guillaumeT = new Archer(robin);
         peon = new Paysan();
+        grosBill = new Guerrier();
+        Wolfie = new Loup();
     }
     
     /**
