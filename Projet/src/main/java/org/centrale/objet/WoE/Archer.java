@@ -4,6 +4,8 @@
  */
 package org.centrale.objet.WoE;
 
+import java.util.Random;
+
 /**
  *
  * @author thomas
@@ -67,7 +69,26 @@ public class Archer extends Personnage{
         nbFleche = 0;
     }
     
+    /**
+     * 
+     * @param c 
+     * On commence par vérifier que le combat à distance est possible et que l'archer a au moins une flèche
+     * On test la réussite de l'attaque
+     * Si les ptVie tombent en dessous de 0 on les remets à 0.
+     */
     public void combattre(Creature c){
-        
+        if ((this.pos.distance(c.pos)<=this.distAttMax)&&(this.pos.distance(c.pos)>1)&&(this.nbFleche>0)){
+            this.nbFleche -= 1;
+            Random genAl = new Random();
+            int jetAtt = genAl.nextInt(99)+1;
+            int deg = 0;
+            if (jetAtt<=this.pageAtt){
+                deg += this.degatAtt;          
+            }
+            c.setPtVie(deg);
+            if (c.getPtVie() < 0){
+                c.setPtVie(0);
+            }
+        }
     }
 }
