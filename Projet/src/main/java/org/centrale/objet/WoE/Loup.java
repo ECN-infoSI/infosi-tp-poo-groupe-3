@@ -15,12 +15,7 @@ public class Loup extends Monstre{
         /**
      *par défault le loup se situe au centre du monde et n'a pas de ptVie ni de degAtt
      */
-        ptVie = 20;
-        degatAtt = 5;
-        ptPar = 2;
-        pageAtt = 70;
-        pagePar = 50;
-        pos = new Point2D(0,0);       
+        super();       
     }
     
     /**
@@ -28,12 +23,7 @@ public class Loup extends Monstre{
      * @param lp
      */
     public Loup(Loup lp){
-        ptVie = lp.ptVie;
-        degatAtt = lp.degatAtt;
-        ptPar = lp.ptPar;
-        pageAtt = lp.pageAtt;
-        pagePar = lp.pagePar;
-        this.pos = new Point2D(lp.getPos());
+        super(lp.ptVie, lp.degatAtt, lp.ptPar, lp.pageAtt, lp.pagePar, new Point2D(lp.getPos()));
     }
     
     /**
@@ -46,12 +36,7 @@ public class Loup extends Monstre{
      * @param pos
      */
     public Loup(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
-        this.ptVie = ptVie;
-        this.degatAtt = degAtt;
-        this.ptPar = ptPar;
-        this.pageAtt = pageAtt;
-        this.pagePar = pagePar;
-        this.pos = new Point2D(pos);       
+        super(ptVie, degAtt, ptPar, pageAtt, pagePar, pos);      
     }
     
     /**

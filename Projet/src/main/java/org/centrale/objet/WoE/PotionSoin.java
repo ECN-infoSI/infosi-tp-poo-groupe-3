@@ -11,14 +11,14 @@ package org.centrale.objet.WoE;
 public class PotionSoin extends Objet {
     
     public PotionSoin(String n){
-        nom = n;
+        super(n);
     }
     
     public PotionSoin(PotionSoin ps){
-        nom = ps.getNom();
+        super(ps.getNom());
     }
     
     public PotionSoin(){
-        nom = "";
+        super();
     }
 }

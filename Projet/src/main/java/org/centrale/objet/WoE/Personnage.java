@@ -44,24 +44,20 @@ public class Personnage extends Creature {
      * @param p     Position du personnage dans le monde
      */
     public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
+        super(pV, dA, pPar, paAtt, paPar, p);
         nom = n;
         distAttMax = dMax;
     }
     
     /**
      * Constructeur de l'objet personnage
-     * @param perso
+     * @param p
      */
         
-    public Personnage(Personnage perso){
-        nom = perso.getNom();
-        ptVie = perso.getPtVie();
-        degatAtt = perso.getDegatAtt();
-        ptPar = perso.getPtPar();
-        pagePar = perso.getPagePar();
-        pageAtt = perso.getPageAtt();
-        distAttMax = perso.getDistAttMax();
-        pos = new Point2D(perso.getPos());
+    public Personnage(Personnage p){
+        super(p.getPtVie(), p.getDegatAtt(), p.getPtPar(), p.getPagePar(), p.getPageAtt(), new Point2D(p.getPos()));
+        nom = p.getNom();
+        distAttMax = p.getDistAttMax();
     }
     
     /**
@@ -69,14 +65,9 @@ public class Personnage extends Creature {
      */
         
     public Personnage(){
+        super();
         nom = "";
-        ptVie = 0;
-        degatAtt = 0;
-        ptPar = 0;
-        pagePar = 0;
-        pageAtt = 0;
         distAttMax = 0;
-        pos = new Point2D(0,0);
     }
     
     /**

@@ -12,7 +12,16 @@ import java.util.Random;
  */
 public class Archer extends Personnage{
     private int nbFleche;
+
+    public int getNbFleche() {
+        return nbFleche;
+    }
+
+    public void setNbFleche(int nbFleche) {
+        this.nbFleche = nbFleche;
+    }
     
+      
     /**
      *
      * @param n
@@ -27,14 +36,7 @@ public class Archer extends Personnage{
      */
         
     public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFl){
-        nom = n;
-        ptVie = pV;
-        degatAtt = dA;
-        ptPar = pPar;
-        pagePar = paPar;
-        pageAtt = paAtt;
-        distAttMax = dMax;
-        pos = p;
+        super(n, pV, dA, pPar, paAtt, paPar, dMax, p);
         nbFleche = nbFl;
     }
     
@@ -44,28 +46,15 @@ public class Archer extends Personnage{
      */
         
     public Archer(Archer a){
-        nom = a.getNom();
-        ptVie = a.getPtVie();
-        degatAtt = a.getDegatAtt();
-        ptPar = a.getPtPar();
-        pagePar = a.getPagePar();
-        pageAtt = a.getPageAtt();
-        distAttMax = a.getDistAttMax();
-        pos = new Point2D(a.getPos());
+        super(a.getNom(), a.getPtVie(), a.getDegatAtt(), a.getPtPar(), a.getPageAtt(), a.getPagePar(), a.getDistAttMax(), new Point2D(a.getPos()));
+        nbFleche = a.getNbFleche();
     }
     
     /**
      *
      */
     public Archer(){
-        nom = "";
-        ptVie = 0;
-        degatAtt = 0;
-        ptPar = 0;
-        pagePar = 0;
-        pageAtt = 0;
-        distAttMax = 0;
-        pos = new Point2D(0,0);
+        super();
         nbFleche = 0;
     }
     

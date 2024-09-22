@@ -18,12 +18,7 @@ public class Monstre extends Creature {
         /**
      *par défault le monstre se situe au centre du monde et n'a pas de ptVie ni de degAtt
      */
-        ptVie = 0;
-        degatAtt = 0;
-        ptPar = 0;
-        pageAtt = 0;
-        pagePar = 0;
-        pos = new Point2D(0,0);       
+        super();
     }
     
     /**
@@ -31,12 +26,7 @@ public class Monstre extends Creature {
      * @param m
      */
     public Monstre(Monstre m){
-        ptVie = m.ptVie;
-        degatAtt = m.degatAtt;
-        ptPar = m.ptPar;
-        pageAtt = m.pageAtt;
-        pagePar = m.pagePar;
-        this.pos = new Point2D(m.getPos());
+        super(m.ptVie, m.degatAtt, m.ptPar, m.pageAtt, m.pagePar, new Point2D(m.getPos()));
     }
     
     /**
@@ -49,12 +39,7 @@ public class Monstre extends Creature {
      * @param pos
      */
     public Monstre(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
-        this.ptVie = ptVie;
-        this.degatAtt = degAtt;
-        this.ptPar = ptPar;
-        this.pageAtt = pageAtt;
-        this.pagePar = pagePar;
-        this.pos = new Point2D(pos);       
+        super(ptVie, degAtt, ptPar, pageAtt, pagePar, pos);   
     }
     
     /**

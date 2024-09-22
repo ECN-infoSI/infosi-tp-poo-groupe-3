@@ -6,19 +6,19 @@ package org.centrale.objet.WoE;
 
 /**
  *
- * @author thoma
+ * @author thomas
  */
 public class Epee extends Objet{
     
     public Epee(String n){
-        nom = n;
+        super(n);
     }
     
     public Epee(Epee e){
-        nom = e.getNom();
+        super(e.getNom());
     }
     
     public Epee(){
-        nom = "";
+        super();
     }
 }
