@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
-import java.util.Random;
 
 /**
  *
@@ -41,21 +40,7 @@ public class Monstre extends Creature {
     public Monstre(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
         super(ptVie, degAtt, ptPar, pageAtt, pagePar, pos);   
     }
-    
-    /**
-     *
-     */
-    public void deplace(){
-        Random genAl = new Random();
-        int xAl = genAl.nextInt(2)-1;
-        int yAl = genAl.nextInt(2)-1;
-        while ((xAl == 0)&&(yAl == 0)){
-            xAl = genAl.nextInt(2)-1;
-            yAl = genAl.nextInt(2)-1;
-        }
-        pos.Translate(xAl, yAl);
-    }
-    
+       
     /**
      *
      */

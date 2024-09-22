@@ -72,5 +72,8 @@ public class Guerrier extends Personnage {
                 c.setPtVie(0);
             }
         }
+        else {
+            System.out.println("attaque impossible");
+        }
     }
 }

@@ -4,7 +4,6 @@
  */
 package org.centrale.objet.WoE;
 
-import java.util.Random;
 /**
  *
  * @author thomas
@@ -86,20 +85,7 @@ public class Personnage extends Creature {
         this.nom = nom;
     }
     
-    /**
-     * Déplace le personnage sur une case adjacente à sa position.
-     */
-    public void deplace(){
-        Random genAl = new Random();
-        int xAl = genAl.nextInt(2)-1;
-        int yAl = genAl.nextInt(2)-1;
-        while ((xAl == 0)&&(yAl == 0)){
-            xAl = genAl.nextInt(2)-1;
-            yAl = genAl.nextInt(2)-1;
-        }
-        pos.Translate(xAl, yAl);
-    }
-    
+           
     /**
      * Affiche les caractéristiques du personnage
      */

@@ -67,5 +67,8 @@ public class Loup extends Monstre{
                 c.setPtVie(0);
             }
         }
+        else {
+            System.out.println("attaque inmpossible");
+        }
     }
 }
