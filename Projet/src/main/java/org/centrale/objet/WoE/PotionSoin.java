@@ -6,19 +6,33 @@ package org.centrale.objet.WoE;
 
 /**
  *
- * @author thoma
+ * @author thomas
  */
 public class PotionSoin extends Objet {
     
-    public PotionSoin(String n){
-        super(n);
+    protected int soin;
+    
+    public PotionSoin(String n, Point2D p, int s){
+        super(n, p);
+        soin = s;
     }
     
     public PotionSoin(PotionSoin ps){
-        super(ps.getNom());
+        super(ps.getNom(), ps.getPos());
+        soin = ps.getSoin();
     }
     
     public PotionSoin(){
         super();
     }
+
+    public int getSoin() {
+        return soin;
+    }
+
+    public void setSoin(int soin) {
+        this.soin = soin;
+    }
+    
+    
 }

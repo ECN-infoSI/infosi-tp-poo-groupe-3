@@ -10,17 +10,21 @@ package org.centrale.objet.WoE;
  */
 public class Objet {
     protected String nom;
+    protected Point2D pos;
     
-    public Objet(String n){
+    public Objet(String n, Point2D p){
         nom = n;
+        pos = p;
     }
     
     public Objet(Objet o){
         nom = o.getNom();
+        pos = o.getPos();
     }
     
     public Objet(){
         nom = "";
+        pos = new Point2D();
     }
     
     public String getNom() {
@@ -30,4 +34,14 @@ public class Objet {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public Point2D getPos() {
+        return pos;
+    }
+
+    public void setPos(Point2D pos) {
+        this.pos = pos;
+    }
+    
+    
 }
