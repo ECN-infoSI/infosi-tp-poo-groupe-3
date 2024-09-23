@@ -74,10 +74,11 @@ public class Archer extends Personnage{
             if (jetAtt<=this.pageAtt){
                 deg += this.degatAtt;          
             }
-            c.setPtVie(deg);
+            c.setPtVie(c.getPtVie()-deg);
             if (c.getPtVie() < 0){
                 c.setPtVie(0);
             }
+            System.out.println(deg+" degats infliges !");
         }
         else {
             System.out.println("attaque impossible");

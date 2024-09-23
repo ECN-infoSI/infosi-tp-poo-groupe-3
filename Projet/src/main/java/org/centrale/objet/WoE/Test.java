@@ -36,16 +36,32 @@ public class Test {
         monde.grosBill.setDistAttMax(1);
         
         monde.robin.deplace();
-        monde.robin.affiche();
-        monde.guillaumeT.affiche();
         
         monde.robin.combattre(monde.grosBill);
         Point2D p1 = new Point2D(0, 0);
         Point2D p2 = new Point2D(0, 1);
+        Point2D p3 = new Point2D(1,1);
         monde.robin.setPos(p1);
         monde.grosBill.setPos(p2);
         monde.robin.combattre(monde.grosBill);
         monde.grosBill.combattre(monde.robin);
+        
+        monde.wolfie.setPtVie(5);
+        monde.wolfie.setDegatAtt(4);
+        monde.wolfie.setPtPar(1);
+        monde.wolfie.setPageAtt(70);
+        monde.wolfie.setPagePar(40);
+        
+        monde.wolfie.setPos(p3);
+        monde.wolfie.combattre(monde.robin);
+        monde.robin.combattre(monde.wolfie);
+        
+        System.out.println("stat de wolfie");
+        monde.wolfie.affiche();
+        System.out.println("stat de grosBill");
+        monde.grosBill.affiche();
+        System.out.println("stat de robin");
         monde.robin.affiche();
+
     }
 }

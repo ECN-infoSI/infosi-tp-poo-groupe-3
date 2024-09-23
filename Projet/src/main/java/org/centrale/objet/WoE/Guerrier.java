@@ -62,14 +62,20 @@ public class Guerrier extends Personnage {
                 deg += this.degatAtt;
                 int jetPar = genAl.nextInt(99)+1;
                 if (jetPar<=c.pagePar){
+                    System.out.println("parade réussie");
                     deg -= c.ptPar;
                 }             
             }
             if (deg>0){
-                c.setPtVie(deg);
+                c.setPtVie(c.getPtVie()- deg);
+                System.out.println(deg+" degats infliges !");
+            }
+            else {
+                System.out.println("Attaque trop faible");
             }
             if (c.getPtVie() < 0){
                 c.setPtVie(0);
+                System.out.println("adversaire KO");
             }
         }
         else {
