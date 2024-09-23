@@ -72,13 +72,16 @@ public class Archer extends Personnage{
             int jetAtt = genAl.nextInt(99)+1;
             int deg = 0;
             if (jetAtt<=this.pageAtt){
-                deg += this.degatAtt;          
+                deg += this.degatAtt;
+                c.setPtVie(c.getPtVie()-deg);
+                if (c.getPtVie() < 0){
+                    c.setPtVie(0);
+                }
+                System.out.println(deg+" degats infliges !");
             }
-            c.setPtVie(c.getPtVie()-deg);
-            if (c.getPtVie() < 0){
-                c.setPtVie(0);
+            else{
+                System.out.println("attaque manquée");
             }
-            System.out.println(deg+" degats infliges !");
         }
         else {
             System.out.println("attaque impossible");

@@ -45,7 +45,11 @@ public class Monstre extends Creature {
      *
      */
     public void affiche(){
-        System.out.println("ptVie = "+ptVie+"\n;degAtt = "+degatAtt+"\n;ptPar = "+ptPar+"\n;pageAtt = "+pageAtt+"\n;pagePar = " +pagePar);
+        System.out.println("points de vie : "+ptVie);
+        System.out.println("degats d'attaque : "+degatAtt);
+        System.out.println("points de parade : "+ptPar);
+        System.out.println("pourcentage de parade : "+pagePar);
+        System.out.println("pourcentage d'attaque : "+pageAtt);
         pos.affiche();
     }
 }

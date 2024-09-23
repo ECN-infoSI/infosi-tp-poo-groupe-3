@@ -90,12 +90,12 @@ public class Personnage extends Creature {
      * Affiche les caractéristiques du personnage
      */
     public void affiche(){
-        System.out.println("nom : "+nom+"\n;points de vie : "+ptVie);
-        System.out.println("\n;degats d'attaque : "+degatAtt);
-        System.out.println("\n;points de parade : "+ptPar);
-        System.out.println("\n;pourcentage de parade : "+pagePar);
-        System.out.println("\n;pourcentage d'attaque : "+pageAtt);
-        System.out.println("\n;distance d'attaque maximale : "+distAttMax);
+        System.out.println("nom : "+nom+"\npoints de vie : "+ptVie);
+        System.out.println("degats d'attaque : "+degatAtt);
+        System.out.println("points de parade : "+ptPar);
+        System.out.println("pourcentage de parade : "+pagePar);
+        System.out.println("pourcentage d'attaque : "+pageAtt);
+        System.out.println("distance d'attaque maximale : "+distAttMax);
         pos.affiche();
     }
 }
