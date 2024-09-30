@@ -44,7 +44,22 @@ public class World {
     }
     
     /**
+     * @param j l'indice de la créture étudiée dans la liste
+     * @return le fait qu'une créature est toute seule sur sa case ou non
+     */
+    public boolean Esttoutseul(int j){
+        Point2D p0 = this.structcrea.get(j).pos;
+        int indic = 0;
+        for (int i = 0 ; i<this.structcrea.size() ; i++){
+            if ((this.structcrea.get(i).pos == p0)&&(i!=j)){
+                indic = 1;
+            }
+        }
+        return indic==0;
+    }
+    /**
      * @return le monde crée aléatoirement
+     * On fait bouger une créature tant qu'elle n'est pas toute seule sur sa case
      */
     public World creerMondeAlea(){
         Random genAl = new Random();
@@ -54,6 +69,11 @@ public class World {
         int nblo = genAl.nextInt(99)+1;
         int nbla = genAl.nextInt(99)+1;
         World Monmonde = new World(nbpa, nbgu, nbar, nblo, nbla);
+        for (int j = 0 ; j<this.structcrea.size() ; j++){
+            while (!Esttoutseul(j)){
+                this.structcrea.get(j).deplace();
+            }
+        }
         return Monmonde;
     }
 }
