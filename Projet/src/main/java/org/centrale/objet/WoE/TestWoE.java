@@ -16,15 +16,12 @@ public class TestWoE {
      * @param args
      */
     public static void main(String[] args){
+        int sum = 0;        
         World monde = new World();
         monde = monde.creerMondeAlea();
-        Set<Creature> setC = monde.structcrea.keySet();
-        Iterator itr = setC.iterator();
-        while (itr.hasNext()) {
-            String str = (String) itr.next();
-            System.out.println(str + ": " + monde.structcrea.get(itr));
+        for (int i=0; i<monde.structcrea.size(); i++){
+            sum = sum + monde.structcrea.get(i).ptVie;
         }
-        System.out.println();
-
+        System.out.println(sum);
     }
 }
