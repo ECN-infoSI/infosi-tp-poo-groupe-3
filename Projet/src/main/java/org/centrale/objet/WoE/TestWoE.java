@@ -18,9 +18,6 @@ public class TestWoE {
         int sum = 0;
         World monde = new World();
         monde = monde.creerMondeAlea(2,2,2,2,2);
-        for (int i = 0; i<100 ;i++){
-            monde.deplacelimite(monde.structcrea.get(0));
-        }
         System.out.println("Est-ce que la creature est dans les limites du monde ?");
         System.out.println(monde.Estdanslimite(monde.structcrea.get(0)));
         System.out.println("Est-ce que la creature est seule sur sa case ?");
