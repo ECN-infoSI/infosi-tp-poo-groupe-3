@@ -9,6 +9,11 @@ package org.centrale.objet.WoE;
  * @author titou
  */
 public class Test {
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args){
         World monde = new World();
         monde = monde.creerMondeAlea();
