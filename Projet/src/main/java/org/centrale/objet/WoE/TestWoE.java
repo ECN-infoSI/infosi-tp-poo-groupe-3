@@ -23,5 +23,6 @@ public class TestWoE {
             sum = sum + monde.structcrea.get(i).ptVie;
         }
         System.out.println(sum);
+        System.out.println(monde.structcrea.size());
     }
 }

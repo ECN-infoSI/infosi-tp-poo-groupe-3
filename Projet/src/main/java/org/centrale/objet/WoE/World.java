@@ -19,6 +19,15 @@ public class World {
         this.structcrea = new LinkedList<>();
     }
     
+    /**
+     * 
+     * @param nbpa nombre de paysan
+     * @param nbgu nombre de guerrier
+     * @param nbar nombre d'archer
+     * @param nblo nombre de loup
+     * @param nbla nombre de lapin
+     * Genere aleatoirement le nombre de creatures passe en parametre
+     */
     public World(int nbpa, int nbgu, int nbar, int nblo, int nbla){
         Random genAl = new Random();
         this.structcrea = new LinkedList<>();
@@ -75,7 +84,7 @@ public class World {
     }
     
     /**
-     * @param j l'indice de la créture étudiée dans la liste
+     * @param j l'indice de la créature étudiée dans la liste
      * @return le fait qu'une créature est toute seule sur sa case ou non
      */
     public boolean Esttoutseul(int j){
