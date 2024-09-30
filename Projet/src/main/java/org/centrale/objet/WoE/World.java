@@ -80,8 +80,8 @@ public class World {
     public void deplacelimite(Creature c){
         int x = c.pos.getX();
         int y = c.pos.getY();
-        int xAl = 0;
-        int yAl = 0;
+        int xAl;
+        int yAl;
         Random genAl = new Random();
         if (x==(this.taille)/2){
             xAl = genAl.nextInt(1)-1;
@@ -111,17 +111,16 @@ public class World {
         return indic==0;
     }
     /**
+     * @param nbpa nombre de paysans
+     * @param nbgu nombre de guerriers
+     * @param nbar nombre d'archers
+     * @param nblo nombre de loups
+     * @param nbla nombre de lapins
      * @return le monde crée aléatoirement
      * On fait bouger une créature tant qu'elle n'est pas toute seule sur sa case
      * Pour le moment ça a été fait au plus simple (en terme de code) donc la complexité est en n^n
      */
-    public World creerMondeAlea(){
-        Random genAl = new Random();
-        int nbpa = genAl.nextInt(99)+1;
-        int nbgu = genAl.nextInt(99)+1;
-        int nbar = genAl.nextInt(99)+1;
-        int nblo = genAl.nextInt(99)+1;
-        int nbla = genAl.nextInt(99)+1;
+    public World creerMondeAlea(int nbpa, int nbgu, int nbar, int nblo, int nbla){
         World Monmonde = new World(nbpa, nbgu, nbar, nblo, nbla);
         for (int j = 0 ; j<this.structcrea.size() ; j++){
             while (!Esttoutseul(j)){

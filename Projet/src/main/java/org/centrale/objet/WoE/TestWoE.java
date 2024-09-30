@@ -16,12 +16,14 @@ public class TestWoE {
      * @param args
      */
     public static void main(String[] args){
-        int sum = 0;        
         World monde = new World();
-        monde = monde.creerMondeAlea();
-        for (int i=0; i<monde.structcrea.size(); i++){
-            sum = sum + monde.structcrea.get(i).ptVie;
+        monde = monde.creerMondeAlea(20, 20, 20, 20, 20);
+        boolean verif = true;
+        for (int i = 0; i<100; i++){
+            if((monde.structcrea.get(i).pos.getX()>25)&&(monde.structcrea.get(i).pos.getX()<=-25)&&(monde.structcrea.get(i).pos.getY()>25)&&(monde.structcrea.get(i).pos.getY()<=-25)){
+                verif = false;
+            }
         }
-        System.out.println(sum);
+        System.out.println(verif);
     }
 }
