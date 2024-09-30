@@ -20,26 +20,57 @@ public class World {
     }
     
     public World(int nbpa, int nbgu, int nbar, int nblo, int nbla){
+        Random genAl = new Random();
         this.structcrea = new LinkedList<>();
         for (int i = 0; i<nbpa; i++){
-            Paysan peon = new Paysan();
+            String nom = "Paysan"+i;
+            int pv = genAl.nextInt(10)+1;
+            int dA = genAl.nextInt(3)+1;
+            int pPar = genAl.nextInt(2)+1;
+            int paAtt = genAl.nextInt(99)+1;
+            int paPar = genAl.nextInt(99)+1;
+            Paysan peon = new Paysan(nom, pv,dA, pPar, paAtt, paPar, 1, new Point2D());
             this.structcrea.add(i, peon);
         }
         for (int i = 0; i<nbgu; i++){
-            Guerrier peon = new Guerrier();
-            this.structcrea.add(i+nbpa, peon);
+            String nom = "Guerrier"+i;
+            int pv = genAl.nextInt(15)+1;
+            int dA = genAl.nextInt(5)+1;
+            int pPar = genAl.nextInt(3)+1;
+            int paPar = genAl.nextInt(49)+50;
+            int paAtt = genAl.nextInt(49)+50;
+            Guerrier grosBill = new Guerrier(nom, pv,dA, pPar, paAtt, paPar, 1, new Point2D());
+            this.structcrea.add(i+nbpa, grosBill);
         }
         for (int i = 0; i<nbar; i++){
-            Archer peon = new Archer();
-            this.structcrea.add(i+nbpa+nbgu, peon);
+            String nom = "Archer"+i;
+            int pv = genAl.nextInt(12)+1;
+            int dA = genAl.nextInt(4)+1;
+            int pPar = genAl.nextInt(2)+1;
+            int paPar = genAl.nextInt(74)+25;
+            int paAtt = genAl.nextInt(74)+25;
+            int dMax = genAl.nextInt(5)+3;
+            int nbFleche = genAl.nextInt(10);
+            Archer robin = new Archer(nom, pv, dA, pPar, paAtt, paPar, dMax, new Point2D(), nbFleche);
+            this.structcrea.add(i+nbpa+nbgu, robin);
         }
         for (int i = 0; i<nblo; i++){
-            Loup peon = new Loup();
-            this.structcrea.add(i+nbpa+nbgu+nbar, peon);
+            int pv = genAl.nextInt(10)+1;
+            int dA = genAl.nextInt(6)+1;
+            int pPar = genAl.nextInt(2)+1;
+            int paAtt = genAl.nextInt(70)+30;
+            int paPar = genAl.nextInt(70)+30;
+            Loup wolfie = new Loup(pv, dA, pPar, paAtt, paPar, new Point2D());
+            this.structcrea.add(i+nbpa+nbgu+nbar, wolfie);
         }
         for (int i = 0; i<nbla; i++){
-            Lapin peon = new Lapin();
-            this.structcrea.add(i+nbpa+nbgu+nbar+nblo, peon);
+            int pv = genAl.nextInt(4)+1;
+            int dA = genAl.nextInt(1)+1;
+            int pPar = genAl.nextInt(1)+1;
+            int paAtt = genAl.nextInt(99);
+            int paPar = genAl.nextInt(99);
+            Lapin bunny = new Lapin(pv, dA, pPar, paAtt, paPar, new Point2D());            
+            this.structcrea.add(i+nbpa+nbgu+nbar+nblo, bunny);
         }
     }
     
