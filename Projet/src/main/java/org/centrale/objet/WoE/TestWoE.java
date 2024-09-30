@@ -25,7 +25,7 @@ public class TestWoE {
         }
         long fin = System.nanoTime();
         System.out.println("Le cumul des pv vaut : "+sum);
-        System.out.println("pour "+monde.structcrea.size()+"creatures.");
-        System.out.println("temps de calcul : "+(fin-debut));
+        System.out.println("pour "+monde.structcrea.size()+" creatures.");
+        System.out.println("temps de calcul : "+((fin-debut)/1000)+" ms");
     }
 }
