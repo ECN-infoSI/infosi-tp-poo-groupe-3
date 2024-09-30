@@ -16,13 +16,16 @@ public class TestWoE {
      * @param args
      */
     public static void main(String[] args){
-        int sum = 0;        
+        int sum = 0;     
         World monde = new World();
         monde = monde.creerMondeAlea();
+        long debut = System.nanoTime();
         for (int i=0; i<monde.structcrea.size(); i++){
             sum = sum + monde.structcrea.get(i).ptVie;
         }
-        System.out.println(sum);
-        System.out.println(monde.structcrea.size());
+        long fin = System.nanoTime();
+        System.out.println("Le cumul des pv vaut : "+sum);
+        System.out.println("pour "+monde.structcrea.size()+"creatures.");
+        System.out.println("temps de calcul : "+(fin-debut));
     }
 }
