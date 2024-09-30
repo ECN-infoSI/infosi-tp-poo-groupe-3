@@ -15,7 +15,9 @@ public class TestWoE {
      * @param args
      */
     public static void main(String[] args){
-        
+        World monde = new World();
+        monde = monde.creerMondeAlea();
+        for
 
     }
 }
