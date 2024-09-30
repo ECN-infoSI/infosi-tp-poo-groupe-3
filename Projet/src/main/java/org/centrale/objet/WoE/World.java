@@ -10,7 +10,7 @@ import java.util.Random;
  * @author titou
  */
 public class World {
-    public Hashtable<Creature, Integer> structcrea;
+    public Hashtable<Integer, Creature> structcrea;
     
     /**
      *
@@ -23,23 +23,23 @@ public class World {
         this.structcrea = new Hashtable<>();
         for (int i = 0; i<nbpa; i++){
             Paysan peon = new Paysan();
-            this.structcrea.put(peon, i);
+            this.structcrea.put(i, peon);
         }
         for (int i = 0; i<nbgu; i++){
-            Guerrier peon = new Guerrier();
-            this.structcrea.put(peon, i+nbpa);
+            Guerrier grosBill = new Guerrier();
+            this.structcrea.put(i+nbpa, grosBill);
         }
         for (int i = 0; i<nbar; i++){
-            Archer peon = new Archer();
-            this.structcrea.put(peon, i+nbpa+nbgu);
+            Archer robin = new Archer();
+            this.structcrea.put(i+nbpa+nbgu, robin);
         }
         for (int i = 0; i<nblo; i++){
-            Loup peon = new Loup();
-            this.structcrea.put(peon, i+nbpa+nbgu+nbar);
+            Loup wolfie = new Loup();
+            this.structcrea.put(i+nbpa+nbgu+nbar, wolfie);
         }
         for (int i = 0; i<nbla; i++){
-            Lapin peon = new Lapin();
-            this.structcrea.put(peon, i+nbpa+nbgu+nbar+nblo);
+            Lapin bug = new Lapin();
+            this.structcrea.put(i+nbpa+nbgu+nbar+nblo, bug);
         }
     }
     

@@ -17,7 +17,9 @@ public class TestWoE {
     public static void main(String[] args){
         World monde = new World();
         monde = monde.creerMondeAlea();
-        for
-
+        System.out.println(monde.structcrea.size());
+        for (Creature c : monde.structcrea){
+            System.out.println(c);
+        }
     }
 }
