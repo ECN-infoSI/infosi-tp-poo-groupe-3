@@ -20,8 +20,15 @@ public class World {
         this.structcrea = new LinkedList<>();
     }
     
-    
-    
+    /**
+     * 
+     * @param nbpa nombre de paysan
+     * @param nbgu nombre de guerrier
+     * @param nbar nombre d'archer
+     * @param nblo nombre de loup
+     * @param nbla nombre de lapin
+     * Genere aleatoirement le nombre de creatures passe en parametre
+     */
     public World(int nbpa, int nbgu, int nbar, int nblo, int nbla){
         Random genAl = new Random();
         this.structcrea = new LinkedList<>();
