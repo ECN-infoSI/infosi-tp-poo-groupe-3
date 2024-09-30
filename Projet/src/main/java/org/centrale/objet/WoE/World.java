@@ -3,47 +3,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
-
+import java.util.Hashtable;
+import java.util.Random;
 /**
  *
  * @author titou
  */
 public class World {
-    public Lapin bug1;
-    public Lapin bug2;
-    public Archer robin;
-    public Paysan peon;
-    public Archer guillaumeT;
-    public Guerrier grosBill;
-    public Loup wolfie;
+    public Hashtable<Creature, Integer> structcrea;
     
     /**
      *
      */
     public World(){
-        bug1 = new Lapin();
-        bug2 = new Lapin();
-        robin = new Archer();
-        guillaumeT = new Archer(robin);
-        peon = new Paysan();
-        grosBill = new Guerrier();
-        wolfie = new Loup();
+        this.structcrea = new Hashtable<>();
+    }
+    
+    public World(int nbpa, int nbgu, int nbar, int nblo, int nbla){
+        this.structcrea = new Hashtable<>();
+        for (int i = 0; i<nbpa; i++){
+            Paysan peon = new Paysan();
+            this.structcrea.put(peon, i);
+        }
+        for (int i = 0; i<nbgu; i++){
+            Guerrier peon = new Guerrier();
+            this.structcrea.put(peon, i+nbpa);
+        }
+        for (int i = 0; i<nbar; i++){
+            Archer peon = new Archer();
+            this.structcrea.put(peon, i+nbpa+nbgu);
+        }
+        for (int i = 0; i<nblo; i++){
+            Loup peon = new Loup();
+            this.structcrea.put(peon, i+nbpa+nbgu+nbar);
+        }
+        for (int i = 0; i<nbla; i++){
+            Lapin peon = new Lapin();
+            this.structcrea.put(peon, i+nbpa+nbgu+nbar+nblo);
+        }
     }
     
     /**
      * @return le monde crée aléatoirement
      */
     public World creerMondeAlea(){
-        World Monmonde = new World();
-        while(!((bug1.pos!=bug2.pos)&&(bug1.pos!=robin.pos)&&(bug1.pos!=peon.pos)&&(bug1.pos!=grosBill.pos)&&(bug1.pos!=wolfie.pos)&&(bug2.pos!=robin.pos)&&(bug2.pos!=grosBill.pos)&&(bug2.pos!=wolfie.pos)&&(bug2.pos!=peon.pos)&&(peon.pos!=robin.pos)&&(peon.pos!=grosBill.pos)&&(peon.pos!=wolfie.pos)&&(grosBill.pos!=robin.pos)&&(wolfie.pos!=robin.pos)&&(grosBill.pos!=wolfie.pos))){
-            Monmonde.bug1.deplace();
-            Monmonde.bug2.deplace();
-            Monmonde.robin.deplace();
-            Monmonde.peon.deplace();
-            Monmonde.grosBill.deplace();
-            Monmonde.wolfie.deplace();
-            Monmonde.guillaumeT.deplace();
-        }
+        Random genAl = new Random();
+        int nbpa = genAl.nextInt(99)+1;
+        int nbgu = genAl.nextInt(99)+1;
+        int nbar = genAl.nextInt(99)+1;
+        int nblo = genAl.nextInt(99)+1;
+        int nbla = genAl.nextInt(99)+1;
+        World Monmonde = new World(nbpa, nbgu, nbar, nblo, nbla);
         return Monmonde;
     }
 }
