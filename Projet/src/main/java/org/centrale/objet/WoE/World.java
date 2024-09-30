@@ -11,6 +11,7 @@ import java.util.Random;
  */
 public class World {
     public LinkedList<Creature> structcrea;
+    final int taille = 50;
     
     /**
      *
@@ -18,6 +19,8 @@ public class World {
     public World(){
         this.structcrea = new LinkedList<>();
     }
+    
+    
     
     public World(int nbpa, int nbgu, int nbar, int nblo, int nbla){
         Random genAl = new Random();
@@ -74,8 +77,27 @@ public class World {
         }
     }
     
+    public void deplacelimite(Creature c){
+        int x = c.pos.getX();
+        int y = c.pos.getY();
+        int xAl = 0;
+        int yAl = 0;
+        Random genAl = new Random();
+        if (x==(this.taille)/2){
+            xAl = genAl.nextInt(1)-1;
+        } else if (x==-(this.taille-1)/2){
+            xAl = genAl.nextInt(1);
+        } else {xAl = genAl.nextInt(2)-1;}
+        if (y==(this.taille)/2){
+            yAl = genAl.nextInt(1)-1;
+        } else if (y==-(this.taille-1)/2){
+            yAl = genAl.nextInt(1);
+        } else {yAl = genAl.nextInt(2)-1;}
+        c.pos.Translate(xAl, yAl);
+    }
+    
     /**
-     * @param j l'indice de la créture étudiée dans la liste
+     * @param j l'indice de la créature étudiée dans la liste
      * @return le fait qu'une créature est toute seule sur sa case ou non
      */
     public boolean Esttoutseul(int j){
@@ -91,6 +113,7 @@ public class World {
     /**
      * @return le monde crée aléatoirement
      * On fait bouger une créature tant qu'elle n'est pas toute seule sur sa case
+     * Pour le moment ça a été fait au plus simple (en terme de code) donc la complexité est en n^n
      */
     public World creerMondeAlea(){
         Random genAl = new Random();
@@ -102,7 +125,7 @@ public class World {
         World Monmonde = new World(nbpa, nbgu, nbar, nblo, nbla);
         for (int j = 0 ; j<this.structcrea.size() ; j++){
             while (!Esttoutseul(j)){
-                this.structcrea.get(j).deplace();
+                deplacelimite(this.structcrea.get(j));
             }
         }
         return Monmonde;
