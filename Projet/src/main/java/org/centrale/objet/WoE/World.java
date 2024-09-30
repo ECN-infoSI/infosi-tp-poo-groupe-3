@@ -3,43 +3,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Random;
 /**
  *
  * @author titou
  */
 public class World {
-    public Hashtable<Creature, Integer> structcrea;
+    public HashMap<Integer, Creature> structcrea;
     
     /**
      *
      */
     public World(){
-        this.structcrea = new Hashtable<>();
+        this.structcrea = new HashMap<>();
     }
     
     public World(int nbpa, int nbgu, int nbar, int nblo, int nbla){
-        this.structcrea = new Hashtable<>();
+        this.structcrea = new HashMap<>();
         for (int i = 0; i<nbpa; i++){
             Paysan peon = new Paysan();
-            this.structcrea.put(peon, i);
+            this.structcrea.put(i, peon);
         }
         for (int i = 0; i<nbgu; i++){
             Guerrier peon = new Guerrier();
-            this.structcrea.put(peon, i+nbpa);
+            this.structcrea.put(i+nbpa, peon);
         }
         for (int i = 0; i<nbar; i++){
             Archer peon = new Archer();
-            this.structcrea.put(peon, i+nbpa+nbgu);
+            this.structcrea.put(i+nbpa+nbgu, peon);
         }
         for (int i = 0; i<nblo; i++){
             Loup peon = new Loup();
-            this.structcrea.put(peon, i+nbpa+nbgu+nbar);
+            this.structcrea.put(i+nbpa+nbgu+nbar, peon);
         }
         for (int i = 0; i<nbla; i++){
             Lapin peon = new Lapin();
-            this.structcrea.put(peon, i+nbpa+nbgu+nbar+nblo);
+            this.structcrea.put(i+nbpa+nbgu+nbar+nblo, peon);
         }
     }
     

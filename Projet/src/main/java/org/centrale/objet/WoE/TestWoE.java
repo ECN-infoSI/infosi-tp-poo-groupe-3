@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
+import java.util.*;
 
 /**
  *
@@ -17,7 +18,13 @@ public class TestWoE {
     public static void main(String[] args){
         World monde = new World();
         monde = monde.creerMondeAlea();
-        for
+        Set<Creature> setC = monde.structcrea.keySet();
+        Iterator itr = setC.iterator();
+        while (itr.hasNext()) {
+            String str = (String) itr.next();
+            System.out.println(str + ": " + monde.structcrea.get(itr));
+        }
+        System.out.println();
 
     }
 }
