@@ -4,13 +4,14 @@
  */
 package org.centrale.objet.WoE;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Random;
 /**
  *
  * @author titou
  */
 public class World {
-    public LinkedList<Creature> structcrea;
+    public ArrayList<Creature> structcrea;
     final int taille = 50;
     public int[][] posmonde;
     
@@ -18,7 +19,7 @@ public class World {
      *
      */
     public World(){
-        this.structcrea = new LinkedList<>();
+        this.structcrea = new ArrayList<>();
         this.posmonde = new int[this.taille][this.taille];
         for (int i = 0; i < this.taille; i++) {
             for (int j = 0; j < this.taille; j++) {

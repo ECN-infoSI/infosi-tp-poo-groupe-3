@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
+import java.util.Iterator;
 
 /**
  *
@@ -19,18 +20,14 @@ public class TestWoE {
         World monde = new World();
         monde = monde.creerMondeAlea(20,20,20,20,20);
         long debut = System.nanoTime();
-        for (int i=0; i<monde.structcrea.size(); i++){
-            sum = sum + monde.structcrea.get(i).ptVie;
-        }
-        for (int i = 0; i < monde.posmonde.length; i++) {
-            for (int j = 0; j < monde.posmonde[0].length; j++) {
-                System.out.print(monde.posmonde[i][j] + "\t");
-            }
-            System.out.println();
+        Iterator<Creature> listIt = monde.structcrea.iterator();
+        while (listIt.hasNext()){
+            Creature c = listIt.next();
+            sum = sum + c.ptVie;
         }
         long fin = System.nanoTime();
         System.out.println("Le cumul des pv vaut : "+sum);
         System.out.println("pour "+monde.structcrea.size()+" creatures.");
-        System.out.println("temps de calcul : "+((fin-debut)/1000)+" ms");
+        System.out.println("temps de calcul : "+((fin-debut)/1000)+" micro s");
     }
 }
