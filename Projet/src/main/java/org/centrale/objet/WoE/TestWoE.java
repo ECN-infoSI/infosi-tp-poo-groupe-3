@@ -18,17 +18,16 @@ public class TestWoE {
     public static void main(String[] args){
         int sum = 0;
         World monde = new World();
-        monde = monde.creerMondeAlea(2,2,2,2,2);
-        for (int i = 0; i<100 ;i++){
-            monde.deplacelimite(monde.structcrea.get(0));
-        }
-        System.out.println("Est-ce que la creature est dans les limites du monde ?");
-        System.out.println(monde.Estdanslimite(monde.structcrea.get(0)));
-        System.out.println("Est-ce que la creature est seule sur sa case ?");
-        System.out.println(monde.Esttoutseul(monde.structcrea.get(0)));
+        monde = monde.creerMondeAlea(20,20,20,20,20);
         long debut = System.nanoTime();
         for (int i=0; i<monde.structcrea.size(); i++){
             sum = sum + monde.structcrea.get(i).ptVie;
+        }
+        for (int i = 0; i < monde.posmonde.length; i++) {
+            for (int j = 0; j < monde.posmonde[0].length; j++) {
+                System.out.print(monde.posmonde[i][j] + "\t");
+            }
+            System.out.println();
         }
         long fin = System.nanoTime();
         System.out.println("Le cumul des pv vaut : "+sum);
