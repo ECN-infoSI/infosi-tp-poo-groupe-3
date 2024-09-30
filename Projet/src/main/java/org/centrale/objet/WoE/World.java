@@ -84,54 +84,58 @@ public class World {
         }
     }
     
-    public void deplacelimite(Creature c){
+    /**
+     * @param c La creature etudiee dans la liste
+     * @return le fait qu'une creature est dans les limites du monde
+     */
+    public boolean Estdanslimite (Creature c){
         int x = c.pos.getX();
         int y = c.pos.getY();
-        int xAl = 0;
-        int yAl = 0;
-        Random genAl = new Random();
-        if (x==(this.taille)/2){
-            xAl = genAl.nextInt(1)-1;
-        } else if (x==-(this.taille-1)/2){
-            xAl = genAl.nextInt(1);
-        } else {xAl = genAl.nextInt(2)-1;}
-        if (y==(this.taille)/2){
-            yAl = genAl.nextInt(1)-1;
-        } else if (y==-(this.taille-1)/2){
-            yAl = genAl.nextInt(1);
-        } else {yAl = genAl.nextInt(2)-1;}
-        c.pos.Translate(xAl, yAl);
+        return ((x<=(this.taille)/2)&&(x>-(this.taille-1)/2)&&(y<=(this.taille)/2)&&(y>-(this.taille-1)/2));
+    }
+    
+    
+    /**
+     * @param c La creature etudiee dans la liste
+     * deplace une creature en prenant compte des limites du monde et des autres creatures
+     */
+    public void deplacelimite(Creature c){
+        Point2D p0 = c.pos;
+        c.deplace();
+        while ((!Estdanslimite(c))||(!Esttoutseul(c))){
+            c.pos = p0;
+            c.deplace();
+        }
     }
     
     /**
-     * @param j l'indice de la créature étudiée dans la liste
-     * @return le fait qu'une créature est toute seule sur sa case ou non
+     * @param c La creature etudiee dans la liste
+     * @return le fait qu'une creature est toute seule sur sa case ou non
      */
-    public boolean Esttoutseul(int j){
-        Point2D p0 = this.structcrea.get(j).pos;
+    public boolean Esttoutseul(Creature c){
+        Point2D p0 = c.pos;
         int indic = 0;
         for (int i = 0 ; i<this.structcrea.size() ; i++){
-            if ((this.structcrea.get(i).pos == p0)&&(i!=j)){
-                indic = 1;
+            if (this.structcrea.get(i).pos == p0){
+                indic++;
             }
         }
-        return indic==0;
+        return indic==1;
     }
     /**
-     * @return le monde crée aléatoirement
-     * On fait bouger une créature tant qu'elle n'est pas toute seule sur sa case
-     * Pour le moment ça a été fait au plus simple (en terme de code) donc la complexité est en n^n
+     * @param nbpa nombre de paysans
+     * @param nbgu nombre de guerriers
+     * @param nbar nombre d'archers
+     * @param nblo nombre de loups
+     * @param nbla nombre de lapins
+     * @return le monde cree aléatoirement
+     * On fait bouger une creature tant qu'elle n'est pas toute seule sur sa case
+     * Pour le moment ça a ete fait au plus simple (en terme de code) donc la complexite est en n^n
      */
-    public World creerMondeAlea(){
-        Random genAl = new Random();
-        int nbpa = genAl.nextInt(99)+1;
-        int nbgu = genAl.nextInt(99)+1;
-        int nbar = genAl.nextInt(99)+1;
-        int nblo = genAl.nextInt(99)+1;
-        int nbla = genAl.nextInt(99)+1;
+    public World creerMondeAlea(int nbpa, int nbgu, int nbar, int nblo, int nbla){
         World Monmonde = new World(nbpa, nbgu, nbar, nblo, nbla);
         for (int j = 0 ; j<this.structcrea.size() ; j++){
-            while (!Esttoutseul(j)){
+            while (!Esttoutseul(this.structcrea.get(j))){
                 deplacelimite(this.structcrea.get(j));
             }
         }
