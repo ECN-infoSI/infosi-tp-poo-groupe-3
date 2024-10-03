@@ -31,7 +31,8 @@ public class World {
     
     
     /**
-     * @param c La creature etudiee dans la liste
+     * @param x 
+     * @param y Les coordonnees etudiees
      * @return le fait qu'une creature est dans les limites du monde
      */
     public boolean Estdanslimite (int x, int y){
