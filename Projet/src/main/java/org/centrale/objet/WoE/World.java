@@ -34,28 +34,51 @@ public class World {
      * @param c La creature etudiee dans la liste
      * @return le fait qu'une creature est dans les limites du monde
      */
-    public boolean Estdanslimite (Creature c){
-        int x = c.pos.getX();
-        int y = c.pos.getY();
+    public boolean Estdanslimite (int x, int y){
         return ((x<this.taille)&&(x>=0)&&(y<this.taille)&&(y>=0));
     }
     
     
     /**
      * @param c La creature etudiee dans la liste
-     * deplace une creature en prenant compte des limites du monde et des autres creature
+     * On explore les positions possibles autour de la creature en prenant en compte les limites du monde et les autres creature
+     * On verifie qu'il y a bien au moins une position possible
+     * On tire au sort une position qui est disponible soit telle que pospossible[rand] == true
+     * On retrouve les i et j correspondants par la division euclidienne
+     * On translate la position de la creature
      * Puis on actualise la matrice de position en remplissant la nouvelle case avec le code de la creature 
      * et en vidant l'ancienne case (en mettant la valeur a -1)
      */
     public void deplacelimite(Creature c){
         Point2D p0 = c.pos;
-        c.deplace();
-        while ((!Estdanslimite(c))||(this.posmonde[c.pos.getX()][c.pos.getY()] != -1)){
-            c.pos = p0;
-            c.deplace();
+        int x = p0.getX();
+        int y = p0.getY();
+        boolean[] pospossible = {false, false, false, false, false, false, false, false, false};
+        boolean[] reffalse = {false, false, false, false, false, false, false, false, false};
+        for (int i = -1; i<2; i++){
+            for (int j = -1; j<2;j++){
+                int k = 3*(i+1)+j+1;
+                if ((k!=4)&&(Estdanslimite(x+i,y+j))){/*on ne verifie pas la position k=4 car c'est celle sur laquelle on est deja*/
+                    pospossible[k] = (this.posmonde[x+i][y+j]==-1);
+                }
+            }
         }
-        this.posmonde[c.pos.getX()][c.pos.getY()] = this.posmonde[p0.getX()][p0.getY()];
-        this.posmonde[p0.getX()][p0.getY()] = -1;
+        if (pospossible==reffalse){
+            System.out.println("Impossible de bouger ou de generer position");
+        } else {
+            Random genAl = new Random();
+            int rand = genAl.nextInt(8);
+            while (!pospossible[rand]){
+                rand = genAl.nextInt(8);
+            }
+            int newi = rand/3;
+            int newj = rand - newi*3;
+            c.pos.Translate(newi, newj);
+            this.posmonde[c.pos.getX()][c.pos.getY()] = this.posmonde[p0.getX()][p0.getY()];
+            this.posmonde[p0.getX()][p0.getY()] = -1;
+        }
+        
+        
     }
     
     /**
