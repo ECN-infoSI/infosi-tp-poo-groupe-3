@@ -37,15 +37,26 @@ public class Creature {
         */
        protected int pageAtt;
        
-       protected int degaAtt;
+    /**
+     *
+     */
+    protected int degaAtt;
 
        /**
         * Position de la creature
         */
        protected Point2D pos;
        
-       
-         public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
+    /**
+     *
+     * @param pV
+     * @param dA
+     * @param pPar
+     * @param paAtt
+     * @param paPar
+     * @param p
+     */
+    public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
             ptVie = pV;
             degatAtt = dA;
             ptPar = pPar;
@@ -54,7 +65,10 @@ public class Creature {
             pos = p;
         }    
          
-        public Creature(){
+    /**
+     *
+     */
+    public Creature(){
             ptVie = 0;
             degatAtt = 0;
             ptPar = 0;
@@ -63,51 +77,99 @@ public class Creature {
             pos = new Point2D();
         }
 
-        public int getPtVie() {
+    /**
+     *
+     * @return
+     */
+    public int getPtVie() {
             return ptVie;
         }
 
-        public void setPtVie(int ptVie) {
+    /**
+     *
+     * @param ptVie
+     */
+    public void setPtVie(int ptVie) {
             this.ptVie = ptVie;
         }
 
-        public int getDegatAtt() {
+    /**
+     *
+     * @return
+     */
+    public int getDegatAtt() {
             return degatAtt;
         }
 
-        public void setDegatAtt(int degatAtt) {
+    /**
+     *
+     * @param degatAtt
+     */
+    public void setDegatAtt(int degatAtt) {
             this.degatAtt = degatAtt;
         }
 
-        public int getPtPar() {
+    /**
+     *
+     * @return
+     */
+    public int getPtPar() {
             return ptPar;
         }
 
-        public void setPtPar(int ptPar) {
+    /**
+     *
+     * @param ptPar
+     */
+    public void setPtPar(int ptPar) {
             this.ptPar = ptPar;
         }
 
-        public int getPagePar() {
+    /**
+     *
+     * @return
+     */
+    public int getPagePar() {
             return pagePar;
         }
 
-        public void setPagePar(int pagePar) {
+    /**
+     *
+     * @param pagePar
+     */
+    public void setPagePar(int pagePar) {
             this.pagePar = pagePar;
         }
 
-        public int getPageAtt() {
+    /**
+     *
+     * @return
+     */
+    public int getPageAtt() {
             return pageAtt;
         }
 
-        public void setPageAtt(int pageAtt) {
+    /**
+     *
+     * @param pageAtt
+     */
+    public void setPageAtt(int pageAtt) {
             this.pageAtt = pageAtt;
         }
 
-        public Point2D getPos() {
+    /**
+     *
+     * @return
+     */
+    public Point2D getPos() {
             return pos;
         }
 
-        public void setPos(Point2D pos) {
+    /**
+     *
+     * @param pos
+     */
+    public void setPos(Point2D pos) {
             this.pos = pos;
         }
         

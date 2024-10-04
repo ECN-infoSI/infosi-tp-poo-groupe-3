@@ -11,6 +11,10 @@ import java.util.Random;
  * @author titou
  */
 public class Loup extends Monstre{
+
+    /**
+     *
+     */
     public Loup(){
         /**
      *par défault le loup se situe au centre du monde et n'a pas de ptVie ni de degAtt

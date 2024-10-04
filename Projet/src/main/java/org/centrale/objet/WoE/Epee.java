@@ -10,14 +10,26 @@ package org.centrale.objet.WoE;
  */
 public class Epee extends Objet{
     
+    /**
+     *
+     * @param n
+     * @param p
+     */
     public Epee(String n, Point2D p){
         super(n, p);
     }
     
+    /**
+     *
+     * @param e
+     */
     public Epee(Epee e){
         super(e.getNom(), e.getPos());
     }
     
+    /**
+     *
+     */
     public Epee(){
         super();
     }

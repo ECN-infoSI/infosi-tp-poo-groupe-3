@@ -11,8 +11,16 @@ import java.util.Random;
  * @author titou
  */
 public class World {
+
+    /**
+     *
+     */
     public ArrayList<Creature> structcrea;
     final int taille = 50;
+
+    /**
+     *
+     */
     public int[][] posmonde;
     
     /**

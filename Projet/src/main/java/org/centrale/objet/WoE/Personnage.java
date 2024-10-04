@@ -21,10 +21,18 @@ public class Personnage extends Creature {
      */
     protected int distAttMax;
 
+    /**
+     *
+     * @return
+     */
     public int getDistAttMax() {
         return distAttMax;
     }
 
+    /**
+     *
+     * @param distAttMax
+     */
     public void setDistAttMax(int distAttMax) {
         this.distAttMax = distAttMax;
     }
