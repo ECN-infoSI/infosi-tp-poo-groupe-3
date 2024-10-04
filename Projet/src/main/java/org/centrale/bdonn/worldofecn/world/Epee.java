@@ -6,7 +6,7 @@
  * JY Martin
  * -------------------------------------------------------------------------------- */
 
-package org.centrale.worldofecn.world;
+package org.centrale.bdonn.worldofecn.world;
 
 import java.sql.Connection;
 
