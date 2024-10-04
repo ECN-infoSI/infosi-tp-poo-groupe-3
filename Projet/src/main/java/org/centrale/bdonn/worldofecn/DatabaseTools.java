@@ -5,7 +5,7 @@
  * Equipe pédagogique Informatique et Mathématiques
  * JY Martin
  * -------------------------------------------------------------------------------- */
-package org.centrale.worldofecn;
+package org.centrale.bdonn.worldofecn;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.centrale.worldofecn.world.World;
+import java.sql.*;
+import org.centrale.bdonn.worldofecn.world.World;
 
 /**
  *
@@ -88,7 +88,18 @@ public class DatabaseTools {
      * @return
      */
     public Integer getPlayerID(String nomJoueur, String password) {
+        if (this.login.equals(nomJoueur) && this.password.equals(password)){
+            try{
+            String sql = "SELECT id FROM joueur WHERE nom_code="+nomJoueur;
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            int id = rs.getInt("id_joueur");
+            return id;
+            } catch (SQLException ex) {
+            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+            }
         return null;
+        }
     }
 
     /**
@@ -99,7 +110,7 @@ public class DatabaseTools {
      * @param monde
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
-
+        
     }
 
     /**

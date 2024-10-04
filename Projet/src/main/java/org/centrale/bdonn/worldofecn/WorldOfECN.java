@@ -6,9 +6,9 @@
  * JY Martin
  * -------------------------------------------------------------------------------- */
 
-package org.centrale.worldofecn;
+package org.centrale.bdonn.worldofecn;
 
-import org.centrale.worldofecn.world.World;
+import org.centrale.bdonn.worldofecn.world.World;
 
 /**
  *
