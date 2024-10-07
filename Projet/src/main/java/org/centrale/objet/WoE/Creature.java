@@ -48,6 +48,11 @@ public class Creature {
        protected Point2D pos;
        
     /**
+     * Jouabilité de la creature par un joueur
+     */
+    final boolean estJouable = false;
+       
+    /**
      *
      * @param pV
      * @param dA

@@ -11,7 +11,15 @@ import java.util.Random;
  * @author thomas
  */
 public class Archer extends Personnage{
+    /**
+     * Nombre de fleches de l'archer
+     */
     private int nbFleche;
+    
+    /**
+     * Jouabilite par un joueur
+     */
+    final boolean estJouable = true;
 
     /**
      *

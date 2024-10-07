@@ -12,6 +12,11 @@ import java.util.Random;
  */
 public class Guerrier extends Personnage {
     /**
+     * Jouabilite par un joueur
+     */
+    final boolean estJouable = true;
+    
+    /**
      *
      * @param n
      * @param pV
