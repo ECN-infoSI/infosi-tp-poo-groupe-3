@@ -45,7 +45,7 @@ public class Creature {
        protected Point2D pos;
        
        
-         public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
+        public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
             ptVie = pV;
             degatAtt = dA;
             ptPar = pPar;
@@ -114,15 +114,5 @@ public class Creature {
         /**
         * Déplace le personnage sur une case adjacente à sa position.
         */
-        public void deplace(){
-            Random genAl = new Random();
-            int xAl = genAl.nextInt(2)-1;
-            int yAl = genAl.nextInt(2)-1;
-            while ((xAl == 0)&&(yAl == 0)){
-                xAl = genAl.nextInt(2)-1;
-                yAl = genAl.nextInt(2)-1;
-            }
-            pos.Translate(xAl, yAl);
-    }
       
 }

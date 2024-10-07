@@ -42,6 +42,7 @@ public class World {
     
     /**
      * @param c La creature etudiee dans la liste
+     * C'est un deplacement aleatoire dans une case adjacente libre
      * On explore les positions possibles autour de la creature en prenant en compte les limites du monde et les autres creature
      * On verifie qu'il y a bien au moins une position possible
      * On tire au sort une position qui est disponible soit telle que pospossible[rand] == true
@@ -80,6 +81,15 @@ public class World {
         }
         
         
+    }
+    
+    public void afficheWorld(){
+        for (int i=0; i<this.taille; i++){
+            for (int j=0; j<this.taille; j++){
+                System.out.print(this.posmonde[i][j] + "\t");
+            }
+            System.out.println();
+        }
     }
     
     /**
