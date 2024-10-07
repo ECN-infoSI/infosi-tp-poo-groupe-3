@@ -12,7 +12,6 @@ import java.util.Random;
  */
 public class Archer extends Personnage{
     private int nbFleche;
-    final boolean estjouable = true;
 
     public int getNbFleche() {
         return nbFleche;
