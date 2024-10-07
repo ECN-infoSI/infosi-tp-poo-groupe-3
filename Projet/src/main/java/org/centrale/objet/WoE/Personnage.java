@@ -10,7 +10,7 @@ package org.centrale.objet.WoE;
  * @author thomas
  */
 
-public class Personnage extends Creature {
+public abstract class Personnage extends Creature {
 
     /**
      * Nom du personnage

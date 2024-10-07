@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author titou
  */
-public class Creature {
+public abstract class Creature {
 
         /**
          * Nombre de points de vie
@@ -177,7 +177,7 @@ public class Creature {
     public void setPos(Point2D pos) {
             this.pos = pos;
         }
-        
+      
         /**
         * Déplace le personnage sur une case adjacente à sa position.
         */
@@ -188,7 +188,7 @@ public class Creature {
             while ((xAl == 0)&&(yAl == 0)){
                 xAl = genAl.nextInt(2)-1;
                 yAl = genAl.nextInt(2)-1;
-            }
+}
             pos.Translate(xAl, yAl);
     }
       

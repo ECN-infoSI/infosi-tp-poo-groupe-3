@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author thoma
  */
 public class Joueur {
-    private Personnage perso = new Personnage();
+    private Personnage perso;
     
     public void choixPerso(){
         System.out.println("Indiquez le type de personnage que vous souhaitez jouer : ");
