@@ -8,7 +8,7 @@ package org.centrale.objet.WoE;
  *
  * @author titou
  */
-public class Monstre extends Creature {
+public abstract class Monstre extends Creature {
     
     /**
      *

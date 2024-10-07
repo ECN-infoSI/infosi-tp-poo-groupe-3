@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author titou
  */
-public class Creature {
+public abstract class Creature {
 
         /**
          * Nombre de points de vie
@@ -111,8 +111,5 @@ public class Creature {
             this.pos = pos;
         }
         
-        /**
-        * Déplace le personnage sur une case adjacente à sa position.
-        */
       
 }
