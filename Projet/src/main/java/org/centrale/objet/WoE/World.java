@@ -24,9 +24,8 @@ public class World {
         for (int i = 0; i < this.taille; i++) {
             for (int j = 0; j < this.taille; j++) {
                 this.posmonde[i][j] = -1;
-      }
-    }
-        
+            }     
+        }    
     }
     
     
@@ -51,7 +50,7 @@ public class World {
      * Puis on actualise la matrice de position en remplissant la nouvelle case avec le code de la creature 
      * et en vidant l'ancienne case (en mettant la valeur a -1)
      */
-    public void deplacelimite(Creature c){
+    public void deplacealealimite(Creature c){
         Point2D p0 = c.pos;
         int x = p0.getX();
         int y = p0.getY();
@@ -122,13 +121,8 @@ public class World {
             int x = genAl.nextInt(0, (this.taille)-1);
             int y = genAl.nextInt(0, (this.taille)-1);
             Paysan peon = new Paysan(nom, pv, dA, pPar, paAtt, paPar, 1, new Point2D(x, y));
-            if (Monmonde.posmonde[x][y] != -1){
-                Monmonde.deplacelimite(peon);
-                x = peon.pos.getX();
-                y = peon.pos.getY();
-            }
+            Monmonde.ajoutecrea(peon);
             Monmonde.structcrea.add(i, peon);
-            Monmonde.posmonde[x][y] = 1;
         }
         for (int i = 0; i<nbgu; i++){
             String nom = "Guerrier"+i;
@@ -140,12 +134,7 @@ public class World {
             int x = genAl.nextInt(0, (this.taille)-1);
             int y = genAl.nextInt(0, (this.taille)-1);
             Guerrier grosBill = new Guerrier(nom, pv,dA, pPar, paAtt, paPar, 1, new Point2D(x, y));
-            if (Monmonde.posmonde[x][y] != -1){
-                Monmonde.deplacelimite(grosBill);
-                x = grosBill.pos.getX();
-                y = grosBill.pos.getY();
-            }
-            Monmonde.posmonde[x][y] = 2;
+            Monmonde.ajoutecrea(grosBill);
             Monmonde.structcrea.add(i+nbpa, grosBill);
         }
         for (int i = 0; i<nbar; i++){
@@ -160,12 +149,7 @@ public class World {
             int x = genAl.nextInt(0, (this.taille)-1);
             int y = genAl.nextInt(0, (this.taille)-1);
             Archer robin = new Archer(nom, pv, dA, pPar, paAtt, paPar, dMax, new Point2D(x, y), nbFleche);
-            if (Monmonde.posmonde[x][y] != -1){
-                Monmonde.deplacelimite(robin);
-                x = robin.pos.getX();
-                y = robin.pos.getY();
-            }
-            Monmonde.posmonde[x][y] = 3;
+            Monmonde.ajoutecrea(robin);
             Monmonde.structcrea.add(i+nbpa+nbgu, robin);
         }
         for (int i = 0; i<nblo; i++){
@@ -177,12 +161,7 @@ public class World {
             int x = genAl.nextInt(0, (this.taille)-1);
             int y = genAl.nextInt(0, (this.taille)-1);
             Loup wolfie = new Loup(pv, dA, pPar, paAtt, paPar, new Point2D(x, y));
-            if (Monmonde.posmonde[x][y] != -1){
-                Monmonde.deplacelimite(wolfie);
-                x = wolfie.pos.getX();
-                y = wolfie.pos.getY();
-            }
-            Monmonde.posmonde[x][y] = 4;
+            Monmonde.ajoutecrea(wolfie);
             Monmonde.structcrea.add(i+nbpa+nbgu+nbar, wolfie);
         }
         for (int i = 0; i<nbla; i++){
@@ -194,14 +173,41 @@ public class World {
             int x = genAl.nextInt(0, (this.taille)-1);
             int y = genAl.nextInt(0, (this.taille)-1);
             Lapin bunny = new Lapin(pv, dA, pPar, paAtt, paPar, new Point2D(x, y));
-            if (Monmonde.posmonde[x][y] != -1){
-                Monmonde.deplacelimite(bunny);
-                x = bunny.pos.getX();
-                y = bunny.pos.getY();
-            }
-            Monmonde.posmonde[x][y] = 5;            
+            Monmonde.ajoutecrea(bunny);
             Monmonde.structcrea.add(i+nbpa+nbgu+nbar+nblo, bunny);
         }
         return Monmonde;
+    }
+    
+    public void ajoutecrea(Creature c){
+        int x = c.pos.getX();
+        int y = c.pos.getY();
+        if (this.posmonde[x][y] != -1){
+            this.deplacealealimite(c);
+            x = c.pos.getX();
+            y = c.pos.getY();
+        }
+        Class classe = c.getClass();
+        String nomclasse = classe.getName();
+        int indiceclasse = 0;
+        switch (nomclasse){
+            case "Paysan":
+                indiceclasse = 1;
+                break;
+            case "Guerrier":
+                indiceclasse = 2;
+                break;
+            case "Archer":
+                indiceclasse = 3;
+                break;
+            case "Loup":
+                indiceclasse = 4;
+                break;
+            case "Lapin":
+                indiceclasse = 5;
+                break;
+        }
+        this.posmonde[x][y] = indiceclasse;
+        this.structcrea.add(this.structcrea.size(), c);
     }
 }
