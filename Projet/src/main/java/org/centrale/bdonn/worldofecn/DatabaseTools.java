@@ -98,8 +98,8 @@ public class DatabaseTools {
             } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
             }
-        return null;
         }
+        return null;
     }
 
     /**
@@ -108,9 +108,28 @@ public class DatabaseTools {
      * @param nomPartie
      * @param nomSauvegarde
      * @param monde
+     * On commence par récupérer id_partie
+     * On crée une nouvelle ligne dans la table sauvegarde
+     * On récupère id_sauv de la nouvelle sauvegarde
+     * On rajoute dans les tables personnage, monstre et objet des copies des données avec lesquels on jouait avec le nouvel id_sauv
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
-        
+        try{
+            String sql1 = "SELECT id_partie FROM partie WHERE nomPartie = "+nomPartie+" and id_joueur = "+idJoueur;
+            PreparedStatement stmt1 = this.connection.prepareStatement(sql1);
+            ResultSet rs = stmt1.executeQuery();
+            int idPartie = rs.getInt("id_partie");
+            boolean rapide = (nomSauvegarde == null);
+            String sql2 = "INSERT INTO sauvegarde (rapide, nom, id_partie) VALUES ("+rapide+", "+nomSauvegarde+", "+idPartie+")";
+            PreparedStatement stmt2 = this.connection.prepareStatement(sql2);
+            stmt2.executeUpdate();
+            String sql3 = "SELECT id_sauv FROM sauvegarde WHERE nom = "+nomSauvegarde+" and id_partie = "+idPartie;
+            PreparedStatement stmt3 = this.connection.prepareStatement(sql3);
+            ResultSet rs3 = stmt3.executeQuery();
+            int idSauv = rs.getInt("id_sauv");
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
