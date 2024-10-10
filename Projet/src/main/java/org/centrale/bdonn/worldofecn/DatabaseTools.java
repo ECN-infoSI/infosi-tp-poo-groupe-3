@@ -161,19 +161,24 @@ public class DatabaseTools {
     public void readWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
         
         try {
-            String sqlPerso = "SELECT FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+            String sqlPerso = "SELECT nom, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleche, pos_x, pos_y, type.nom"
+                    + "FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
                     + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
                     + "JOIN Personnage ON personnage.id_sauve = sauvegarde.id_sauve"
+                    + "JOIN Type ON personnage.id_type = type.id_type"
                     + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
                     +"AND sauvegarde.nom = "+nomSauvegarde;
-            String sqlObjet = "SELECT FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+            String sqlObjet = "SELECT nom, pos_x, pos_y, type.nom "
+                    + "FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
                     + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
                     + "JOIN Objet ON objet.id_sauve = sauvegarde.id_sauve"
+                    + "JOIN Type ON personnage.id_type = type.id_type"
                     + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
                     +"AND sauvegarde.nom = "+nomSauvegarde;
             String sqlMonstre = "SELECT FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
                     + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
                     + "JOIN Monstre ON monstre.id_sauve = sauvegarde.id_sauve"
+                    + "JOIN Type ON personnage.id_type = type.id_type"
                     + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
                     +"AND sauvegarde.nom = "+nomSauvegarde;
             PreparedStatement stmt1 = this.connection.prepareStatement(sqlPerso);
@@ -184,30 +189,75 @@ public class DatabaseTools {
             ResultSet rsMonstre = stmt3.executeQuery();
             
             while (rsPerso.next()){
-                String nom = rsPerso.getString(2);
-                int pv = rsPerso.getInt(5);
-                int pour_att = rsPerso.getInt(6);
-                int pt_att = rsPerso.getInt(7);
-                int pour_par = rsPerso.getInt(8);
-                int pt_par = rsPerso.getInt(9);
-                int dist_max = rsPerso.getInt(10);
-                int nb_fleches = rsPerso.getInt(11);
-                int pos_x = rsPerso.getInt(12);
-                int pos_y = rsPerso.getInt(13);
-                String type = rsPerso.getString(14);
+                String nom = rsPerso.getString(1);
+                int pv = rsPerso.getInt(2);
+                int pour_att = rsPerso.getInt(3);
+                int pt_att = rsPerso.getInt(4);
+                int pour_par = rsPerso.getInt(5);
+                int pt_par = rsPerso.getInt(6);
+                int dist_max = rsPerso.getInt(7);
+                int nb_fleches = rsPerso.getInt(8);
+                int pos_x = rsPerso.getInt(9);
+                int pos_y = rsPerso.getInt(10);
+                String type = rsPerso.getString(11);
                 Personnage item = null;
                 switch (type){
                     case "Guerrier":
-                        item = new Guerrier(monde);
+                        item = new Guerrier(nom, pv, pt_att, pt_par, pour_att, pour_par, dist_max, monde);
                         break;
                     case "Archer":
-                        item = new Archer(monde);
+                        item = new Archer(nom, pv, pt_att, pt_par, pour_att, pour_par, dist_max, monde, nb_fleches);
                         break;
                     default:
-                        item = new Paysan(monde);
+                        item = new Paysan(nom, pv, pt_att, pt_par, pour_att, pour_par, dist_max, monde);
                         break;
                 }
+                Point2D pos = new Point2D(pos_x, pos_y);
+                item.setPosition(pos);
+                monde.addElement(item);
             }
+            
+            while (rsObjet.next()){
+                String nom = rsObjet.getString(1);
+                int pos_x = rsObjet.getInt(2);
+                int pos_y = rsObjet.getInt(3);
+                String type = rsObjet.getString(4);
+                Objet item = null;
+                switch (type){
+                    case "Epee":
+                        item = new Epee(nom, monde);
+                        break;
+                    default:
+                        item = new PotionSoin(nom, monde);
+                        break;
+                }
+                Point2D pos = new Point2D(pos_x, pos_y);
+                item.setPosition(pos);
+                monde.addElement(item);
+            }
+            
+            while (rsMonstre.next()){
+                int pv = rsMonstre.getInt(1);
+                int pour_att = rsMonstre.getInt(2);
+                int pt_att = rsMonstre.getInt(3);
+                int pour_par = rsMonstre.getInt(4);
+                int pos_x = rsMonstre.getInt(5);
+                int pos_y = rsMonstre.getInt(6);
+                String type = rsMonstre.getString(7);
+                Monstre item = null;
+                switch (type){
+                    case "Loup":
+                        item = new Loup(pv, pt_att, pour_att, pour_par, monde);
+                        break;
+                    default:
+                        item = new Lapin(pv, pt_att, pour_att, pour_par, monde);
+                        break;
+                }
+                Point2D pos = new Point2D(pos_x, pos_y);
+                item.setPosition(pos);
+                monde.addElement(item);
+            }
+            
         } catch (SQLException ex) {
                 Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
         }

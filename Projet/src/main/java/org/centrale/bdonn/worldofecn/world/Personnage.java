@@ -17,6 +17,11 @@ public abstract class Personnage extends Creature {
      * Nom du personnage
      */
     protected String nom;
+    
+    /**
+     * Points de parade
+     */
+    protected int ptPar;
 
     /**
      * Portée maximale d'une attaque
@@ -45,8 +50,9 @@ public abstract class Personnage extends Creature {
      * @param monde     Position du personnage dans le monde
      */
     public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, World monde){
-        super(pV, dA, pPar, paAtt, paPar, monde);
+        super(pV, dA, paAtt, paPar, monde);
         nom = n;
+        ptPar = pPar;
         distAttMax = dMax;
     }
     

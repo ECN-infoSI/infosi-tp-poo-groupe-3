@@ -26,11 +26,6 @@ public abstract class Creature extends ElementDeJeu {
         protected int degatAtt;
 
         /**
-         * Points de parade
-         */
-        protected int ptPar;
-
-        /**
          * Pourcentage de parade
          */
         protected int pagePar;
@@ -53,7 +48,6 @@ public abstract class Creature extends ElementDeJeu {
         super(world);
         ptVie = 0;
         degatAtt = 0;
-        ptPar = 0;
         pagePar = 0;
         pageAtt = 0;
     }
@@ -62,16 +56,14 @@ public abstract class Creature extends ElementDeJeu {
      *
      * @param pV
      * @param dA
-     * @param pPar
      * @param paAtt
      * @param paPar
      * @param monde
      */
-    public Creature(int pV, int dA, int pPar, int paAtt, int paPar, World monde){
+    public Creature(int pV, int dA, int paAtt, int paPar, World monde){
             super(monde);
             ptVie = pV;
             degatAtt = dA;
-            ptPar = pPar;
             pagePar = paPar;
             pageAtt = paAtt;
         }    
