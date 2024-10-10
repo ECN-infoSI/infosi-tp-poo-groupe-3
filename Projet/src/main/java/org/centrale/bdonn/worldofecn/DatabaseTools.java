@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
-import org.centrale.bdonn.worldofecn.world.World;
+import org.centrale.bdonn.worldofecn.world.*;
 
 /**
  *
@@ -138,8 +138,62 @@ public class DatabaseTools {
      * @param nomPartie
      * @param nomSauvegarde
      * @param monde
+     * On recupere les personnages, les objets et les monstres associes a la sauvegarde
+     * On les ajoute dans le container du Monde
      */
     public void readWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
-
+        
+        try {
+            String sqlPerso = "SELECT FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+                    + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
+                    + "JOIN Personnage ON personnage.id_sauve = sauvegarde.id_sauve"
+                    + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
+                    +"AND sauvegarde.nom = "+nomSauvegarde;
+            String sqlObjet = "SELECT FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+                    + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
+                    + "JOIN Objet ON objet.id_sauve = sauvegarde.id_sauve"
+                    + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
+                    +"AND sauvegarde.nom = "+nomSauvegarde;
+            String sqlMonstre = "SELECT FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+                    + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
+                    + "JOIN Monstre ON monstre.id_sauve = sauvegarde.id_sauve"
+                    + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
+                    +"AND sauvegarde.nom = "+nomSauvegarde;
+            PreparedStatement stmt1 = this.connection.prepareStatement(sqlPerso);
+            ResultSet rsPerso = stmt1.executeQuery();
+            PreparedStatement stmt2 = this.connection.prepareStatement(sqlObjet);
+            ResultSet rsObjet = stmt2.executeQuery();
+            PreparedStatement stmt3 = this.connection.prepareStatement(sqlMonstre);
+            ResultSet rsMonstre = stmt3.executeQuery();
+            
+            while (rsPerso.next()){
+                String nom = rsPerso.getString(2);
+                int pv = rsPerso.getInt(5);
+                int pour_att = rsPerso.getInt(6);
+                int pt_att = rsPerso.getInt(7);
+                int pour_par = rsPerso.getInt(8);
+                int pt_par = rsPerso.getInt(9);
+                int dist_max = rsPerso.getInt(10);
+                int nb_fleches = rsPerso.getInt(11);
+                int pos_x = rsPerso.getInt(12);
+                int pos_y = rsPerso.getInt(13);
+                String type = rsPerso.getString(14);
+                Personnage item = null;
+                switch (type){
+                    case "Guerrier":
+                        item = new Guerrier(monde);
+                        break;
+                    case "Archer":
+                        item = new Archer(monde);
+                        break;
+                    default:
+                        item = new Paysan(monde);
+                        break;
+                }
+            }
+        } catch (SQLException ex) {
+                Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
