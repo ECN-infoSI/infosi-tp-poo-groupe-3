@@ -62,6 +62,10 @@ public class World {
     public Integer getWidth() {
         return width;
     }
+    
+    public void addElement(ElementDeJeu e){
+        this.listElements.add(e);
+    }
 
     /**
      *

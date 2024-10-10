@@ -17,10 +17,19 @@ import java.sql.Connection;
 public class PotionSoin extends Objet {
     
     /**
-     *
+     * @param world
      */
     public PotionSoin(World world) {
         super(world);
+        nom = "";
+    }    
+    
+    /**
+     * @param n
+     * @param world
+     */
+    public PotionSoin(String n, World world) {
+        super(n, world);
     }
 
     /**

@@ -27,13 +27,12 @@ public class Loup extends Monstre {
      *
      * @param ptVie
      * @param degAtt
-     * @param ptPar
      * @param pageAtt
      * @param pagePar
      * @param monde
      */
-    public Loup(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, World monde){
-        super(ptVie, degAtt, ptPar, pageAtt, pagePar, monde);      
+    public Loup(int ptVie, int degAtt, int pageAtt, int pagePar, World monde){
+        super(ptVie, degAtt, pageAtt, pagePar, monde);      
     }
     
     /**
