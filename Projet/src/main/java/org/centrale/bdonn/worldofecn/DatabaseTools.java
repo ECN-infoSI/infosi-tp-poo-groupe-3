@@ -129,6 +129,35 @@ public class DatabaseTools {
             PreparedStatement stmt3 = this.connection.prepareStatement(sql3);
             ResultSet rs3 = stmt3.executeQuery();
             int idSauv = rs3.getInt("id_sauv");
+            for (int i = 0 ; i< monde.listElements.size() ; i++){
+                ElementDeJeu e = monde.listElements.get(i);
+                Class classe = e.getClass();
+                String nomclasse = classe.getName();
+                switch (nomclasse){
+                    case "Paysan", "Guerrier", "Archer":
+                        /** on recupere les attributs des personnages*/
+                        String sql4 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
+                                + "VALUES (nom, id_partie, "+idSauv+", pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type)";
+                        PreparedStatement stmt4 = this.connection.prepareStatement(sql4);
+                        stmt4.executeUpdate();
+                        break;
+                    case "Loup", "Lapin":
+                        /** on recupere les attributs des monstres*/
+                        String sql5 = "INSERT INTO monstre (id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pos_x, pos_y, id_type)"
+                                + "VALUES (id_partie, "+idSauv+", pv, pour_att, pt_att, pour_par, pos_x, pos_y, id_type) ";
+                        PreparedStatement stmt5 = this.connection.prepareStatement(sql5);
+                        stmt5.executeUpdate();
+                        break;
+                    case "Objet":
+                        /** on recupere les attributs des objets*/
+                        String sql6 = "INSERT INTO objet (nom, id_partie, id_sauv, id_perso, pos_x, pos_y, id_type)"
+                                + "(nom, id_partie, "+idSauv+", id_perso, pos_x, pos_y, id_type)VALUES ";
+                        PreparedStatement stmt6 = this.connection.prepareStatement(sql6);
+                        stmt6.executeUpdate();
+                        break;
+                }
+            }
+            /**
             String sql4 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
                     + "SELECT nom, id_partie, "+idSauv+", pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type"
                     + "FROM personnage WHERE id_sauv IS NULL;";
@@ -144,6 +173,7 @@ public class DatabaseTools {
                     + "FROM objet WHERE id_sauv IS NULL;";
             PreparedStatement stmt6 = this.connection.prepareStatement(sql6);
             stmt6.executeUpdate();
+            */
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
         }
