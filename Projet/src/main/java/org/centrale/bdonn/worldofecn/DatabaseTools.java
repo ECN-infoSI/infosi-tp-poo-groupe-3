@@ -87,7 +87,7 @@ public class DatabaseTools {
      * @param password
      * @return
      * On vérifie que le login et le mot de passe sont corrects
-     * 
+     * On va chercher puis on renvoie l'id_joueur
      */
     public Integer getPlayerID(String nomJoueur, String password) {
         if (this.login.equals(nomJoueur) && this.password.equals(password)){
@@ -110,9 +110,9 @@ public class DatabaseTools {
      * @param nomPartie
      * @param nomSauvegarde
      * @param monde
-     * On commence par récupérer id_partie
-     * On crée une nouvelle ligne dans la table sauvegarde
-     * On récupère id_sauv de la nouvelle sauvegarde
+     * On commence par recuperer id_partie
+     * On cree une nouvelle ligne dans la table sauvegarde
+     * On recupere id_sauv de la nouvelle sauvegarde
      * On rajoute dans les tables personnage, monstre et objet des copies des données avec lesquels on jouait avec le nouvel id_sauv
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
@@ -163,7 +163,10 @@ public class DatabaseTools {
      * delete world from database
      * @param idJoueur
      * @param nomPartie
-     * @param nomSauvegarde 
+     * @param nomSauvegarde
+     * On recupere l'id de la sauvegarde concernee
+     * On supprime tous les personnages, monstres et objets qui sont enregistres avec cet id
+     * On supprime la ligne correspondante dans la bdd sauvegarde
      */
     public void removeWorld(Integer idJoueur,String nomPartie,String nomSauvegarde){
         try{
@@ -180,6 +183,9 @@ public class DatabaseTools {
             String sql4 = "DELETE FROM objet WHERE id_sauv = "+idSauv+";";
             PreparedStatement stmt4 = this.connection.prepareStatement(sql4);
             stmt4.executeUpdate();
+            String sql5 = "DELETE FROM sauvegarde WHERE id_sauv = "+idSauv+";";
+            PreparedStatement stmt5 = this.connection.prepareStatement(sql5);
+            stmt5.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);            
         }
