@@ -175,7 +175,8 @@ public class DatabaseTools {
                     + "JOIN Type ON personnage.id_type = type.id_type"
                     + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
                     +"AND sauvegarde.nom = "+nomSauvegarde;
-            String sqlMonstre = "SELECT FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+            String sqlMonstre = "SELECT pv, pour_att, pt_att, pour_par, pos_x, pos_y, type.nom"
+                    + "FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
                     + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
                     + "JOIN Monstre ON monstre.id_sauve = sauvegarde.id_sauve"
                     + "JOIN Type ON personnage.id_type = type.id_type"
