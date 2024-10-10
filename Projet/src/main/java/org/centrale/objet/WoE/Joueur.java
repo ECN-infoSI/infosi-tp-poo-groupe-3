@@ -30,7 +30,7 @@ public class Joueur {
                 perso = new Archer();
                 break;
             default:
-                System.out.println("Ce personnage n'existe pas.");
+                System.out.println("Ce personnage n'est pas jouable.");
             }
         if (!perso.estJouable){
             System.out.println("Ce personnage ne peut pas etre joue");
