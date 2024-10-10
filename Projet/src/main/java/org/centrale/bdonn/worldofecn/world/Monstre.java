@@ -24,4 +24,17 @@ public abstract class Monstre extends Creature {
         super(world);
     }
     
+    /**
+     *
+     * @param ptVie
+     * @param degAtt
+     * @param ptPar
+     * @param pageAtt
+     * @param pagePar
+     * @param monde
+     */
+    public Monstre(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, World monde){
+        super(ptVie, degAtt, ptPar, pageAtt, pagePar, monde);   
+    }
+    
 }

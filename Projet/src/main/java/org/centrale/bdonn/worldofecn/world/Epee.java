@@ -21,7 +21,16 @@ public class Epee extends Arme {
      * @param world
      */
     public Epee(World world) {
-        super(world);
+        super("", world);
+    }
+    
+    /**
+     *
+     * @param n
+     * @param monde
+     */
+    public Epee(String n, World monde){
+        super(n, monde);
     }
 
     /**

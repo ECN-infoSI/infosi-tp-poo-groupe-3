@@ -13,6 +13,15 @@ import java.sql.Connection;
  * @author ECN
  */
 public abstract class Personnage extends Creature {
+    /**
+     * Nom du personnage
+     */
+    protected String nom;
+
+    /**
+     * Portée maximale d'une attaque
+     */
+    protected int distAttMax;
     
     /**
      *
@@ -20,6 +29,25 @@ public abstract class Personnage extends Creature {
      */
     public Personnage(World world) {
         super(world);
+        nom = "";
+        distAttMax = 0;
+    }
+    
+    /** 
+     * Constructeur de l'objet Personnage.
+     * @param n     Nom du personnage
+     * @param pV    Nombre de points de vie du personnage
+     * @param dA    Nombre de dégats que le personnage peut infliger en attaquant
+     * @param pPar  Nombre de points d'aptitude à parer du personnage
+     * @param paAtt Pourcentage d'attaque du personnage
+     * @param paPar Pourcentage de parade du personnage
+     * @param dMax  Distance maximale d'attaque du personnage
+     * @param monde     Position du personnage dans le monde
+     */
+    public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, World monde){
+        super(pV, dA, pPar, paAtt, paPar, monde);
+        nom = n;
+        distAttMax = dMax;
     }
     
 }

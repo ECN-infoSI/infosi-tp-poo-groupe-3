@@ -16,10 +16,25 @@ public abstract class Objet extends ElementDeJeu{
     
     /**
      *
+     */
+    protected String nom;
+    
+    /**
+     *
      * @param world
      */
     public Objet(World world) {
         super(world);
+        nom = "";
     }
     
+    /**
+     *
+     * @param n
+     * @param monde
+     */
+    public Objet(String n, World monde){
+        super(monde);
+        nom = n;
+    }
 }
