@@ -134,24 +134,50 @@ public class DatabaseTools {
                 Class classe = e.getClass();
                 String nomclasse = classe.getName();
                 switch (nomclasse){
-                    case "Paysan", "Guerrier", "Archer":
+                    case "Paysan", "Guerrier":
                         /** on recupere les attributs des personnages*/
+                        String nomp = ((Personnage)e).getNom();
+                        Integer pvp = ((Personnage)e).getPtVie();
+                        Integer pourattp = ((Personnage)e).getPageAtt();
+                        Integer ptattp = ((Personnage)e).getDegaAtt();
+                        Integer pourparp = ((Personnage)e).getPagePar();
+                        Integer ptparp = ((Personnage)e).getPtPar();
+                        Integer distmaxp = ((Personnage)e).getDistAttMax();
+                        Integer posxp = ((Personnage)e).getPosition().getX();
+                        Integer posyp = ((Personnage)e).getPosition().getY();
                         String sql4 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
-                                + "VALUES (nom, id_partie, "+idSauv+", pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type)";
+                                + "VALUES ("+nomp+", "+idPartie+", "+idSauv+", "+pvp+", "+pourattp+", "+ptattp+", "+pourparp+", "+ptparp+", "+distmaxp+", NULL, "+posxp+", "+posyp+", id_type)";
                         PreparedStatement stmt4 = this.connection.prepareStatement(sql4);
                         stmt4.executeUpdate();
+                        break;
+                    case "Archer":
+                        /** on recupere les attributs des personnages*/
+                        String noma = ((Personnage)e).getNom();
+                        Integer pva = ((Personnage)e).getPtVie();
+                        Integer pouratta = ((Personnage)e).getPageAtt();
+                        Integer ptatta = ((Personnage)e).getDegaAtt();
+                        Integer pourpara = ((Personnage)e).getPagePar();
+                        Integer ptpara = ((Personnage)e).getPtPar();
+                        Integer distmaxa = ((Personnage)e).getDistAttMax();
+                        Integer nbflechesa = ((Archer)e).getNbFleche();
+                        Integer posxa = ((Personnage)e).getPosition().getX();
+                        Integer posya = ((Personnage)e).getPosition().getY();
+                        String sql7 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
+                                + "VALUES (nom, "+idPartie+", "+idSauv+", pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type)";
+                        PreparedStatement stmt7 = this.connection.prepareStatement(sql7);
+                        stmt7.executeUpdate();
                         break;
                     case "Loup", "Lapin":
                         /** on recupere les attributs des monstres*/
                         String sql5 = "INSERT INTO monstre (id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pos_x, pos_y, id_type)"
-                                + "VALUES (id_partie, "+idSauv+", pv, pour_att, pt_att, pour_par, pos_x, pos_y, id_type) ";
+                                + "VALUES ("+idPartie+", "+idSauv+", pv, pour_att, pt_att, pour_par, pos_x, pos_y, id_type) ";
                         PreparedStatement stmt5 = this.connection.prepareStatement(sql5);
                         stmt5.executeUpdate();
                         break;
                     case "Objet":
                         /** on recupere les attributs des objets*/
                         String sql6 = "INSERT INTO objet (nom, id_partie, id_sauv, id_perso, pos_x, pos_y, id_type)"
-                                + "(nom, id_partie, "+idSauv+", id_perso, pos_x, pos_y, id_type)VALUES ";
+                                + "(nom, "+idPartie+", "+idSauv+", id_perso, pos_x, pos_y, id_type)VALUES ";
                         PreparedStatement stmt6 = this.connection.prepareStatement(sql6);
                         stmt6.executeUpdate();
                         break;

@@ -22,6 +22,70 @@ public abstract class Personnage extends Creature {
      * Portée maximale d'une attaque
      */
     protected int distAttMax;
+
+    public String getNom() {
+        return nom;
+    }
+
+    public int getDistAttMax() {
+        return distAttMax;
+    }
+
+    public int getPtVie() {
+        return ptVie;
+    }
+
+    public int getDegatAtt() {
+        return degatAtt;
+    }
+
+    public int getPtPar() {
+        return ptPar;
+    }
+
+    public int getPagePar() {
+        return pagePar;
+    }
+
+    public int getPageAtt() {
+        return pageAtt;
+    }
+
+    public int getDegaAtt() {
+        return degaAtt;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setDistAttMax(int distAttMax) {
+        this.distAttMax = distAttMax;
+    }
+
+    public void setPtVie(int ptVie) {
+        this.ptVie = ptVie;
+    }
+
+    public void setDegatAtt(int degatAtt) {
+        this.degatAtt = degatAtt;
+    }
+
+    public void setPtPar(int ptPar) {
+        this.ptPar = ptPar;
+    }
+
+    public void setPagePar(int pagePar) {
+        this.pagePar = pagePar;
+    }
+
+    public void setPageAtt(int pageAtt) {
+        this.pageAtt = pageAtt;
+    }
+
+    public void setDegaAtt(int degaAtt) {
+        this.degaAtt = degaAtt;
+    }
     
     /**
      *

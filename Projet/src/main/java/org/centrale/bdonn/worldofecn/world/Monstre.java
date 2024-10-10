@@ -15,6 +15,54 @@ import java.sql.Connection;
  * @author ECN
  */
 public abstract class Monstre extends Creature {
+
+    public int getPtVie() {
+        return ptVie;
+    }
+
+    public int getDegatAtt() {
+        return degatAtt;
+    }
+
+    public int getPtPar() {
+        return ptPar;
+    }
+
+    public int getPagePar() {
+        return pagePar;
+    }
+
+    public int getPageAtt() {
+        return pageAtt;
+    }
+
+    public int getDegaAtt() {
+        return degaAtt;
+    }
+
+    public void setPtVie(int ptVie) {
+        this.ptVie = ptVie;
+    }
+
+    public void setDegatAtt(int degatAtt) {
+        this.degatAtt = degatAtt;
+    }
+
+    public void setPtPar(int ptPar) {
+        this.ptPar = ptPar;
+    }
+
+    public void setPagePar(int pagePar) {
+        this.pagePar = pagePar;
+    }
+
+    public void setPageAtt(int pageAtt) {
+        this.pageAtt = pageAtt;
+    }
+
+    public void setDegaAtt(int degaAtt) {
+        this.degaAtt = degaAtt;
+    }
     
     /**
      *

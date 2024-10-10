@@ -25,8 +25,8 @@ public class World {
     private Integer width;
     private Integer height;
 
-    private List<ElementDeJeu> listElements;
-    private Joueur player;
+    public List<ElementDeJeu> listElements;
+    public Joueur player;
 
     /**
      * Default constructor
