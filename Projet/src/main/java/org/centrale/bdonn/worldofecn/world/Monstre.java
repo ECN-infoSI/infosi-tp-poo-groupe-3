@@ -24,10 +24,6 @@ public abstract class Monstre extends Creature {
         return degatAtt;
     }
 
-    public int getPtPar() {
-        return ptPar;
-    }
-
     public int getPagePar() {
         return pagePar;
     }
@@ -46,10 +42,6 @@ public abstract class Monstre extends Creature {
 
     public void setDegatAtt(int degatAtt) {
         this.degatAtt = degatAtt;
-    }
-
-    public void setPtPar(int ptPar) {
-        this.ptPar = ptPar;
     }
 
     public void setPagePar(int pagePar) {
