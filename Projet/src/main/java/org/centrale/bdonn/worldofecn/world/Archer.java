@@ -14,6 +14,10 @@ import java.sql.Connection;
  * @author ECN
  */
 public class Archer extends Personnage {
+    /**
+     * Nombre de fleches de l'archer
+     */
+    private int nbFleche;
     
     /**
      *
@@ -21,6 +25,25 @@ public class Archer extends Personnage {
      */
     public Archer(World world) {
         super(world);
+        nbFleche = 0;
+    }
+    
+    /**
+     *
+     * @param n
+     * @param pV
+     * @param dA
+     * @param pPar
+     * @param paAtt
+     * @param paPar
+     * @param dMax
+     * @param monde
+     * @param nbFl
+     */
+        
+    public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, World monde, int nbFl){
+        super(n, pV, dA, pPar, paAtt, paPar, dMax, monde);
+        nbFleche = nbFl;
     }
     
     /**

@@ -15,11 +15,11 @@ package org.centrale.bdonn.worldofecn.world;
 public abstract class Arme extends Objet {
     
     /**
-     *
+     * @param nom
      * @param world
      */
-    public Arme(World world) {
-        super(world);
+    public Arme(String nom, World world) {
+        super(nom, world);
     }
     
 }

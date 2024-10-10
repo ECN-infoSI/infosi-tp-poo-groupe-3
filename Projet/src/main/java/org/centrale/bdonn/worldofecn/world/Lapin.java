@@ -17,10 +17,23 @@ import java.sql.Connection;
 public class Lapin extends Monstre {
     
     /**
-     *
+     * @param world
      */
     public Lapin(World world) {
         super(world);
+    }
+    
+    /**
+     *
+     * @param ptVie
+     * @param degAtt
+     * @param ptPar
+     * @param pageAtt
+     * @param pagePar
+     * @param monde
+     */
+    public Lapin(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, World monde){
+        super(ptVie, degAtt, ptPar, pageAtt, pagePar, monde);      
     }
     
     /**
