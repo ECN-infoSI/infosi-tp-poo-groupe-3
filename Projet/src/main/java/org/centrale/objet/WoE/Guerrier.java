@@ -36,13 +36,29 @@ public class Guerrier extends Personnage implements Combattant {
     public Guerrier(Guerrier g){
         super(g.getNom(), g.getPtVie(), g.getDegatAtt(), g.getPtPar(), g.getPageAtt(), g.getPagePar(), g.getDistAttMax(), new Point2D(g.getPos()));
     }
+
+    public Guerrier() {
+        super();
+    }
+    
+    
     
     /**
      *
-     */
+     * @param monde
+     * @return  */
     
-    public Guerrier(){
-        super();
+    public Guerrier guerrierAlea(World monde){
+        Random genAl = new Random();
+        int pv = genAl.nextInt(15)+1;
+        int dA = genAl.nextInt(5)+1;
+        int pPar = genAl.nextInt(3)+1;
+        int paPar = genAl.nextInt(49)+50;
+        int paAtt = genAl.nextInt(49)+50;
+        int x = genAl.nextInt(0, (monde.taille)-1);
+        int y = genAl.nextInt(0, (monde.taille)-1);
+        Guerrier guegue = new Guerrier(nom, pv,dA, pPar, paAtt, paPar, 1, new Point2D(x, y));
+        return guegue;
     }
     
     /**
@@ -81,9 +97,6 @@ public class Guerrier extends Personnage implements Combattant {
             else{
                 System.out.println("attaque manquée");
             }
-        }
-        else {
-            System.out.println("attaque impossible");
         }
     }
 }

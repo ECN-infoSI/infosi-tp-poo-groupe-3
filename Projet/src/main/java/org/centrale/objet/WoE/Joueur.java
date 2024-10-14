@@ -18,33 +18,37 @@ public class Joueur {
     
     public ArrayList<Utilisable> inventaire;
     
-    public void choixPerso(){
-        
+    public void choixPerso(World monde){
+        boolean mauvaistype = true;
         Scanner input = new Scanner(System.in);
         System.out.print("Indiquez le type de personnage que vous souhaitez jouer : ");
         String type = input.next();
+        while (mauvaistype){
+            mauvaistype = false;
         /*try {
             perso = Class.forName("org.centrale.objet.WoE."+type).newInstance();
         } catch (ClassNotFoundException e){
             System.out.println("Ce type de personnage n'existe pas.");
         } finally {                
             }*/
-        switch (type) {
-            case "Guerrier":
-                perso = new Guerrier();
-                break;
-            case "Archer":
-                perso = new Archer();
-                break;
-            default:
-                System.out.println("Ce personnage n'est pas jouable.");
+            switch (type) {
+                case "Guerrier":
+                    Guerrier g = new Guerrier();
+                    perso = g.guerrierAlea(monde);
+                    break;
+                case "Archer":
+                    Archer a = new Archer();
+                    perso = a.archerAlea(monde);
+                    break;
+                default:
+                    System.out.println("Ce personnage n'est pas jouable.");
+                    mauvaistype = true;
+                    Scanner input1 = new Scanner(System.in);
+                    System.out.print("Indiquez le type de personnage que vous souhaitez jouer : ");
+                    type = input1.next();
             }
-        if (!perso.estJouable){
-            System.out.println("Ce personnage ne peut pas etre joue");
-            choixPerso();
-        } else {
-            System.out.println("Vous etes un personnage de type : "+type);
         }
+        System.out.println("Vous etes un personnage de type : "+type);
     }
     
     public void choixNom(){

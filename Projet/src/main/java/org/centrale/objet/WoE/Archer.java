@@ -74,6 +74,21 @@ public class Archer extends Personnage implements Combattant{
         nbFleche = 0;
     }
     
+    public Archer archerAlea(World monde){
+        Random genAl = new Random();        
+        int pv = genAl.nextInt(12)+1;
+        int dA = genAl.nextInt(4)+1;
+        int pPar = genAl.nextInt(2)+1;
+        int paPar = genAl.nextInt(74)+25;
+        int paAtt = genAl.nextInt(74)+25;
+        int dMax = genAl.nextInt(5)+3;
+        int nbFleche = genAl.nextInt(10);
+        int x = genAl.nextInt(0, (monde.taille)-1);
+        int y = genAl.nextInt(0, (monde.taille)-1);
+        Archer robin = new Archer(nom, pv, dA, pPar, paAtt, paPar, dMax, new Point2D(x, y), nbFleche);
+        return robin;
+    }
+    
     /**
      * 
      * @param c 
@@ -98,9 +113,6 @@ public class Archer extends Personnage implements Combattant{
             else{
                 System.out.println("attaque manquée");
             }
-        }
-        else {
-            System.out.println("attaque impossible");
         }
     }
 }

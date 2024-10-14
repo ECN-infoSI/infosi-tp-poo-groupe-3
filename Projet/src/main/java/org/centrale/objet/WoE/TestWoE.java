@@ -17,11 +17,11 @@ public class TestWoE {
      */
     public static void main(String[] args){
         World monde = new World();
-        monde = monde.creerMondeAlea(10,10,10,10,10);
+        monde = monde.creerMondeAlea(20,20,20,20,20);
         Joueur moi =  new Joueur();
-        moi.choixPerso();
-        moi.choixNom();
         monde.AjoutPJ(moi);
-        monde.TourDeJeu();
+        for (int i = 0; i< 100; i++){
+            monde.TourDeJeu();
+        }
     }
 }

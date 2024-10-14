@@ -82,8 +82,8 @@ public class World {
             while (!pospossible[rand]){
                 rand = genAl.nextInt(8);
             }
-            int newi = rand/3;
-            int newj = rand - newi*3;
+            int newi = rand/3 - 1;
+            int newj = rand - (newi+1)*3 - 1;
             c.pos.Translate(newi, newj);
             this.posmonde[c.pos.getX()][c.pos.getY()] = this.posmonde[p0.getX()][p0.getY()];
             this.posmonde[p0.getX()][p0.getY()] = -1;
@@ -227,10 +227,21 @@ public class World {
      * comme c'est un attribut, on aura un accès constant a sa position, ses stats etc
      */
     public void AjoutPJ(Joueur j){
-        j.choixPerso();
+        j.choixPerso(this);
         j.choixNom();
         this.PJ = j.perso;
-        ajoutecrea(this.PJ);
+        Class classe = PJ.getClass();
+        String nomclasse = classe.getName();
+        int indiceclasse = 0;
+        switch (nomclasse){
+            case "Guerrier":
+                indiceclasse = 2;
+                break;
+            case "Archer":
+                indiceclasse = 3;
+                break;
+        }
+        this.posmonde[PJ.pos.getX()][PJ.pos.getY()] = indiceclasse;
     }
     
     /**
@@ -272,7 +283,8 @@ public class World {
                         System.out.println("Direction non valide");
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
-                    } 
+                    }
+                    break;
                 case "NE":
                     if (pospossible[2]){
                         dx = -1;
@@ -282,6 +294,7 @@ public class World {
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
                     } 
+                    break;
                 case "E":
                     if (pospossible[1]){
                         dx = -1;
@@ -291,6 +304,7 @@ public class World {
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
                     } 
+                    break;
                 case "SE":
                     if (pospossible[0]){
                         dx = -1;
@@ -299,7 +313,8 @@ public class World {
                         System.out.println("Direction non valide");
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
-                    }                    
+                    }   
+                    break;
                 case "S":
                     if (pospossible[3]){
                         dx = 0;
@@ -309,6 +324,7 @@ public class World {
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
                     } 
+                    break;
                 case "SO":
                     if (pospossible[6]){
                         dx = 1;
@@ -318,6 +334,7 @@ public class World {
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
                     } 
+                    break;
                 case "O":
                     if (pospossible[7]){
                         dx = 1;
@@ -327,6 +344,7 @@ public class World {
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
                     } 
+                    break;
                 case "NO":
                     if (pospossible[8]){
                         dx = 1;
@@ -336,12 +354,16 @@ public class World {
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
                     }
+                    break;
                 default:
                     System.out.println("Direction non valide");
                     System.out.println("Choisir a nouveau");
                     this.deplacePJ();
+                    break;
             }
-            this.PJ.pos.Translate(dx, dy);   
+            this.PJ.pos.affiche();
+            this.PJ.pos.Translate(dx, dy);
+            this.PJ.pos.affiche();
         }                            
     }
     
@@ -386,17 +408,32 @@ public class World {
     }
     
     /**
+     * On affiche les creatures autour
      * On definit quelle est l'action que le joueur effectue et on utilise la fonction associee
      */
     public void ActionJoueur(){
+        for (int i = -1; i<2; i++){
+            for (int j = -1; j<2;j++){
+                int k = 3*(i+1)+j+1;
+                if ((k!=4)&&(Estdanslimite(PJ.pos.getX()+i,PJ.pos.getY()+j))){/*on ne verifie pas la position k=4 car c'est celle sur laquelle on est deja*/
+                    System.out.println(this.posmonde[PJ.pos.getX()+i][PJ.pos.getY()+j]);
+                }
+            }
+        }
         System.out.println("Voulez-vous : Deplacer ou Combattre");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
         switch (choix) {
             case "Deplacer":
                 this.deplacePJ();
+                break;
             case "Combattre":
-                this.CombattrePJ();                
+                this.CombattrePJ();
+                break;
+            default:
+                System.out.println("Action non reconnue");
+                this.ActionJoueur();
+                break;
         }
     }
     
@@ -420,7 +457,7 @@ public class World {
             for (int i = 0; i<this.structcrea.size(); i++){
                 Creature c = this.structcrea.get(i);
                 int pvPJ = PJ.getPtVie();
-                if (c instanceof Combattant combattant){
+                if ((c instanceof Combattant combattant)&&(c instanceof Monstre)){
                     combattant.combattre(PJ);
                 }
                 if (PJ.getPtVie()==pvPJ){

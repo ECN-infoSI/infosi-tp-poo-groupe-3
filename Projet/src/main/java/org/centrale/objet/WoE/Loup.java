@@ -80,8 +80,5 @@ public class Loup extends Monstre implements Combattant{
                 System.out.println("attaque manquée");
             }
         }
-        else {
-            System.out.println("attaque impossible");
-        }
     }
 }

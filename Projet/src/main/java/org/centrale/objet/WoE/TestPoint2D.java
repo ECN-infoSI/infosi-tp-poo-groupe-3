@@ -14,7 +14,7 @@ public class TestPoint2D {
      *
      * @param args
      */
-    public static void main(String[] args){
+    
     
         /**public static void main(String[] args){
 
@@ -35,5 +35,4 @@ public class TestPoint2D {
         System.out.println("la distance entre p1 et p2 est "+d2+".");
     }
     **/
-    }
 }
