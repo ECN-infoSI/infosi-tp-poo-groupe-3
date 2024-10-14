@@ -19,8 +19,9 @@ public class Joueur {
     public ArrayList<Utilisable> inventaire;
     
     public void choixPerso(){
-        System.out.println("Indiquez le type de personnage que vous souhaitez jouer : ");
+        
         Scanner input = new Scanner(System.in);
+        System.out.print("Indiquez le type de personnage que vous souhaitez jouer : ");
         String type = input.next();
         /*try {
             perso = Class.forName("org.centrale.objet.WoE."+type).newInstance();
