@@ -349,7 +349,8 @@ public class World {
      * On demande la position relative au joueur
      * en cas d'absence de creature a cet endroit, on redemande au joueur ce qu'il veut faire
      * S'il y a bien une creature, on va la chercher dans notre structure qui stocke les creatures
-     * Puis on fait combattre le pj (qui est nécessairement un combattant et la creature
+     * Puis on fait combattre le pj (qui est nécessairement un combattant et la creature)
+     * Si la creature n'a plus de point de vie, on l'enleve de la bdd et on enleve son corps de la grille de positions
      */
     public void CombattrePJ(){
         System.out.println("Ou est la creature a combattre ?");
@@ -376,6 +377,11 @@ public class World {
                 Y = this.structcrea.get(i).pos.getY();
             }
             ((Combattant)(this.PJ)).combattre(this.structcrea.get(i));
+            if (this.structcrea.get(i).getPtVie()<=0){
+                System.out.println("Vous avez tuer la creature");
+                this.posmonde[X][Y] = -1;
+                this.structcrea.remove(i);
+            }
         }
     }
     
@@ -401,19 +407,30 @@ public class World {
      * si c'est le cas elle essaie d'attaquer
      * Puis on verifie si les pv du PJ ont bouge a cause de cette creature
      * si c'est pas le cas, la creature bouge
+     * Lorsque les
      */
     public void TourDeJeu(){
-        this.ActionJoueur();
-        for (int i = 0; i<this.structcrea.size(); i++){
-            Creature c = this.structcrea.get(i);
-            int pvPJ = PJ.getPtVie();
-            if (c instanceof Combattant combattant){
-                combattant.combattre(PJ);
+        if (PJ.getPtVie()<=0){
+            System.out.println("Vous etes KO");
+        }else{
+            this.ActionJoueur();
+            /**if (PJ.pos.distance(tcloud.getPos())<tcloud.getTaille()){
+                    PJ.setPtVie(c.getPtVie()-tcloud.getDegat());
+            }*/
+            for (int i = 0; i<this.structcrea.size(); i++){
+                Creature c = this.structcrea.get(i);
+                int pvPJ = PJ.getPtVie();
+                if (c instanceof Combattant combattant){
+                    combattant.combattre(PJ);
+                }
+                if (PJ.getPtVie()==pvPJ){
+                    this.deplacealealimite(c);
+                }
+                /**if (c.pos.distance(tcloud.getPos())<tcloud.getTaille()){
+                    c.setPtVie(c.getPtVie()-tcloud.getDegat());
+                }*/
             }
-            if (PJ.getPtVie()==pvPJ){
-                this.deplacealealimite(c);
-            }
-        }        
+        }
     }
     
 }

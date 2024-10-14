@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author titou
  */
-public abstract class Creature extends ElementDeJeu{
+public abstract class Creature extends ElementDeJeu implements Deplacable{
 
         /**
          * Nombre de points de vie
@@ -166,20 +166,20 @@ public abstract class Creature extends ElementDeJeu{
      */
     public void setPageAtt(int pageAtt) {
             this.pageAtt = pageAtt;
-        }
-      
-        /**
-        * Déplace le personnage sur une case adjacente à sa position.
-        */
-        public void deplace(){
-            Random genAl = new Random();
-            int xAl = genAl.nextInt(2)-1;
-            int yAl = genAl.nextInt(2)-1;
-            while ((xAl == 0)&&(yAl == 0)){
-                xAl = genAl.nextInt(2)-1;
-                yAl = genAl.nextInt(2)-1;
-}
-            pos.Translate(xAl, yAl);
     }
       
+    /**
+    * Déplace le personnage sur une case adjacente à sa position.
+    */
+    @Override
+    public void deplace(){
+        Random genAl = new Random();
+        int xAl = genAl.nextInt(2)-1;
+        int yAl = genAl.nextInt(2)-1;
+        while ((xAl == 0)&&(yAl == 0)){
+            xAl = genAl.nextInt(2)-1;
+            yAl = genAl.nextInt(2)-1;
+        }
+        pos.Translate(xAl, yAl);
+    }  
 }
