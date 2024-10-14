@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author titou
  */
-public class Loup extends Monstre{
+public class Loup extends Monstre implements Combattant{
 
     /**
      *

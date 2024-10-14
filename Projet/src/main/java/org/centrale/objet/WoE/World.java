@@ -256,7 +256,7 @@ public class World {
         }
         if (pospossible==reffalse){
             System.out.println("Impossible de bouger, obligation de combattre");
-            this.CombattrePJ();
+            this.ActionJoueur();
         }else{
             System.out.println("Ou aller ? N, NE, E, SE, S, SO, O ou NO ?");
             Scanner input2 = new Scanner(System.in);
@@ -349,7 +349,7 @@ public class World {
      * On demande la position relative au joueur
      * en cas d'absence de creature a cet endroit, on redemande au joueur ce qu'il veut faire
      * S'il y a bien une creature, on va la chercher dans notre structure qui stocke les creatures
-     * Puis on fait combattre le pj et la creature
+     * Puis on fait combattre le pj (qui est nécessairement un combattant et la creature
      */
     public void CombattrePJ(){
         System.out.println("Ou est la creature a combattre ?");
@@ -394,8 +394,26 @@ public class World {
         }
     }
     
+    /**
+     * On effetue l'action du joueur
+     * Pour chaque creature :
+     * on verifie si elle est combattante
+     * si c'est le cas elle essaie d'attaquer
+     * Puis on verifie si les pv du PJ ont bouge a cause de cette creature
+     * si c'est pas le cas, la creature bouge
+     */
     public void TourDeJeu(){
         this.ActionJoueur();
-                
+        for (int i = 0; i<this.structcrea.size(); i++){
+            Creature c = this.structcrea.get(i);
+            int pvPJ = PJ.getPtVie();
+            if (c instanceof Combattant combattant){
+                combattant.combattre(PJ);
+            }
+            if (PJ.getPtVie()==pvPJ){
+                this.deplacealealimite(c);
+            }
+        }        
     }
+    
 }
