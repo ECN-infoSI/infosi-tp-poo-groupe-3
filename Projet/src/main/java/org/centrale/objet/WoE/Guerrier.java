@@ -10,12 +10,8 @@ import java.util.Random;
  *
  * @author titou
  */
-public class Guerrier extends Personnage {
-    /**
-     * Jouabilite par un joueur
-     */
-    final boolean estJouable = true;
-    
+public class Guerrier extends Personnage implements Combattant {
+        
     /**
      *
      * @param n

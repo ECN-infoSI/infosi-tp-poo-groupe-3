@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author thoma
  */
 public class Joueur {
-    private Personnage perso;
+    public Personnage perso;
     
     public ArrayList<Utilisable> effets;
     

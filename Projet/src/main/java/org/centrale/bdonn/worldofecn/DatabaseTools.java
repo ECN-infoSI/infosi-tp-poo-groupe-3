@@ -113,7 +113,9 @@ public class DatabaseTools {
      * On commence par recuperer id_partie
      * On cree une nouvelle ligne dans la table sauvegarde
      * On recupere id_sauv de la nouvelle sauvegarde
-     * On rajoute dans les tables personnage, monstre et objet des copies des données avec lesquels on jouait avec le nouvel id_sauv
+     * On regarde quelle est la classe de l'element de jeu qu'on regarde
+     * On extrait les donnees selon la classe de l'element de jeu
+     * On rajoute dans les tables personnage, monstre et objet des copies des donnees avec lesquels on jouait avec le nouvel id_sauv
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
         try{
@@ -129,21 +131,96 @@ public class DatabaseTools {
             PreparedStatement stmt3 = this.connection.prepareStatement(sql3);
             ResultSet rs3 = stmt3.executeQuery();
             int idSauv = rs3.getInt("id_sauv");
-            String sql4 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
-                    + "SELECT nom, id_partie, "+idSauv+", pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type"
-                    + "FROM personnage WHERE id_sauv IS NULL;";
-            PreparedStatement stmt4 = this.connection.prepareStatement(sql4);
-            stmt4.executeUpdate();
-            String sql5 = "INSERT INTO monstre (id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pos_x, pos_y, id_type) "
-                    + "SELECT id_partie, "+idSauv+", pv, pour_att, pt_att, pour_par, pos_x, pos_y, id_type "
-                    + "FROM monstre WHERE id_sauv IS NULL;";
-            PreparedStatement stmt5 = this.connection.prepareStatement(sql5);
-            stmt5.executeUpdate();
-            String sql6 = "INSERT INTO objet (nom, id_partie, id_sauv, id_perso, pos_x, pos_y, id_type)VALUES "
-                    + "SELECT nom, id_partie, "+idSauv+", id_perso, pos_x, pos_y, id_type "
-                    + "FROM objet WHERE id_sauv IS NULL;";
-            PreparedStatement stmt6 = this.connection.prepareStatement(sql6);
-            stmt6.executeUpdate();
+            for (int i = 0 ; i<= monde.listElements.size() ; i++){
+                ElementDeJeu e = monde.player.personnage;
+                if (i<monde.listElements.size()){
+                    e = monde.listElements.get(i);
+                }
+                Class classe = e.getClass();
+                String nomclasse = classe.getName();
+                int indiceclasse = 0;
+                switch (nomclasse){
+                    case "Paysan":
+                        indiceclasse = 1;
+                        break;
+                    case "Guerrier":
+                        indiceclasse = 2;
+                        break;
+                    case "Archer":
+                        indiceclasse = 3;
+                        break;
+                    case "Loup":
+                        indiceclasse = 4;
+                        break;
+                    case "Lapin":
+                        indiceclasse = 5;
+                        break;
+                    case "PotionSoin":
+                        indiceclasse = 6;
+                        break;
+                    case "Epee":
+                        indiceclasse = 7;
+                        break;
+                }
+                switch (nomclasse){
+                    case "Paysan", "Guerrier":
+                        /** on recupere les attributs des personnages*/
+                        String nomp = ((Personnage)e).getNom();
+                        Integer pvp = ((Personnage)e).getPtVie();
+                        Integer pourattp = ((Personnage)e).getPageAtt();
+                        Integer ptattp = ((Personnage)e).getDegaAtt();
+                        Integer pourparp = ((Personnage)e).getPagePar();
+                        Integer ptparp = ((Personnage)e).getPtPar();
+                        Integer distmaxp = ((Personnage)e).getDistAttMax();
+                        Integer posxp = ((Personnage)e).getPosition().getX();
+                        Integer posyp = ((Personnage)e).getPosition().getY();
+                        String sql4 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
+                                + "VALUES ("+nomp+", "+idPartie+", "+idSauv+", "+pvp+", "+pourattp+", "+ptattp+", "+pourparp+", "+ptparp+", "+distmaxp+", NULL, "+posxp+", "+posyp+", "+indiceclasse+");";
+                        PreparedStatement stmt4 = this.connection.prepareStatement(sql4);
+                        stmt4.executeUpdate();
+                        break;
+                    case "Archer":
+                        /** on recupere les attributs des personnages*/
+                        String noma = ((Personnage)e).getNom();
+                        Integer pva = ((Personnage)e).getPtVie();
+                        Integer pouratta = ((Personnage)e).getPageAtt();
+                        Integer ptatta = ((Personnage)e).getDegaAtt();
+                        Integer pourpara = ((Personnage)e).getPagePar();
+                        Integer ptpara = ((Personnage)e).getPtPar();
+                        Integer distmaxa = ((Personnage)e).getDistAttMax();
+                        Integer nbflechesa = ((Archer)e).getNbFleche();
+                        Integer posxa = ((Personnage)e).getPosition().getX();
+                        Integer posya = ((Personnage)e).getPosition().getY();
+                        String sql7 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
+                                + "VALUES ("+noma+", "+idPartie+", "+idSauv+", "+pva+", "+pouratta+", "+ptatta+", "+pourpara+", "+ptpara+", "+distmaxa+", "+nbflechesa+", "+posxa+", "+posya+", "+indiceclasse+");";
+                        PreparedStatement stmt7 = this.connection.prepareStatement(sql7);
+                        stmt7.executeUpdate();
+                        break;
+                    case "Lapin", "Loup":
+                        /** on recupere les attributs des monstres*/
+                        Integer pvm = ((Monstre)e).getPtVie();
+                        Integer pourattm = ((Monstre)e).getPageAtt();
+                        Integer ptattm = ((Monstre)e).getDegaAtt();
+                        Integer pourparm = ((Monstre)e).getPagePar();
+                        Integer posxm = ((Monstre)e).getPosition().getX();
+                        Integer posym = ((Monstre)e).getPosition().getY();
+                        String sql5 = "INSERT INTO monstre (id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pos_x, pos_y, id_type)"
+                                + "VALUES ("+idPartie+", "+idSauv+", "+pvm+", "+pourattm+", "+ptattm+", "+pourparm+", "+posxm+", "+posym+", "+indiceclasse+") ";
+                        PreparedStatement stmt5 = this.connection.prepareStatement(sql5);
+                        stmt5.executeUpdate();
+                        break;
+                    case "Epee", "PotionSoin":
+                        /** on recupere les attributs des objets*/
+                        String nomo = ((Objet)e).getNom();
+                        Integer posxo = ((Objet)e).getPosition().getX();
+                        Integer posyo = ((Objet)e).getPosition().getY();
+                        String sql6 = "INSERT INTO objet (nom, id_partie, id_sauv, id_perso, pos_x, pos_y, id_type)"
+                                + "VALUES ("+nomo+", "+idPartie+", "+idSauv+", id_perso, "+posxo+", "+posyo+", "+indiceclasse+") ";
+                        PreparedStatement stmt6 = this.connection.prepareStatement(sql6);
+                        stmt6.executeUpdate();
+                        break;
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
         }

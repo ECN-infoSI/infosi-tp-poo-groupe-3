@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author thomas
  */
-public class Archer extends Personnage{
+public class Archer extends Personnage implements Combattant{
     /**
      * Nombre de fleches de l'archer
      */

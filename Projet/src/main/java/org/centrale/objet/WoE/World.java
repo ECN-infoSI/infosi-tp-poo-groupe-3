@@ -6,6 +6,7 @@ package org.centrale.objet.WoE;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 /**
  *
  * @author titou
@@ -17,6 +18,7 @@ public class World {
      */
     public ArrayList<Creature> structcrea;
     final int taille = 50;
+    public Personnage PJ;
 
     /** 
      *
@@ -218,4 +220,200 @@ public class World {
         this.posmonde[x][y] = indiceclasse;
         this.structcrea.add(this.structcrea.size(), c);
     }
+    
+    /**
+     * @param j 
+     * on ajoute le personnage jouable dans le monde
+     * comme c'est un attribut, on aura un accès constant a sa position, ses stats etc
+     */
+    public void AjoutPJ(Joueur j){
+        j.choixPerso();
+        j.choixNom();
+        this.PJ = j.perso;
+        ajoutecrea(this.PJ);
+    }
+    
+    /**
+     * On verifie quels deplacements sont autorises
+     * si aucun n'est autorise on force le joueur a combattre
+     * sinon on lui demande la direction du deplacement
+     * si cette direction est possible, on selectionne les dx et dy correspondant
+     * sinon on lui redemande
+     * On applique la translation
+     */
+    public void deplacePJ(){
+        int x = this.PJ.pos.getX();
+        int y = this.PJ.pos.getY();
+        boolean[] pospossible = {false, false, false, false, false, false, false, false, false};
+        boolean[] reffalse = {false, false, false, false, false, false, false, false, false};
+        for (int i = -1; i<2; i++){
+            for (int j = -1; j<2;j++){
+                int k = 3*(i+1)+j+1;
+                if ((k!=4)&&(Estdanslimite(x+i,y+j))){/*on ne verifie pas la position k=4 car c'est celle sur laquelle on est deja*/
+                    pospossible[k] = (this.posmonde[x+i][y+j]==-1);
+                }
+            }
+        }
+        if (pospossible==reffalse){
+            System.out.println("Impossible de bouger, obligation de combattre");
+            this.ActionJoueur();
+        }else{
+            System.out.println("Ou aller ? N, NE, E, SE, S, SO, O ou NO ?");
+            Scanner input2 = new Scanner(System.in);
+            String direction = input2.next();
+            int dx = 0;
+            int dy = 0;
+            switch (direction){
+                case "N":
+                    if (pospossible[5]){
+                        dx = 0;
+                        dy = 1;
+                    } else {
+                        System.out.println("Direction non valide");
+                        System.out.println("Choisir a nouveau");
+                        this.deplacePJ();
+                    } 
+                case "NE":
+                    if (pospossible[2]){
+                        dx = -1;
+                        dy = 1;
+                    } else {
+                        System.out.println("Direction non valide");
+                        System.out.println("Choisir a nouveau");
+                        this.deplacePJ();
+                    } 
+                case "E":
+                    if (pospossible[1]){
+                        dx = -1;
+                        dy = 0;
+                    } else {
+                        System.out.println("Direction non valide");
+                        System.out.println("Choisir a nouveau");
+                        this.deplacePJ();
+                    } 
+                case "SE":
+                    if (pospossible[0]){
+                        dx = -1;
+                        dy = -1;
+                    } else {
+                        System.out.println("Direction non valide");
+                        System.out.println("Choisir a nouveau");
+                        this.deplacePJ();
+                    }                    
+                case "S":
+                    if (pospossible[3]){
+                        dx = 0;
+                        dy = -1;
+                    } else {
+                        System.out.println("Direction non valide");
+                        System.out.println("Choisir a nouveau");
+                        this.deplacePJ();
+                    } 
+                case "SO":
+                    if (pospossible[6]){
+                        dx = 1;
+                        dy = -1;
+                    } else {
+                        System.out.println("Direction non valide");
+                        System.out.println("Choisir a nouveau");
+                        this.deplacePJ();
+                    } 
+                case "O":
+                    if (pospossible[7]){
+                        dx = 1;
+                        dy = 0;
+                    } else {
+                        System.out.println("Direction non valide");
+                        System.out.println("Choisir a nouveau");
+                        this.deplacePJ();
+                    } 
+                case "NO":
+                    if (pospossible[8]){
+                        dx = 1;
+                        dy = 1;
+                    } else {
+                        System.out.println("Direction non valide");
+                        System.out.println("Choisir a nouveau");
+                        this.deplacePJ();
+                    }
+                default:
+                    System.out.println("Direction non valide");
+                    System.out.println("Choisir a nouveau");
+                    this.deplacePJ();
+            }
+            this.PJ.pos.Translate(dx, dy);   
+        }                            
+    }
+    
+    /**
+     * On demande la position relative au joueur
+     * en cas d'absence de creature a cet endroit, on redemande au joueur ce qu'il veut faire
+     * S'il y a bien une creature, on va la chercher dans notre structure qui stocke les creatures
+     * Puis on fait combattre le pj (qui est nécessairement un combattant et la creature
+     */
+    public void CombattrePJ(){
+        System.out.println("Ou est la creature a combattre ?");
+        System.out.println("Entrer la distance en x avec la creature");
+        Scanner input3 = new Scanner(System.in);
+        String rep3 = input3.next();
+        int dx = Integer.parseInt(rep3);
+        System.out.println("Entrer la distance en y avec la creature");
+        Scanner input4 = new Scanner(System.in);
+        String rep4 = input4.next();
+        int dy = Integer.parseInt(rep4);
+        int posx = this.PJ.pos.getX() + dx;
+        int posy = this.PJ.pos.getY() + dy;
+        if (this.posmonde[posx][posy]==-1){
+            System.out.println("Pas de creature la");
+            this.ActionJoueur();
+        } else{
+            int i = 0;
+            int X = this.structcrea.get(i).pos.getX();
+            int Y = this.structcrea.get(i).pos.getY();
+            while ((i<this.structcrea.size())&&((posx!=X)||(posy!=Y))){
+                i++;
+                X = this.structcrea.get(i).pos.getX();
+                Y = this.structcrea.get(i).pos.getY();
+            }
+            ((Combattant)(this.PJ)).combattre(this.structcrea.get(i));
+        }
+    }
+    
+    /**
+     * On definit quelle est l'action que le joueur effectue et on utilise la fonction associee
+     */
+    public void ActionJoueur(){
+        System.out.println("Voulez-vous : Deplacer ou Combattre");
+        Scanner input1 = new Scanner(System.in);
+        String choix = input1.next();
+        switch (choix) {
+            case "Deplacer":
+                this.deplacePJ();
+            case "Combattre":
+                this.CombattrePJ();                
+        }
+    }
+    
+    /**
+     * On effetue l'action du joueur
+     * Pour chaque creature :
+     * on verifie si elle est combattante
+     * si c'est le cas elle essaie d'attaquer
+     * Puis on verifie si les pv du PJ ont bouge a cause de cette creature
+     * si c'est pas le cas, la creature bouge
+     */
+    public void TourDeJeu(){
+        this.ActionJoueur();
+        for (int i = 0; i<this.structcrea.size(); i++){
+            Creature c = this.structcrea.get(i);
+            int pvPJ = PJ.getPtVie();
+            if (c instanceof Combattant combattant){
+                combattant.combattre(PJ);
+            }
+            if (PJ.getPtVie()==pvPJ){
+                this.deplacealealimite(c);
+            }
+        }        
+    }
+    
 }

@@ -18,6 +18,14 @@ public class Archer extends Personnage {
      * Nombre de fleches de l'archer
      */
     private int nbFleche;
+
+    public int getNbFleche() {
+        return nbFleche;
+    }
+
+    public void setNbFleche(int nbFleche) {
+        this.nbFleche = nbFleche;
+    }
     
     /**
      *

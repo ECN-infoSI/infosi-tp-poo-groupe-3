@@ -17,6 +17,13 @@ import java.util.Random;
  */
 public abstract class ElementDeJeu {
     private Point2D position;
+
+    public ElementDeJeu(Point2D position) {
+        this.position = position;
+    }
+
+    public ElementDeJeu() {
+    }
     
     /**
      * generate element in the world
