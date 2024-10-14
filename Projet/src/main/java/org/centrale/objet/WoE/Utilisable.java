@@ -16,4 +16,6 @@ public interface Utilisable {
     public int getDuree();
     
     public void setDuree(int i);
+    
+    public String getNom();
 }
