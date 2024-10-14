@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -11,6 +13,10 @@ import java.util.Scanner;
  */
 public class Joueur {
     private Personnage perso;
+    
+    public ArrayList<Utilisable> effets;
+    
+    public Utilisable[] inventaire;
     
     public void choixPerso(){
         System.out.println("Indiquez le type de personnage que vous souhaitez jouer : ");
@@ -46,5 +52,29 @@ public class Joueur {
         String nom = input.next();
         perso.nom = nom;
         System.out.println("Votre personnage s'appelle : "+nom);
+    }
+    
+    public void ajoutUtil(Utilisable u){
+        this.effets.add(u);
+        u.affecter(perso);
+    }
+    
+    public void finUtil(Utilisable u){
+        u.desaffecter(perso);
+        this.effets.remove(u);
+    }
+    
+    public void estAffecte(){
+        for (Utilisable u : this.effets) {
+            int d = u.getDuree();
+            u.setDuree(d-1);
+            if (d <= 0){
+                this.finUtil(u);
+            }        
+        }
+    }
+    
+    public void ramasser(Utilisable u){
+        this.inventaire.app
     }
 }

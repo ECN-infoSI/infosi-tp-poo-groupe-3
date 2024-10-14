@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author titou
  */
-public abstract class Creature {
+public abstract class Creature extends ElementDeJeu{
 
         /**
          * Nombre de points de vie
@@ -42,10 +42,7 @@ public abstract class Creature {
      */
     protected int degaAtt;
 
-       /**
-        * Position de la creature
-        */
-       protected Point2D pos;
+       
        
     /**
      * Jouabilité de la creature par un joueur
@@ -62,25 +59,34 @@ public abstract class Creature {
      * @param p
      */
     public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
-            ptVie = pV;
-            degatAtt = dA;
-            ptPar = pPar;
-            pagePar = paPar;
-            pageAtt = paAtt;
-            pos = p;
+        super(p);
+        ptVie = pV;
+        degatAtt = dA;
+        ptPar = pPar;
+        pagePar = paPar;
+        pageAtt = paAtt;
         }    
          
     /**
      *
      */
     public Creature(){
-            ptVie = 0;
-            degatAtt = 0;
-            ptPar = 0;
-            pagePar = 0;
-            pageAtt = 0;
-            pos = new Point2D();
+        super();
+        ptVie = 0;
+        degatAtt = 0;
+        ptPar = 0;
+        pagePar = 0;
+        pageAtt = 0;
         }
+    
+    public Creature(Creature c){
+        super(c.getPos());
+        ptVie = c.getPtVie();
+        degatAtt = c.getDegatAtt();
+        ptPar = c.getPtPar();
+        pagePar = c.getPagePar();
+        pageAtt = c.getPageAtt();
+    }
 
     /**
      *
@@ -160,22 +166,6 @@ public abstract class Creature {
      */
     public void setPageAtt(int pageAtt) {
             this.pageAtt = pageAtt;
-        }
-
-    /**
-     *
-     * @return
-     */
-    public Point2D getPos() {
-            return pos;
-        }
-
-    /**
-     *
-     * @param pos
-     */
-    public void setPos(Point2D pos) {
-            this.pos = pos;
         }
       
         /**

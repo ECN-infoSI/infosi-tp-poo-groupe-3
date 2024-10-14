@@ -8,17 +8,12 @@ package org.centrale.objet.WoE;
  *
  * @author thomas
  */
-public class Objet {
+public class Objet extends ElementDeJeu{
 
     /**
      *
      */
     protected String nom;
-
-    /**
-     *
-     */
-    protected Point2D pos;
     
     /**
      *
@@ -26,8 +21,8 @@ public class Objet {
      * @param p
      */
     public Objet(String n, Point2D p){
+        super(p);
         nom = n;
-        pos = p;
     }
     
     /**
@@ -35,16 +30,16 @@ public class Objet {
      * @param o
      */
     public Objet(Objet o){
+        super(o.getPos());
         nom = o.getNom();
-        pos = o.getPos();
     }
     
     /**
      *
      */
     public Objet(){
+        super();
         nom = "";
-        pos = new Point2D();
     }
     
     /**
@@ -61,23 +56,6 @@ public class Objet {
      */
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Point2D getPos() {
-        return pos;
-    }
-
-    /**
-     *
-     * @param pos
-     */
-    public void setPos(Point2D pos) {
-        this.pos = pos;
-    }
-    
+    }  
     
 }
