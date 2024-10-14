@@ -48,7 +48,7 @@ public class Joueur {
     }
     
     public void choixNom(){
-        System.out.println("Indiquez le nom de votre personnage : ");
+        System.out.print("Indiquez le nom de votre personnage : ");
         Scanner input = new Scanner(System.in);
         String nom = input.next();
         perso.nom = nom;

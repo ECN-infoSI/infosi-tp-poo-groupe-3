@@ -11,7 +11,8 @@ import java.util.Random;
  * @author titou
  */
 public class Guerrier extends Personnage implements Combattant {
-        
+    
+    
     /**
      *
      * @param n
