@@ -258,7 +258,7 @@ public class World {
             System.out.println("Impossible de bouger, obligation de combattre");
             this.ActionJoueur();
         }else{
-            System.out.println("Ou aller ? N, NE, E, SE, S, SO, O ou NO ?");
+            System.out.print("Ou aller ? N, NE, E, SE, S, SO, O ou NO ?");
             Scanner input2 = new Scanner(System.in);
             String direction = input2.next();
             int dx = 0;
@@ -290,7 +290,7 @@ public class World {
                         System.out.println("Direction non valide");
                         System.out.println("Choisir a nouveau");
                         this.deplacePJ();
-                    } 
+                    }
                 case "SE":
                     if (pospossible[0]){
                         dx = -1;
