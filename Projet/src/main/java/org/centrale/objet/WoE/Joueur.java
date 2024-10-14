@@ -16,7 +16,7 @@ public class Joueur {
     
     public ArrayList<Utilisable> effets;
     
-    public Utilisable[] inventaire;
+    public ArrayList<Utilisable> inventaire;
     
     public void choixPerso(){
         System.out.println("Indiquez le type de personnage que vous souhaitez jouer : ");
@@ -75,6 +75,24 @@ public class Joueur {
     }
     
     public void ramasser(Utilisable u){
-        this.inventaire.app
+        this.inventaire.add(u);
+    }
+    
+    public void utiliser(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Indiquez le numero de l'objet que vous souhaitez utiliser.");
+        int i = input.nextInt();
+        Utilisable u = this.inventaire.get(i);
+        System.out.println("Vous avez choisi l'objet : "+u.getNom());
+        this.inventaire.remove(u);
+        this.ajoutUtil(u);
+    }
+    
+    public void afficherInventaire(){
+        Iterator<Utilisable> listIt = this.inventaire.iterator();
+        int i = 0;
+        while (listIt.hasNext()){
+            System.out.println(i+" : "+listIt.next().getNom());
+        }
     }
 }
