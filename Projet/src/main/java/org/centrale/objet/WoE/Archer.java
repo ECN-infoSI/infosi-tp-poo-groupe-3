@@ -51,7 +51,7 @@ public class Archer extends Personnage implements Combattant{
      * @param nbFl
      */
         
-    public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFl){
+    public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, float dMax, Point2D p, int nbFl){
         super(n, pV, dA, pPar, paAtt, paPar, dMax, p);
         nbFleche = nbFl;
     }
@@ -81,7 +81,7 @@ public class Archer extends Personnage implements Combattant{
         int pPar = genAl.nextInt(2)+1;
         int paPar = genAl.nextInt(74)+25;
         int paAtt = genAl.nextInt(74)+25;
-        int dMax = genAl.nextInt(5)+3;
+        float dMax = genAl.nextInt(5)+3;
         int nbFleche = genAl.nextInt(10);
         int x = genAl.nextInt(0, (monde.taille)-1);
         int y = genAl.nextInt(0, (monde.taille)-1);
@@ -98,6 +98,7 @@ public class Archer extends Personnage implements Combattant{
      */
     public void combattre(Creature c){
         if ((this.pos.distance(c.pos)<=this.distAttMax)&&(this.pos.distance(c.pos)>1)&&(this.nbFleche>0)){
+            System.out.println(this.getNom()+" attaque !");
             this.nbFleche -= 1;
             Random genAl = new Random();
             int jetAtt = genAl.nextInt(99)+1;
@@ -113,6 +114,9 @@ public class Archer extends Personnage implements Combattant{
             else{
                 System.out.println("attaque manquée");
             }
+        }
+        else{
+            System.out.println("attaque impossible");
         }
     }
 }

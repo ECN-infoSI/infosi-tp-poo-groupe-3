@@ -17,7 +17,7 @@ public class World {
      *
      */
     public ArrayList<Creature> structcrea;
-    final int taille = 50;
+    final int taille = 2;
     public Personnage PJ;
 
     /** 
@@ -84,9 +84,12 @@ public class World {
             }
             int newi = rand/3 - 1;
             int newj = rand - (newi+1)*3 - 1;
+            System.out.println(this.posmonde[c.pos.getX()][c.pos.getY()]);
             c.pos.Translate(newi, newj);
-            this.posmonde[c.pos.getX()][c.pos.getY()] = this.posmonde[p0.getX()][p0.getY()];
-            this.posmonde[p0.getX()][p0.getY()] = -1;
+            System.out.println(this.posmonde[c.pos.getX()][c.pos.getY()]);
+            this.posmonde[c.pos.getX()][c.pos.getY()] = this.posmonde[x][y];
+            System.out.println(this.posmonde[c.pos.getX()][c.pos.getY()]);
+            this.posmonde[x][y] = -1;
         }
         
         
@@ -132,7 +135,6 @@ public class World {
             int y = genAl.nextInt(0, (this.taille)-1);
             Paysan peon = new Paysan(nom, pv, dA, pPar, paAtt, paPar, 1, new Point2D(x, y));
             Monmonde.ajoutecrea(peon);
-            Monmonde.structcrea.add(i, peon);
         }
         for (int i = 0; i<nbgu; i++){
             String nom = "Guerrier"+i;
@@ -145,7 +147,6 @@ public class World {
             int y = genAl.nextInt(0, (this.taille)-1);
             Guerrier grosBill = new Guerrier(nom, pv,dA, pPar, paAtt, paPar, 1, new Point2D(x, y));
             Monmonde.ajoutecrea(grosBill);
-            Monmonde.structcrea.add(i+nbpa, grosBill);
         }
         for (int i = 0; i<nbar; i++){
             String nom = "Archer"+i;
@@ -160,7 +161,6 @@ public class World {
             int y = genAl.nextInt(0, (this.taille)-1);
             Archer robin = new Archer(nom, pv, dA, pPar, paAtt, paPar, dMax, new Point2D(x, y), nbFleche);
             Monmonde.ajoutecrea(robin);
-            Monmonde.structcrea.add(i+nbpa+nbgu, robin);
         }
         for (int i = 0; i<nblo; i++){
             int pv = genAl.nextInt(10)+1;
@@ -172,7 +172,6 @@ public class World {
             int y = genAl.nextInt(0, (this.taille)-1);
             Loup wolfie = new Loup(pv, dA, pPar, paAtt, paPar, new Point2D(x, y));
             Monmonde.ajoutecrea(wolfie);
-            Monmonde.structcrea.add(i+nbpa+nbgu+nbar, wolfie);
         }
         for (int i = 0; i<nbla; i++){
             int pv = genAl.nextInt(4)+1;
@@ -184,21 +183,30 @@ public class World {
             int y = genAl.nextInt(0, (this.taille)-1);
             Lapin bunny = new Lapin(pv, dA, pPar, paAtt, paPar, new Point2D(x, y));
             Monmonde.ajoutecrea(bunny);
-            Monmonde.structcrea.add(i+nbpa+nbgu+nbar+nblo, bunny);
         }
         return Monmonde;
     }
     
+    
+    /**
+     * On recupere la position et si cette derniere est deja prise, on deplace la creature sur un ecase libre voisine
+     * On récupere le nom de la creature, en enlevant le nom du dossier devant
+     * On actualise la matrice de position et la bdd qui stocke les creatures du monde
+     * @param c la creature qu'on veut ajouter
+     */
     public void ajoutecrea(Creature c){
         int x = c.pos.getX();
         int y = c.pos.getY();
-        if (this.posmonde[x][y] != -1){
+        int indicpos = this.posmonde[x][y];
+        if (indicpos != -1){
             this.deplacealealimite(c);
+            this.posmonde[x][y] = indicpos;
             x = c.pos.getX();
             y = c.pos.getY();
         }
         Class classe = c.getClass();
         String nomclasse = classe.getName();
+        nomclasse = nomclasse.substring(23);
         int indiceclasse = 0;
         switch (nomclasse){
             case "Paysan":
@@ -232,16 +240,7 @@ public class World {
         this.PJ = j.perso;
         Class classe = PJ.getClass();
         String nomclasse = classe.getName();
-        int indiceclasse = 0;
-        switch (nomclasse){
-            case "Guerrier":
-                indiceclasse = 2;
-                break;
-            case "Archer":
-                indiceclasse = 3;
-                break;
-        }
-        this.posmonde[PJ.pos.getX()][PJ.pos.getY()] = indiceclasse;
+        this.posmonde[PJ.pos.getX()][PJ.pos.getY()] = 0;
     }
     
     /**
@@ -251,6 +250,7 @@ public class World {
      * si cette direction est possible, on selectionne les dx et dy correspondant
      * sinon on lui redemande
      * On applique la translation
+     * On actualise la matrice de position
      */
     public void deplacePJ(){
         int x = this.PJ.pos.getX();
@@ -361,9 +361,11 @@ public class World {
                     this.deplacePJ();
                     break;
             }
-            this.PJ.pos.affiche();
+            int X = PJ.getPos().getX();
+            int Y = PJ.getPos().getY();
             this.PJ.pos.Translate(dx, dy);
-            this.PJ.pos.affiche();
+            this.posmonde[PJ.pos.getX()][PJ.pos.getY()] = this.posmonde[X][Y];
+            this.posmonde[X][Y] = -1;
         }                            
     }
     
@@ -393,14 +395,18 @@ public class World {
             int i = 0;
             int X = this.structcrea.get(i).pos.getX();
             int Y = this.structcrea.get(i).pos.getY();
-            while ((i<this.structcrea.size())&&((posx!=X)||(posy!=Y))){
+            while ((i<this.structcrea.size()-1)&&((posx!=X)||(posy!=Y))){
                 i++;
                 X = this.structcrea.get(i).pos.getX();
                 Y = this.structcrea.get(i).pos.getY();
             }
+            if(i==this.structcrea.size()&&((posx!=X)||(posy!=Y))){
+                System.out.println("Creature non trouvée");
+                this.ActionJoueur();
+            }
             ((Combattant)(this.PJ)).combattre(this.structcrea.get(i));
             if (this.structcrea.get(i).getPtVie()<=0){
-                System.out.println("Vous avez tuer la creature");
+                System.out.println("Vous avez tue la creature");
                 this.posmonde[X][Y] = -1;
                 this.structcrea.remove(i);
             }
@@ -412,14 +418,16 @@ public class World {
      * On definit quelle est l'action que le joueur effectue et on utilise la fonction associee
      */
     public void ActionJoueur(){
+        this.afficheWorld();
+        /**
         for (int i = -1; i<2; i++){
             for (int j = -1; j<2;j++){
                 int k = 3*(i+1)+j+1;
-                if ((k!=4)&&(Estdanslimite(PJ.pos.getX()+i,PJ.pos.getY()+j))){/*on ne verifie pas la position k=4 car c'est celle sur laquelle on est deja*/
+                if ((k!=4)&&(Estdanslimite(PJ.pos.getX()+i,PJ.pos.getY()+j))){
                     System.out.println(this.posmonde[PJ.pos.getX()+i][PJ.pos.getY()+j]);
                 }
             }
-        }
+        }*/
         System.out.println("Voulez-vous : Deplacer ou Combattre");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
@@ -456,11 +464,15 @@ public class World {
             }*/
             for (int i = 0; i<this.structcrea.size(); i++){
                 Creature c = this.structcrea.get(i);
-                int pvPJ = PJ.getPtVie();
-                if ((c instanceof Combattant combattant)&&(c instanceof Monstre)){
+                if ((c instanceof Combattant combattant)&&(c instanceof Monstre)&&(c.pos.distance(PJ.pos)==1.)){
+                    Class classe = c.getClass();
+                    String nomclasse = classe.getName();
+                    nomclasse = nomclasse.substring(23);
+                    System.out.println("Je me fais attaquer par un "+nomclasse+" !");
                     combattant.combattre(PJ);
                 }
-                if (PJ.getPtVie()==pvPJ){
+                else{
+                    
                     this.deplacealealimite(c);
                 }
                 /**if (c.pos.distance(tcloud.getPos())<tcloud.getTaille()){

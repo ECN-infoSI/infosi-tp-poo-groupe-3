@@ -53,7 +53,7 @@ public class Loup extends Monstre implements Combattant{
      * Si les ptVie tombent en dessous de 0 on les remets à 0.
      */
     public void combattre(Creature c){
-        if (this.pos.distance(c.pos)==1){
+        if (this.pos.distance(c.pos)==1.){
             Random genAl = new Random();
             int jetAtt = genAl.nextInt(99)+1;
             int deg = 0;
@@ -77,8 +77,11 @@ public class Loup extends Monstre implements Combattant{
                 }
             }
             else{
-                System.out.println("attaque manquée");
+                System.out.println("attaque manquee");
             }
+        }
+        else{
+            System.out.println("attaque impossible");
         }
     }
 }

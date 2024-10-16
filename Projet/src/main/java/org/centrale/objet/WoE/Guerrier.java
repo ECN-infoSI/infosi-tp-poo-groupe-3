@@ -5,6 +5,7 @@
 package org.centrale.objet.WoE;
 
 import java.util.Random;
+import java.lang.Integer;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Guerrier extends Personnage implements Combattant {
      * @param p
      */
 
-    public Guerrier(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
+    public Guerrier(String n, int pV, int dA, int pPar, int paAtt, int paPar, float dMax, Point2D p){
         super(n, pV, dA, pPar, paAtt, paPar, dMax, p);
     }
     
@@ -58,7 +59,8 @@ public class Guerrier extends Personnage implements Combattant {
         int paAtt = genAl.nextInt(49)+50;
         int x = genAl.nextInt(0, (monde.taille)-1);
         int y = genAl.nextInt(0, (monde.taille)-1);
-        Guerrier guegue = new Guerrier(nom, pv,dA, pPar, paAtt, paPar, 1, new Point2D(x, y));
+        float DistMax = 1;
+        Guerrier guegue = new Guerrier(nom, pv,dA, pPar, paAtt, paPar, DistMax, new Point2D(x, y));
         return guegue;
     }
     
@@ -72,7 +74,8 @@ public class Guerrier extends Personnage implements Combattant {
      * Si les ptVie tombent en dessous de 0 on les remets à 0.
      */
     public void combattre(Creature c){
-        if (this.pos.distance(c.pos)==1){
+        if (this.pos.distance(c.pos)==this.distAttMax){;
+            System.out.println(this.getNom()+" attaque !");
             Random genAl = new Random();
             int jetAtt = genAl.nextInt(99)+1;
             int deg = 0;
@@ -96,8 +99,11 @@ public class Guerrier extends Personnage implements Combattant {
                 }
             }
             else{
-                System.out.println("attaque manquée");
+                System.out.println("attaque manquee");
             }
+        }
+        else{
+            System.out.println("attaque impossible");
         }
     }
 }

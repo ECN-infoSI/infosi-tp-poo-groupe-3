@@ -20,13 +20,13 @@ public abstract class Personnage extends Creature {
     /**
      * Portée maximale d'une attaque
      */
-    protected int distAttMax;
+    protected float distAttMax;
 
     /**
      *
      * @return
      */
-    public int getDistAttMax() {
+    public float getDistAttMax() {
         return distAttMax;
     }
 
@@ -51,7 +51,7 @@ public abstract class Personnage extends Creature {
      * @param dMax  Distance maximale d'attaque du personnage
      * @param p     Position du personnage dans le monde
      */
-    public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
+    public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, float dMax, Point2D p){
         super(pV, dA, pPar, paAtt, paPar, p);
         nom = n;
         distAttMax = dMax;
