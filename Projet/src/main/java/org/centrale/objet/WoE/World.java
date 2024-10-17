@@ -17,7 +17,7 @@ public class World {
      *
      */
     public ArrayList<Creature> structcrea;
-    final int taille = 2;
+    final int taille = 6;
     public Personnage PJ;
 
     /** 
@@ -84,11 +84,8 @@ public class World {
             }
             int newi = rand/3 - 1;
             int newj = rand - (newi+1)*3 - 1;
-            System.out.println(this.posmonde[c.pos.getX()][c.pos.getY()]);
             c.pos.Translate(newi, newj);
-            System.out.println(this.posmonde[c.pos.getX()][c.pos.getY()]);
             this.posmonde[c.pos.getX()][c.pos.getY()] = this.posmonde[x][y];
-            System.out.println(this.posmonde[c.pos.getX()][c.pos.getY()]);
             this.posmonde[x][y] = -1;
         }
         
@@ -381,7 +378,7 @@ public class World {
         System.out.println("Entrer la distance en x avec la creature");
         Scanner input3 = new Scanner(System.in);
         String rep3 = input3.next();
-        int dx = Integer.parseInt(rep3);
+        int dx = -Integer.parseInt(rep3);
         System.out.println("Entrer la distance en y avec la creature");
         Scanner input4 = new Scanner(System.in);
         String rep4 = input4.next();
@@ -406,7 +403,10 @@ public class World {
             }
             ((Combattant)(this.PJ)).combattre(this.structcrea.get(i));
             if (this.structcrea.get(i).getPtVie()<=0){
-                System.out.println("Vous avez tue la creature");
+                Class classe = this.structcrea.get(i).getClass();
+                String nomclasse = classe.getName();
+                nomclasse = nomclasse.substring(23);
+                System.out.println("Vous avez tue un "+nomclasse);
                 this.posmonde[X][Y] = -1;
                 this.structcrea.remove(i);
             }
@@ -418,16 +418,7 @@ public class World {
      * On definit quelle est l'action que le joueur effectue et on utilise la fonction associee
      */
     public void ActionJoueur(){
-        this.afficheWorld();
-        /**
-        for (int i = -1; i<2; i++){
-            for (int j = -1; j<2;j++){
-                int k = 3*(i+1)+j+1;
-                if ((k!=4)&&(Estdanslimite(PJ.pos.getX()+i,PJ.pos.getY()+j))){
-                    System.out.println(this.posmonde[PJ.pos.getX()+i][PJ.pos.getY()+j]);
-                }
-            }
-        }*/
+        this.mondeAutour(2);
         System.out.println("Voulez-vous : Deplacer ou Combattre");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
@@ -445,6 +436,33 @@ public class World {
         }
     }
     
+    /**
+     * @param k est la profondeur à laquel le personnage voit : k=0 signifie que le PJ ne voit que lui-meme
+     * On recupere les coordonnées du PJ
+     * on cree la matrice montrant les cases autour du PJ en remplissant les cases hors du monde par des 0
+     * on affiche cette matrice en effectuant une transpose le nord en haut et le sud en bas     * 
+     */
+    public void mondeAutour(int k){
+        int x = PJ.pos.getX();
+        int y = PJ.pos.getY();
+        int [][] myView = new int[2*k+1][2*k+1];
+        for (int i = -k; i<=k; i++){
+            for (int j = -k; j<=k; j++){
+                if (Estdanslimite(x+i,y+j)){
+                    myView[i+k][j+k] = posmonde[x+i][y+j];
+                }
+                else {
+                    myView[i+k][j+k] = -2;
+                }
+            }
+        }
+        for (int i=2*k; i>=0; i--){
+            for (int j=2*k; j>=0; j--){
+                System.out.print(myView[j][i] + "\t");
+            }
+            System.out.println();
+        }
+    }
     /**
      * On effetue l'action du joueur
      * Pour chaque creature :
