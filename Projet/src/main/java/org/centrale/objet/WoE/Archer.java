@@ -82,7 +82,7 @@ public class Archer extends Personnage implements Combattant{
         int paPar = genAl.nextInt(74)+25;
         int paAtt = genAl.nextInt(74)+25;
         float dMax = genAl.nextInt(5)+3;
-        int nbFleche = genAl.nextInt(10);
+        int nbFleche = genAl.nextInt(10)+5;
         int x = genAl.nextInt(0, (monde.taille)-1);
         int y = genAl.nextInt(0, (monde.taille)-1);
         Archer robin = new Archer(nom, pv, dA, pPar, paAtt, paPar, dMax, new Point2D(x, y), nbFleche);
@@ -112,11 +112,22 @@ public class Archer extends Personnage implements Combattant{
                 System.out.println(deg+" degats infliges !");
             }
             else{
-                System.out.println("attaque manquée");
+                System.out.println("attaque manquee");
             }
         }
         else{
             System.out.println("attaque impossible");
         }
+    }
+    
+    public void affiche(){
+        System.out.println("nom : "+nom+"\npoints de vie : "+ptVie);
+        System.out.println("degats d'attaque : "+degatAtt);
+        System.out.println("points de parade : "+ptPar);
+        System.out.println("pourcentage de parade : "+pagePar);
+        System.out.println("pourcentage d'attaque : "+pageAtt);
+        System.out.println("distance d'attaque maximale : "+distAttMax);
+        System.out.println("fleches restantes :"+this.nbFleche);
+        pos.affiche();
     }
 }

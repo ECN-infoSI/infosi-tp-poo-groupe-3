@@ -464,7 +464,7 @@ public class World {
      */
     public void ActionJoueur(){
         this.mondeAutour(2);
-        System.out.println("Voulez-vous : Deplacer ou Combattre");
+        System.out.println("Voulez-vous : Deplacer, Combattre ou Info");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
         switch (choix) {
@@ -474,11 +474,19 @@ public class World {
             case "Combattre":
                 this.CombattrePJ();
                 break;
+            case "Info":
+                this.InfoPJ();
+                break;
             default:
                 System.out.println("Action non reconnue");
                 this.ActionJoueur();
                 break;
         }
+    }
+    
+    public void InfoPJ(){
+        PJ.affiche();
+        this.ActionJoueur();
     }
     
     /**
@@ -535,8 +543,9 @@ public class World {
                     combattant.combattre(PJ);
                 }
                 else{
-                    
+                    c.pos.affiche();
                     this.deplacealealimite(c);
+                    c.pos.affiche();
                 }
                 /**if (c.pos.distance(tcloud.getPos())<tcloud.getTaille()){
                     c.setPtVie(c.getPtVie()-tcloud.getDegat());
