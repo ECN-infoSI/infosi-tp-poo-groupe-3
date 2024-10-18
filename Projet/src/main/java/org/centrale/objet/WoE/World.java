@@ -17,7 +17,7 @@ public class World {
      */
     public ArrayList<Creature> structcrea;
     public ArrayList<Objet> structobj;
-    final int taille = 6;
+    final int taille = 20;
     public Joueur joueur;
     public NuageToxique tcloud;
 
@@ -275,19 +275,16 @@ public class World {
                 break;
         }
         this.posmonde[x][y] = indiceclasse;
-        this.structobj.add(this.structobj.size(), ((Objet)n);
+        this.structobj.add(this.structobj.size(), ((Objet)n));
     }
     
     /**
-     * @param j 
      * on ajoute le personnage jouable dans le monde
      * comme c'est un attribut, on aura un accès constant a sa position, ses stats etc
      */
     public void AjoutPJ(){
         joueur.choixPerso(this);
         joueur.choixNom();
-        Class classe = joueur.perso.getClass();
-        String nomclasse = classe.getName();
         this.posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()] = 0;
     }
     
@@ -478,7 +475,7 @@ public class World {
      */
     public void ActionJoueur(){
         this.mondeAutour(2);
-        System.out.println("Voulez-vous : Deplacer, Combattre, Info ou Utiliser");
+        System.out.println("Voulez-vous : Deplacer, Combattre, Utiliser ou Info");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
         switch (choix) {

@@ -91,10 +91,10 @@ public class Joueur {
     public void utiliser(){
         Scanner input = new Scanner(System.in);
         if (this.inventaire.isEmpty()){
-            System.out.print("Votre inventaire est vide");
+            System.out.println("Votre inventaire est vide");
         } else {
             this.afficherInventaire();
-            System.out.print("Indiquez le numero de l'objet que vous souhaitez utiliser.");
+            System.out.print("Indiquez le numero de l'objet que vous souhaitez utiliser : ");
             int i = input.nextInt();
             if (i>=this.inventaire.size()){
                 System.out.println("Tu n'as pas autant d'objet !");
