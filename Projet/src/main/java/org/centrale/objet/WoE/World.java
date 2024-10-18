@@ -408,7 +408,6 @@ public class World {
             int Y = PJ.getPos().getY();
             this.PJ.pos.Translate(dx, dy);
             this.posmonde[PJ.pos.getX()][PJ.pos.getY()] = this.posmonde[X][Y];
-            
             this.posmonde[X][Y] = -1;
         }                            
     }
