@@ -15,11 +15,6 @@ public class Archer extends Personnage implements Combattant{
      * Nombre de fleches de l'archer
      */
     private int nbFleche;
-    
-    /**
-     * Jouabilite par un joueur
-     */
-    final boolean estJouable = true;
 
     /**
      *
@@ -74,6 +69,11 @@ public class Archer extends Personnage implements Combattant{
         nbFleche = 0;
     }
     
+    /**
+     *
+     * @param monde
+     * @return
+     */
     public Archer archerAlea(World monde){
         Random genAl = new Random();        
         int pv = genAl.nextInt(12)+1;
@@ -120,6 +120,9 @@ public class Archer extends Personnage implements Combattant{
         }
     }
     
+    /**
+     *
+     */
     public void affiche(){
         System.out.println("nom : "+nom+"\npoints de vie : "+ptVie);
         System.out.println("degats d'attaque : "+degatAtt);

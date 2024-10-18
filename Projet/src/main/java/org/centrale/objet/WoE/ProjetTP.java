@@ -9,7 +9,7 @@ import java.util.Iterator;
  *
  * @author titou
  */
-public class TestWoE {
+public class ProjetTP {
 
     /**
      *
