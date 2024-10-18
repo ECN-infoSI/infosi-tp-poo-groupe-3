@@ -110,4 +110,7 @@ public class Point2D {
         d = (float)Math.sqrt(a*a + b*b);
         return d;
     }
+    public boolean equal(org.centrale.bdonn.worldofecn.world.Point2D p0){
+        return ((this.getX()==p0.getX())&&(this.getY()==p0.getY()));
+    }
 }
