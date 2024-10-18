@@ -193,7 +193,7 @@ public class World {
             String nom = "carotte"+i;
             int x = genAl.nextInt(0, (this.taille)-1);
             int y = genAl.nextInt(0, (this.taille)-1);
-            int intensite = genAl.nextInt(5)+1;
+            int intensite = genAl.nextInt(1)+1;
             int d = genAl.nextInt(3)+1;
             Carotte charlotte = new Carotte(nom, new Point2D(x, y), intensite, d);
             Monmonde.ajouteNou(charlotte);
@@ -202,7 +202,7 @@ public class World {
             String nom = "lait"+i;
             int x = genAl.nextInt(0, (this.taille)-1);
             int y = genAl.nextInt(0, (this.taille)-1);
-            int intensite = genAl.nextInt(5)+1;
+            int intensite = genAl.nextInt(19)+1;
             int d = genAl.nextInt(3)+1;
             Lait yop = new Lait(nom, new Point2D(x, y), intensite, d);
             Monmonde.ajouteNou(yop);
