@@ -21,7 +21,7 @@ public class Joueur {
     public void choixPerso(World monde){
         boolean mauvaistype = true;
         Scanner input = new Scanner(System.in);
-        System.out.print("Indiquez le type de personnage que vous souhaitez jouer : ");
+        System.out.print("Indiquez le type de personnage que vous souhaitez jouer (Guerrier ou Archer): ");
         String type = input.next();
         while (mauvaistype){
             mauvaistype = false;
