@@ -464,7 +464,7 @@ public class World {
      * On definit quelle est l'action que le joueur effectue et on utilise la fonction associee
      */
     public void ActionJoueur(){
-        this.mondeAutour(2);
+        this.mondeAutour(3);
         System.out.println("Voulez-vous : Deplacer, Combattre ou Info");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
