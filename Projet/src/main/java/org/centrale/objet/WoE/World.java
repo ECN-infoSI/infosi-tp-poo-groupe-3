@@ -96,6 +96,9 @@ public class World {
         
     }
     
+    /**
+     * Affiche la matrice pomonde telle qu'elle est (sans prendre en compte l'orientation Nord Sud Ouest Est)
+     */
     public void afficheWorld(){
         for (int i=0; i<this.taille; i++){
             for (int j=0; j<this.taille; j++){
@@ -111,10 +114,12 @@ public class World {
      * @param nbar nombre d'archers
      * @param nblo nombre de loups
      * @param nbla nombre de lapins
-     * @return le monde cree aléatoirement
+     * @param nbca nombre de carottes
+     * @param nblait nombre de bouteilles de lait
+     * @return le monde cree aleatoirement
      * On cree chaque creature en fonction du nombre demande
      * On fait bouger une creature tant qu'elle n'est pas toute seule sur sa case
-     * On actualise la matrice de position à chaque ajout de personnage
+     * On actualise la matrice de position a chaque ajout de personnage
      * Dans la matrice, les -1 representent des cases vides
      * les 1 representent des paysans
      * les 2 representent des guerriers
@@ -213,7 +218,7 @@ public class World {
     
     /**
      * On recupere la position et si cette derniere est deja prise, on deplace la creature sur un ecase libre voisine
-     * On récupere le nom de la creature, en enlevant le nom du dossier devant
+     * On recupere le nom de la creature, en enlevant le nom du dossier devant
      * On actualise la matrice de position et la bdd qui stocke les creatures du monde
      * @param c la creature qu'on veut ajouter
      */
@@ -252,6 +257,11 @@ public class World {
         this.structcrea.add(this.structcrea.size(), c);
     }
     
+    /**
+     * @param n nourriture qu'on ajoute au jeu
+     * le fonctionnement est le meme qu'avec les creatures
+     */
+    
     public void ajouteNou(Nourriture n){
         int x = n.pos.getX();
         int y = n.pos.getY();
@@ -280,7 +290,7 @@ public class World {
     
     /**
      * on ajoute le personnage jouable dans le monde
-     * comme c'est un attribut, on aura un accès constant a sa position, ses stats etc
+     * comme c'est un attribut, on aura un acces constant a sa position, ses stats etc
      */
     public void AjoutPJ(){
         joueur.choixPerso(this);
@@ -426,7 +436,7 @@ public class World {
      * On demande la position relative au joueur
      * en cas d'absence de creature a cet endroit, on redemande au joueur ce qu'il veut faire
      * S'il y a bien une creature, on va la chercher dans notre structure qui stocke les creatures
-     * Puis on fait combattre le pj (qui est nécessairement un combattant et la creature)
+     * Puis on fait combattre le pj (qui est necessairement un combattant et la creature)
      * Si la creature n'a plus de point de vie, on l'enleve de la bdd et on enleve son corps de la grille de positions
      */
     public void CombattrePJ(){
@@ -454,7 +464,7 @@ public class World {
                 Y = this.structcrea.get(i).pos.getY();
             }
             if(i==this.structcrea.size()&&((posx!=X)||(posy!=Y))){
-                System.out.println("Creature non trouvée");
+                System.out.println("Creature non trouvee");
                 this.ActionJoueur();
             }
             ((Combattant)(this.joueur.perso)).combattre(this.structcrea.get(i));
@@ -498,6 +508,10 @@ public class World {
         }
     }
     
+    /**
+     * affiche les caracteristiques du PJ et son inventaire
+     * Apres cela, on relance le tour du joueur car cela ne compte pas comme une action dans le tour
+     */
     public void InfoPJ(){
         joueur.perso.affiche();
         joueur.afficherInventaire();
@@ -505,8 +519,8 @@ public class World {
     }
     
     /**
-     * @param k est la profondeur à laquel le personnage voit : k=0 signifie que le joueur.perso ne voit que lui-meme
-     * On recupere les coordonnées du joueur.perso
+     * @param k est la profondeur a laquel le personnage voit : k=0 signifie que le joueur.perso ne voit que lui-meme
+     * On recupere les coordonnees du joueur.perso
      * on cree la matrice montrant les cases autour du joueur.perso en remplissant les cases hors du monde par des 0
      * on affiche cette matrice en effectuant une transpose le nord en haut et le sud en bas     * 
      */
@@ -538,7 +552,7 @@ public class World {
      * si c'est le cas elle essaie d'attaquer
      * Puis on verifie si les pv du joueur.perso ont bouge a cause de cette creature
      * si c'est pas le cas, la creature bouge
-     * Lorsque les
+     * De plus, toutes creatures (y compris le PJ) trop proches du nuage toxique prennent des degats
      */
     public void TourDeJeu(){
         if (joueur.perso.getPtVie()<=0){
