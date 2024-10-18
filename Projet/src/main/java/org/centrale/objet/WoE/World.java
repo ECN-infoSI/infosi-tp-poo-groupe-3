@@ -408,7 +408,7 @@ public class World {
             this.joueur.perso.pos.Translate(dx, dy);
             if (posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()]==6||posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()]==7){
                 for (int i = 0; i<this.structnou.size(); i++){
-                    if (joueur.perso.getPos()==this.structnou.get(i).getPos()){
+                    if (joueur.perso.getPos().equal(this.structnou.get(i).getPos())){
                         Utilisable n = (Utilisable)this.structnou.get(i);
                         this.joueur.ramasser(n);
                     }
@@ -474,7 +474,7 @@ public class World {
      */
     public void ActionJoueur(){
         this.mondeAutour(3);
-        System.out.println("Voulez-vous : Deplacer, Combattre ou Info");
+        System.out.println("Voulez-vous : Deplacer, Combattre, Utiliser ou Info");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
         switch (choix) {
@@ -487,6 +487,8 @@ public class World {
             case "Info":
                 this.InfoPJ();
                 break;
+            case "Utiliser":
+                this.joueur.utiliser();
             default:
                 System.out.println("Action non reconnue");
                 this.ActionJoueur();
