@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
-import java.util.Iterator;
 
 /**
  *
@@ -28,5 +27,6 @@ public class TestWoE {
             monde.TourDeJeu();
             }
         }
+        System.out.println("Vous etes KO : Fin du jeu");
     }
 }

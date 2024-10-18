@@ -16,10 +16,6 @@ public class Archer extends Personnage implements Combattant{
      */
     private int nbFleche;
     
-    /**
-     * Jouabilite par un joueur
-     */
-    final boolean estJouable = true;
 
     /**
      *
@@ -82,10 +78,10 @@ public class Archer extends Personnage implements Combattant{
         int paPar = genAl.nextInt(74)+25;
         int paAtt = genAl.nextInt(74)+25;
         float dMax = genAl.nextInt(5)+3;
-        int nbFleche = genAl.nextInt(10)+5;
+        int nombFlech = genAl.nextInt(10)+5;
         int x = genAl.nextInt(0, (monde.taille)-1);
         int y = genAl.nextInt(0, (monde.taille)-1);
-        Archer robin = new Archer(nom, pv, dA, pPar, paAtt, paPar, dMax, new Point2D(x, y), nbFleche);
+        Archer robin = new Archer(nom, pv, dA, pPar, paAtt, paPar, dMax, new Point2D(x, y), nombFlech);
         return robin;
     }
     
@@ -96,6 +92,7 @@ public class Archer extends Personnage implements Combattant{
      * On test la réussite de l'attaque
      * Si les ptVie tombent en dessous de 0 on les remets à 0.
      */
+    @Override
     public void combattre(Creature c){
         if ((this.pos.distance(c.pos)<=this.distAttMax)&&(this.pos.distance(c.pos)>1)&&(this.nbFleche>0)){
             System.out.println(this.getNom()+" attaque !");
@@ -120,6 +117,7 @@ public class Archer extends Personnage implements Combattant{
         }
     }
     
+    @Override
     public void affiche(){
         System.out.println("nom : "+nom+"\npoints de vie : "+ptVie);
         System.out.println("degats d'attaque : "+degatAtt);

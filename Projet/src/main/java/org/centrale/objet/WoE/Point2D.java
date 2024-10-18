@@ -110,6 +110,11 @@ public class Point2D {
         d = (float)Math.sqrt(a*a + b*b);
         return d;
     }
+
+    /**
+     * @param p0
+     * @return le booleen qui verifie l'egalite des deux points
+     */
     public boolean equal(Point2D p0){
         return ((this.getX()==p0.getX())&&(this.getY()==p0.getY()));
     }
