@@ -93,6 +93,7 @@ public class Joueur {
         if (this.inventaire.isEmpty()){
             System.out.print("Votre inventaire est vide");
         } else {
+            this.afficherInventaire();
             System.out.print("Indiquez le numero de l'objet que vous souhaitez utiliser.");
             int i = input.nextInt();
             Utilisable u = this.inventaire.get(i);

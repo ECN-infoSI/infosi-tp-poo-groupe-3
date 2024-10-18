@@ -412,11 +412,9 @@ public class World {
                         Utilisable n = (Utilisable)this.structnou.get(i);
                         this.joueur.ramasser(n);
                     }
-                }
-                
-                
+                }               
             }
-            this.posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()] = this.posmonde[X][Y];
+            this.posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()] = 0;
             this.posmonde[X][Y] = -1;
         }                            
     }
@@ -489,6 +487,7 @@ public class World {
                 break;
             case "Utiliser":
                 this.joueur.utiliser();
+                break;
             default:
                 System.out.println("Action non reconnue");
                 this.ActionJoueur();

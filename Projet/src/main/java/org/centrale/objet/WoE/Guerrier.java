@@ -74,7 +74,7 @@ public class Guerrier extends Personnage implements Combattant {
      * Si les ptVie tombent en dessous de 0 on les remets à 0.
      */
     public void combattre(Creature c){
-        if (this.pos.distance(c.pos)==this.distAttMax){;
+        if (this.pos.distance(c.pos)<=this.distAttMax){
             System.out.println(this.getNom()+" attaque !");
             Random genAl = new Random();
             int jetAtt = genAl.nextInt(99)+1;
