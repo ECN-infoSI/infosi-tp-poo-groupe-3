@@ -258,7 +258,7 @@ public class World {
             for (int j = -1; j<2;j++){
                 int k = 3*(i+1)+j+1;
                 if ((k!=4)&&(Estdanslimite(x+i,y+j))){/*on ne verifie pas la position k=4 car c'est celle sur laquelle on est deja*/
-                    pospossible[k] = (this.posmonde[x+i][y+j]==-1);
+                    pospossible[k] = ((this.posmonde[x+i][y+j]==-1)&&(this.posmonde[x+i][y+j]==6)&&(this.posmonde[x+i][y+j]==7));
                 }
             }
         }
@@ -362,6 +362,7 @@ public class World {
             int Y = PJ.getPos().getY();
             this.PJ.pos.Translate(dx, dy);
             this.posmonde[PJ.pos.getX()][PJ.pos.getY()] = this.posmonde[X][Y];
+            
             this.posmonde[X][Y] = -1;
         }                            
     }
@@ -498,9 +499,7 @@ public class World {
                     combattant.combattre(PJ);
                 }
                 else{
-                    c.pos.affiche();
                     this.deplacealealimite(c);
-                    c.pos.affiche();
                 }
                 /**if (c.pos.distance(tcloud.getPos())<tcloud.getTaille()){
                     c.setPtVie(c.getPtVie()-tcloud.getDegat());
