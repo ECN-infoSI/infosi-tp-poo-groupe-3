@@ -31,6 +31,7 @@ public class World {
      */
     public World(){
         this.structcrea = new ArrayList<>();
+        this.structnou = new ArrayList<>();
         this.posmonde = new int[this.taille][this.taille];
         for (int i = 0; i < this.taille; i++) {
             for (int j = 0; j < this.taille; j++) {
