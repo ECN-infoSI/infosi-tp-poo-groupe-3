@@ -17,6 +17,7 @@ public class World {
      *
      */
     public ArrayList<Creature> structcrea;
+    public ArrayList<Nourriture> structnou;
     final int taille = 6;
     public Personnage PJ;
 
@@ -50,7 +51,7 @@ public class World {
     
     
     /**
-     * @param c La creature etudiee dans la liste
+     * @param edj La creature etudiee dans la liste
      * C'est un deplacement aleatoire dans une case adjacente libre
      * On explore les positions possibles autour de la creature en prenant en compte les limites du monde et les autres creature
      * On verifie qu'il y a bien au moins une position possible
@@ -60,8 +61,8 @@ public class World {
      * Puis on actualise la matrice de position en remplissant la nouvelle case avec le code de la creature 
      * et en vidant l'ancienne case (en mettant la valeur a -1)
      */
-    public void deplacealealimite(Creature c){
-        Point2D p0 = c.pos;
+    public void deplacealealimite(ElementDeJeu edj){
+        Point2D p0 = edj.pos;
         int x = p0.getX();
         int y = p0.getY();
         boolean[] pospossible = {false, false, false, false, false, false, false, false, false};
@@ -84,8 +85,8 @@ public class World {
             }
             int newi = rand/3 - 1;
             int newj = rand - (newi+1)*3 - 1;
-            c.pos.Translate(newi, newj);
-            this.posmonde[c.pos.getX()][c.pos.getY()] = this.posmonde[x][y];
+            edj.pos.Translate(newi, newj);
+            this.posmonde[edj.pos.getX()][edj.pos.getY()] = this.posmonde[x][y];
             this.posmonde[x][y] = -1;
         }
         
@@ -118,7 +119,7 @@ public class World {
      * les 4 representent des loups
      * les 5 representent des lapins
      */
-    public World creerMondeAlea(int nbpa, int nbgu, int nbar, int nblo, int nbla){
+    public World creerMondeAlea(int nbpa, int nbgu, int nbar, int nblo, int nbla, int nbca, int nblait){
         World Monmonde = new World();
         Random genAl = new Random();
         for (int i = 0; i<nbpa; i++){
@@ -181,6 +182,24 @@ public class World {
             Lapin bunny = new Lapin(pv, dA, pPar, paAtt, paPar, new Point2D(x, y));
             Monmonde.ajoutecrea(bunny);
         }
+        for (int i = 0; i<nbca; i++){
+            String nom = "carotte"+i;
+            int x = genAl.nextInt(0, (this.taille)-1);
+            int y = genAl.nextInt(0, (this.taille)-1);
+            int intensite = genAl.nextInt(5)+1;
+            int d = genAl.nextInt(3)+1;
+            Carotte charlotte = new Carotte(nom, new Point2D(x, y), intensite, d);
+            Monmonde.ajouteNou(charlotte);
+        }
+        for (int i = 0; i<nblait; i++){
+            String nom = "lait"+i;
+            int x = genAl.nextInt(0, (this.taille)-1);
+            int y = genAl.nextInt(0, (this.taille)-1);
+            int intensite = genAl.nextInt(5)+1;
+            int d = genAl.nextInt(3)+1;
+            Lait yop = new Lait(nom, new Point2D(x, y), intensite, d);
+            Monmonde.ajouteNou(yop);
+        }
         return Monmonde;
     }
     
@@ -224,6 +243,32 @@ public class World {
         }
         this.posmonde[x][y] = indiceclasse;
         this.structcrea.add(this.structcrea.size(), c);
+    }
+    
+    public void ajouteNou(Nourriture n){
+        int x = n.pos.getX();
+        int y = n.pos.getY();
+        int indicpos = this.posmonde[x][y];
+        if (indicpos != -1){
+            this.deplacealealimite(n);
+            this.posmonde[x][y] = indicpos;
+             x = n.pos.getX();
+            y = n.pos.getY();
+        }
+        Class classe = n.getClass();
+        String nomclasse = classe.getName();
+        nomclasse = nomclasse.substring(23);
+        int indiceclasse = 0;
+        switch (nomclasse){
+            case "Carotte":
+                indiceclasse = 6;
+                break;
+            case "Lait":
+                indiceclasse = 7;
+                break;
+        }
+        this.posmonde[x][y] = indiceclasse;
+        this.structnou.add(this.structnou.size(), n);
     }
     
     /**

@@ -8,33 +8,31 @@ package org.centrale.objet.WoE;
  *
  * @author thoma
  */
-public class Nourriture{
+public class Nourriture extends ElementDeJeu{
     
     private String nom;
-    
-    private Point2D pos;
     
     private int intensite;
     
     private int duree;
   
     public Nourriture(){
+        super();
         nom = "";
-        pos = new Point2D();
         intensite = 0;
         duree = 0;
     }
     
     public Nourriture(Nourriture n){
+        super(n.getPos());
         nom = n.getNom();
-        pos = n.getPos();
         intensite = n.getIntensite();
         duree = n.getDuree();
     }
     
     public Nourriture(String n, Point2D p, int i, int d){
+        super(p);
         nom = n;
-        pos = p;
         intensite = i;
         duree = d;
     }
