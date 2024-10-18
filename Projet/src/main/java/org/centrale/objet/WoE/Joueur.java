@@ -18,6 +18,11 @@ public class Joueur {
     
     public ArrayList<Utilisable> inventaire;
     
+    public Joueur(){
+        this.effets = new ArrayList();
+        this.inventaire = new ArrayList();
+    }
+    
     public void choixPerso(World monde){
         boolean mauvaistype = true;
         Scanner input = new Scanner(System.in);
@@ -85,19 +90,27 @@ public class Joueur {
     
     public void utiliser(){
         Scanner input = new Scanner(System.in);
-        System.out.print("Indiquez le numero de l'objet que vous souhaitez utiliser.");
-        int i = input.nextInt();
-        Utilisable u = this.inventaire.get(i);
-        System.out.println("Vous avez choisi l'objet : "+u.getNom());
-        this.inventaire.remove(u);
-        this.ajoutUtil(u);
+        if (this.inventaire.isEmpty()){
+            System.out.print("Votre inventaire est vide");
+        } else {
+            System.out.print("Indiquez le numero de l'objet que vous souhaitez utiliser.");
+            int i = input.nextInt();
+            Utilisable u = this.inventaire.get(i);
+            System.out.println("Vous avez choisi l'objet : "+u.getNom());
+            this.inventaire.remove(u);
+            this.ajoutUtil(u);
+        }
     }
     
     public void afficherInventaire(){
-        Iterator<Utilisable> listIt = this.inventaire.iterator();
-        int i = 0;
-        while (listIt.hasNext()){
-            System.out.println(i+" : "+listIt.next().getNom());
+        if (this.inventaire.isEmpty()){
+            System.out.println("Votre inventaire est vide");
+        } else {
+            Iterator<Utilisable> listIt = this.inventaire.iterator();
+            int i = 0;
+            while (listIt.hasNext()){
+                System.out.println(i+" : "+listIt.next().getNom());
+            }
         }
     }
 }

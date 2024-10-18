@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
-import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -19,7 +18,7 @@ public class World {
     public ArrayList<Creature> structcrea;
     public ArrayList<Nourriture> structnou;
     final int taille = 6;
-    public Personnage PJ;
+    public Joueur joueur;
 
     /** 
      *
@@ -32,6 +31,7 @@ public class World {
     public World(){
         this.structcrea = new ArrayList<>();
         this.structnou = new ArrayList<>();
+        this.joueur =  new Joueur();
         this.posmonde = new int[this.taille][this.taille];
         for (int i = 0; i < this.taille; i++) {
             for (int j = 0; j < this.taille; j++) {
@@ -277,13 +277,12 @@ public class World {
      * on ajoute le personnage jouable dans le monde
      * comme c'est un attribut, on aura un accès constant a sa position, ses stats etc
      */
-    public void AjoutPJ(Joueur j){
-        j.choixPerso(this);
-        j.choixNom();
-        this.PJ = j.perso;
-        Class classe = PJ.getClass();
+    public void AjoutPJ(){
+        joueur.choixPerso(this);
+        joueur.choixNom();
+        Class classe = joueur.perso.getClass();
         String nomclasse = classe.getName();
-        this.posmonde[PJ.pos.getX()][PJ.pos.getY()] = 0;
+        this.posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()] = 0;
     }
     
     /**
@@ -296,15 +295,15 @@ public class World {
      * On actualise la matrice de position
      */
     public void deplacePJ(){
-        int x = this.PJ.pos.getX();
-        int y = this.PJ.pos.getY();
+        int x = this.joueur.perso.pos.getX();
+        int y = this.joueur.perso.pos.getY();
         boolean[] pospossible = {false, false, false, false, false, false, false, false, false};
         boolean[] reffalse = {false, false, false, false, false, false, false, false, false};
         for (int i = -1; i<2; i++){
             for (int j = -1; j<2;j++){
                 int k = 3*(i+1)+j+1;
                 if ((k!=4)&&(Estdanslimite(x+i,y+j))){/*on ne verifie pas la position k=4 car c'est celle sur laquelle on est deja*/
-                    pospossible[k] = (this.posmonde[x+i][y+j]==-1);
+                    pospossible[k] = (this.posmonde[x+i][y+j]==-1)||(this.posmonde[x+i][y+j]==6)||(this.posmonde[x+i][y+j]==7);
                 }
             }
         }
@@ -404,10 +403,20 @@ public class World {
                     this.deplacePJ();
                     break;
             }
-            int X = PJ.getPos().getX();
-            int Y = PJ.getPos().getY();
-            this.PJ.pos.Translate(dx, dy);
-            this.posmonde[PJ.pos.getX()][PJ.pos.getY()] = this.posmonde[X][Y];
+            int X = joueur.perso.getPos().getX();
+            int Y = joueur.perso.getPos().getY();
+            this.joueur.perso.pos.Translate(dx, dy);
+            if (posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()]==6||posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()]==7){
+                for (int i = 0; i<this.structnou.size(); i++){
+                    if (joueur.perso.getPos()==this.structnou.get(i).getPos()){
+                        Utilisable n = (Utilisable)this.structnou.get(i);
+                        this.joueur.ramasser(n);
+                    }
+                }
+                
+                
+            }
+            this.posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()] = this.posmonde[X][Y];
             this.posmonde[X][Y] = -1;
         }                            
     }
@@ -429,8 +438,8 @@ public class World {
         Scanner input4 = new Scanner(System.in);
         String rep4 = input4.next();
         int dy = Integer.parseInt(rep4);
-        int posx = this.PJ.pos.getX() + dx;
-        int posy = this.PJ.pos.getY() + dy;
+        int posx = this.joueur.perso.pos.getX() + dx;
+        int posy = this.joueur.perso.pos.getY() + dy;
         if (this.posmonde[posx][posy]==-1){
             System.out.println("Pas de creature la");
             this.ActionJoueur();
@@ -447,7 +456,7 @@ public class World {
                 System.out.println("Creature non trouvée");
                 this.ActionJoueur();
             }
-            ((Combattant)(this.PJ)).combattre(this.structcrea.get(i));
+            ((Combattant)(this.joueur.perso)).combattre(this.structcrea.get(i));
             if (this.structcrea.get(i).getPtVie()<=0){
                 Class classe = this.structcrea.get(i).getClass();
                 String nomclasse = classe.getName();
@@ -486,19 +495,20 @@ public class World {
     }
     
     public void InfoPJ(){
-        PJ.affiche();
+        joueur.perso.affiche();
+        joueur.afficherInventaire();
         this.ActionJoueur();
     }
     
     /**
-     * @param k est la profondeur à laquel le personnage voit : k=0 signifie que le PJ ne voit que lui-meme
-     * On recupere les coordonnées du PJ
-     * on cree la matrice montrant les cases autour du PJ en remplissant les cases hors du monde par des 0
+     * @param k est la profondeur à laquel le personnage voit : k=0 signifie que le joueur.perso ne voit que lui-meme
+     * On recupere les coordonnées du joueur.perso
+     * on cree la matrice montrant les cases autour du joueur.perso en remplissant les cases hors du monde par des 0
      * on affiche cette matrice en effectuant une transpose le nord en haut et le sud en bas     * 
      */
     public void mondeAutour(int k){
-        int x = PJ.pos.getX();
-        int y = PJ.pos.getY();
+        int x = joueur.perso.pos.getX();
+        int y = joueur.perso.pos.getY();
         int [][] myView = new int[2*k+1][2*k+1];
         for (int i = -k; i<=k; i++){
             for (int j = -k; j<=k; j++){
@@ -522,26 +532,26 @@ public class World {
      * Pour chaque creature :
      * on verifie si elle est combattante
      * si c'est le cas elle essaie d'attaquer
-     * Puis on verifie si les pv du PJ ont bouge a cause de cette creature
+     * Puis on verifie si les pv du joueur.perso ont bouge a cause de cette creature
      * si c'est pas le cas, la creature bouge
      * Lorsque les
      */
     public void TourDeJeu(){
-        if (PJ.getPtVie()<=0){
+        if (joueur.perso.getPtVie()<=0){
             System.out.println("Vous etes KO");
         }else{
             this.ActionJoueur();
-            /**if (PJ.pos.distance(tcloud.getPos())<tcloud.getTaille()){
-                    PJ.setPtVie(c.getPtVie()-tcloud.getDegat());
+            /**if (joueur.perso.pos.distance(tcloud.getPos())<tcloud.getTaille()){
+                    joueur.perso.setPtVie(c.getPtVie()-tcloud.getDegat());
             }*/
             for (int i = 0; i<this.structcrea.size(); i++){
                 Creature c = this.structcrea.get(i);
-                if ((c instanceof Combattant combattant)&&(c instanceof Monstre)&&(c.pos.distance(PJ.pos)==1.)){
+                if ((c instanceof Combattant combattant)&&(c instanceof Monstre)&&(c.pos.distance(joueur.perso.pos)==1.)){
                     Class classe = c.getClass();
                     String nomclasse = classe.getName();
                     nomclasse = nomclasse.substring(23);
                     System.out.println("Je me fais attaquer par un "+nomclasse+" !");
-                    combattant.combattre(PJ);
+                    combattant.combattre(joueur.perso);
                 }
                 else{
                     c.pos.affiche();

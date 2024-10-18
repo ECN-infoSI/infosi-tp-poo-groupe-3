@@ -18,8 +18,7 @@ public class TestWoE {
     public static void main(String[] args){
         World monde = new World();
         monde = monde.creerMondeAlea(0,0,0,1,4, 2, 2);
-        Joueur moi =  new Joueur();
-        monde.AjoutPJ(moi);
+        monde.AjoutPJ();
         monde.afficheWorld();
         System.out.println("debut du jeu");
         for (int i = 0; i< 100; i++){
