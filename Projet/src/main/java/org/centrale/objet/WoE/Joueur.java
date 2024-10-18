@@ -23,6 +23,10 @@ public class Joueur {
         this.inventaire = new ArrayList();
     }
     
+    /**
+     * Demande au joueur le type de perso qu'il souhaite jouer
+     * @param monde 
+     */
     public void choixPerso(World monde){
         boolean mauvaistype = true;
         Scanner input = new Scanner(System.in);
@@ -56,6 +60,9 @@ public class Joueur {
         System.out.println("Vous etes un personnage de type : "+type);
     }
     
+    /**
+     * Demande au joueur le nom de son perso
+     */
     public void choixNom(){
         System.out.print("Indiquez le nom de votre personnage : ");
         Scanner input = new Scanner(System.in);
@@ -64,16 +71,27 @@ public class Joueur {
         System.out.println("Votre personnage s'appelle : "+nom);
     }
     
+    /**
+     * Le joueur utilise un objet de son inventaire
+     * @param u 
+     */
     public void ajoutUtil(Utilisable u){
         this.effets.add(u);
         u.affecter(perso);
     }
     
+    /**
+     * L'effet d'un objet utilise prend fin
+     * @param u 
+     */
     public void finUtil(Utilisable u){
         u.desaffecter(perso);
         this.effets.remove(u);
     }
     
+    /**
+     * Le perso est affecte par les objets utilises
+     */
     public void estAffecte(){
         for (Utilisable u : this.effets) {
             int d = u.getDuree();
@@ -84,10 +102,17 @@ public class Joueur {
         }
     }
     
+    /**
+     * Le perso ramasse un objet
+     * @param u 
+     */
     public void ramasser(Utilisable u){
         this.inventaire.add(u);
     }
     
+    /**
+     * Le perso utilise un objet
+     */
     public void utiliser(){
         Scanner input = new Scanner(System.in);
         if (this.inventaire.isEmpty()){
@@ -108,6 +133,9 @@ public class Joueur {
         }
     }
     
+    /**
+     * Affichage de l'inventaire
+     */
     public void afficherInventaire(){
         if (this.inventaire.isEmpty()){
             System.out.println("Votre inventaire est vide");
@@ -119,4 +147,26 @@ public class Joueur {
             }
         }
     }
+    
+    /*public void afficherEffets(){
+        if (this.effets.isEmpty()){
+            System.out.println("Aucun effet en cours.");
+        } else {
+            Iterator<Utilisable> listIt = this.effets.iterator();
+            while (listIt.hasNext()){
+                Class classe = listIt.next().getClass();
+                String nClasse = classe.getName();
+                nClasse = nClasse.substring(23);
+                switch (nClasse){
+                    case "Carotte":
+                        Carotte c = (Carotte)listIt.next();
+                        System.out.println("Carotte : distance maximale d'attaque augmente de "+c.getIntensite());
+                        break;
+                    case "Lait":
+                        Lait l = (Lait)listIt.next();
+                        System.out.println("Lait : pourcentage de parade reduit de "+l.getIntensite());
+                }
+            }
+        }
+    }*/
 }
