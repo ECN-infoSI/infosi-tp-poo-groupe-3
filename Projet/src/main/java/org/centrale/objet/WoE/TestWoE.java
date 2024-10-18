@@ -21,6 +21,8 @@ public class TestWoE {
         monde.AjoutPJ();
         monde.afficheWorld();
         System.out.println("debut du jeu");
+        System.out.println("vous etes au 0");
+        System.out.println("1 : Paysan, 2 : Archer, 3 : Guerrier, 4 : Loup, 5 : Lapin");
         for (int i = 0; i< 100; i++){
             monde.TourDeJeu();
         }

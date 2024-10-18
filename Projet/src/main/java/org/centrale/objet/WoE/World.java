@@ -473,7 +473,7 @@ public class World {
      * On definit quelle est l'action que le joueur effectue et on utilise la fonction associee
      */
     public void ActionJoueur(){
-        this.mondeAutour(2);
+        this.mondeAutour(3);
         System.out.println("Voulez-vous : Deplacer, Combattre ou Info");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
@@ -546,17 +546,15 @@ public class World {
             }*/
             for (int i = 0; i<this.structcrea.size(); i++){
                 Creature c = this.structcrea.get(i);
-                if ((c instanceof Combattant combattant)&&(c instanceof Monstre)&&(c.pos.distance(joueur.perso.pos)==1.)){
+                if ((c instanceof Combattant)&&(c instanceof Monstre)&&(c.pos.distance(joueur.perso.pos)==1.)){
                     Class classe = c.getClass();
                     String nomclasse = classe.getName();
                     nomclasse = nomclasse.substring(23);
                     System.out.println("Je me fais attaquer par un "+nomclasse+" !");
-                    combattant.combattre(joueur.perso);
+                    ((Combattant)c).combattre(this.joueur.perso);
                 }
                 else{
-                    c.pos.affiche();
                     this.deplacealealimite(c);
-                    c.pos.affiche();
                 }
                 /**if (c.pos.distance(tcloud.getPos())<tcloud.getTaille()){
                     c.setPtVie(c.getPtVie()-tcloud.getDegat());
