@@ -19,6 +19,7 @@ public class World {
     public ArrayList<Nourriture> structnou;
     final int taille = 6;
     public Joueur joueur;
+    public NuageToxique tcloud;
 
     /** 
      *
@@ -32,6 +33,7 @@ public class World {
         this.structcrea = new ArrayList<>();
         this.structnou = new ArrayList<>();
         this.joueur =  new Joueur();
+        this.tcloud = new NuageToxique();
         this.posmonde = new int[this.taille][this.taille];
         for (int i = 0; i < this.taille; i++) {
             for (int j = 0; j < this.taille; j++) {
@@ -123,6 +125,10 @@ public class World {
     public World creerMondeAlea(int nbpa, int nbgu, int nbar, int nblo, int nbla, int nbca, int nblait){
         World Monmonde = new World();
         Random genAl = new Random();
+        Monmonde.tcloud = this.tcloud;
+        Monmonde.tcloud.setDegatpartour(1);
+        Point2D p0 = new Point2D(0,0); 
+        Monmonde.tcloud.setPos(p0);
         for (int i = 0; i<nbpa; i++){
             String nom = "Paysan"+i;
             int pv = genAl.nextInt(10)+1;
@@ -471,8 +477,8 @@ public class World {
      * On definit quelle est l'action que le joueur effectue et on utilise la fonction associee
      */
     public void ActionJoueur(){
-        this.mondeAutour(3);
-        System.out.println("Voulez-vous : Deplacer, Combattre, Utiliser ou Info");
+        this.mondeAutour(2);
+        System.out.println("Voulez-vous : Deplacer, Combattre ou Info");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
         switch (choix) {
@@ -542,9 +548,9 @@ public class World {
             System.out.println("Vous etes KO");
         }else{
             this.ActionJoueur();
-            /**if (joueur.perso.pos.distance(tcloud.getPos())<tcloud.getTaille()){
-                    joueur.perso.setPtVie(c.getPtVie()-tcloud.getDegat());
-            }*/
+            if (joueur.perso.pos.distance(tcloud.getPos())<tcloud.getTaille()){
+                    joueur.perso.setPtVie(joueur.perso.getPtVie()-tcloud.getDegatpartour());
+            }
             for (int i = 0; i<this.structcrea.size(); i++){
                 Creature c = this.structcrea.get(i);
                 if ((c instanceof Combattant)&&(c instanceof Monstre)&&(c.pos.distance(joueur.perso.pos)==1.)){
@@ -557,9 +563,9 @@ public class World {
                 else{
                     this.deplacealealimite(c);
                 }
-                /**if (c.pos.distance(tcloud.getPos())<tcloud.getTaille()){
-                    c.setPtVie(c.getPtVie()-tcloud.getDegat());
-                }*/
+                if (c.pos.distance(tcloud.getPos())<tcloud.getTaille()){
+                    c.setPtVie(c.getPtVie()-tcloud.getDegatpartour());
+                }
             }
         }
     }
