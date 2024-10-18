@@ -96,10 +96,15 @@ public class Joueur {
             this.afficherInventaire();
             System.out.print("Indiquez le numero de l'objet que vous souhaitez utiliser.");
             int i = input.nextInt();
-            Utilisable u = this.inventaire.get(i);
+            if (i>=this.inventaire.size()){
+                System.out.println("Tu n'as pas autant d'objet !");
+                this.utiliser();
+            }else{
+                Utilisable u = this.inventaire.get(i);
             System.out.println("Vous avez choisi l'objet : "+u.getNom());
             this.inventaire.remove(u);
             this.ajoutUtil(u);
+            }
         }
     }
     

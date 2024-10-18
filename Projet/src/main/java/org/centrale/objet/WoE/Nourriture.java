@@ -8,7 +8,7 @@ package org.centrale.objet.WoE;
  *
  * @author thoma
  */
-public class Nourriture extends ElementDeJeu{
+public class Nourriture extends Objet{
     
     private String nom;
     

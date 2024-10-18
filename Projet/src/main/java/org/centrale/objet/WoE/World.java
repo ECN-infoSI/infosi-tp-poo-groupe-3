@@ -16,7 +16,7 @@ public class World {
      *
      */
     public ArrayList<Creature> structcrea;
-    public ArrayList<Nourriture> structnou;
+    public ArrayList<Objet> structobj;
     final int taille = 6;
     public Joueur joueur;
     public NuageToxique tcloud;
@@ -31,7 +31,7 @@ public class World {
      */
     public World(){
         this.structcrea = new ArrayList<>();
-        this.structnou = new ArrayList<>();
+        this.structobj = new ArrayList<>();
         this.joueur =  new Joueur();
         this.tcloud = new NuageToxique();
         this.posmonde = new int[this.taille][this.taille];
@@ -275,7 +275,7 @@ public class World {
                 break;
         }
         this.posmonde[x][y] = indiceclasse;
-        this.structnou.add(this.structnou.size(), n);
+        this.structobj.add(this.structobj.size(), ((Objet)n);
     }
     
     /**
@@ -413,9 +413,9 @@ public class World {
             int Y = joueur.perso.getPos().getY();
             this.joueur.perso.pos.Translate(dx, dy);
             if (posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()]==6||posmonde[joueur.perso.pos.getX()][joueur.perso.pos.getY()]==7){
-                for (int i = 0; i<this.structnou.size(); i++){
-                    if (joueur.perso.getPos().equal(this.structnou.get(i).getPos())){
-                        Utilisable n = (Utilisable)this.structnou.get(i);
+                for (int i = 0; i<this.structobj.size(); i++){
+                    if (joueur.perso.getPos().equal(this.structobj.get(i).getPos())){
+                        Utilisable n = (Utilisable)this.structobj.get(i);
                         this.joueur.ramasser(n);
                     }
                 }               
@@ -478,7 +478,7 @@ public class World {
      */
     public void ActionJoueur(){
         this.mondeAutour(2);
-        System.out.println("Voulez-vous : Deplacer, Combattre ou Info");
+        System.out.println("Voulez-vous : Deplacer, Combattre, Info ou Utiliser");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
         switch (choix) {
@@ -550,6 +550,7 @@ public class World {
             this.ActionJoueur();
             if (joueur.perso.pos.distance(tcloud.getPos())<tcloud.getTaille()){
                     joueur.perso.setPtVie(joueur.perso.getPtVie()-tcloud.getDegatpartour());
+                    System.out.println("Le nuage toxique est au-dessus de toi : il t'empoisonne !");
             }
             for (int i = 0; i<this.structcrea.size(); i++){
                 Creature c = this.structcrea.get(i);
