@@ -71,6 +71,7 @@ public class Point2D {
     public void setY(int y) {
         this.y = y;
     }
-    
-    
+    public boolean equal(Point2D p0){
+        return ((this.getX()==p0.getX())&&(this.getY()==p0.getY()));
+    }
 }
