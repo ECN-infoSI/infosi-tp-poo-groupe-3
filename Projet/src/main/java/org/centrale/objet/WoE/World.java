@@ -536,12 +536,12 @@ public class World {
             }*/
             for (int i = 0; i<this.structcrea.size(); i++){
                 Creature c = this.structcrea.get(i);
-                if ((c instanceof Combattant combattant)&&(c instanceof Monstre)&&(c.pos.distance(PJ.pos)==1.)){
+                if ((c instanceof Combattant)&&(c instanceof Monstre)&&(c.pos.distance(PJ.pos)==1.)){
                     Class classe = c.getClass();
                     String nomclasse = classe.getName();
                     nomclasse = nomclasse.substring(23);
                     System.out.println("Je me fais attaquer par un "+nomclasse+" !");
-                    combattant.combattre(PJ);
+                    ((Combattant)c).combattre(PJ);
                 }
                 else{
                     this.deplacealealimite(c);
