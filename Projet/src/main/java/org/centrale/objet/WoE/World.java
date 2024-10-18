@@ -504,7 +504,6 @@ public class World {
     public void InfoPJ(){
         joueur.perso.affiche();
         joueur.afficherInventaire();
-        joueur.afficherEffets();
         this.ActionJoueur();
     }
     

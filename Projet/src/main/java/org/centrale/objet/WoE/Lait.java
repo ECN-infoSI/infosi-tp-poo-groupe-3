@@ -14,19 +14,38 @@ public class Lait extends Nourriture implements Utilisable{
         super();
     }
     
+    /**
+     * 
+     * @param l 
+     */
     public Lait(Lait l){
         super(l);
     }
     
+    /**
+     * 
+     * @param n
+     * @param p
+     * @param i
+     * @param d 
+     */
     public Lait(String n, Point2D p, int i, int d){
         super(n, p, i, d);
     }
     
+    /**
+     * 
+     * @param p 
+     */
     @Override
     public void affecter(Personnage p){
         p.pageAtt = p.pageAtt + this.getIntensite();
     }
     
+    /**
+     * 
+     * @param p 
+     */
     @Override
     public void desaffecter(Personnage p){
         p.pageAtt = p.pageAtt - this.getIntensite();

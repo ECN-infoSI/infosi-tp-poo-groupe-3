@@ -14,10 +14,20 @@ public class Carotte extends Nourriture implements Utilisable{
         super();
     }
     
+    /**
+     * @param rp
+    **/
     public Carotte(Carotte rp){
         super(rp);
     }
     
+    /**
+     * 
+     * @param n
+     * @param p
+     * @param i
+     * @param d 
+     */
     public Carotte(String n, Point2D p, int i, int d){
         super(n, p, i, d);
     }

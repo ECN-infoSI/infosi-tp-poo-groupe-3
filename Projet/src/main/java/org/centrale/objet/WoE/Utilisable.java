@@ -9,6 +9,7 @@ package org.centrale.objet.WoE;
  * @author thoma
  */
 public interface Utilisable {
+    
     public void affecter(Personnage p);
     
     public void desaffecter(Personnage p);

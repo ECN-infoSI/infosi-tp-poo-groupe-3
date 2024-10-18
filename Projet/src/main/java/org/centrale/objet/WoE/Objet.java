@@ -15,8 +15,6 @@ public class Objet extends ElementDeJeu{
      */
     protected String nom;
     
-    protected int intensite;
-    
     /**
      *
      * @param n

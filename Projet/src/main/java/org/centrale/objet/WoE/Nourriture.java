@@ -20,6 +20,10 @@ public class Nourriture extends Objet{
         duree = 0;
     }
     
+    /**
+     * 
+     * @param n 
+     */
     public Nourriture(Nourriture n){
         super(n.getNom(), n.getPos());
         nom = n.getNom();
@@ -27,6 +31,13 @@ public class Nourriture extends Objet{
         duree = n.getDuree();
     }
     
+    /**
+     * 
+     * @param n
+     * @param p
+     * @param i
+     * @param d 
+     */
     public Nourriture(String n, Point2D p, int i, int d){
         super(n, p);
         intensite = i;
