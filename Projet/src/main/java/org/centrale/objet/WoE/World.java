@@ -478,7 +478,7 @@ public class World {
      */
     public void ActionJoueur(){
         this.mondeAutour(2);
-        System.out.println("Voulez-vous : Deplacer, Combattre ou Info");
+        System.out.println("Voulez-vous : Deplacer, Combattre, Utiliser ou Info");
         Scanner input1 = new Scanner(System.in);
         String choix = input1.next();
         switch (choix) {
