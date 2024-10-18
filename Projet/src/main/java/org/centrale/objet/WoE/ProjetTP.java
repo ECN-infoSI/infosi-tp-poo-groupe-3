@@ -24,10 +24,8 @@ public class ProjetTP {
         System.out.println("vous etes au 0");
         System.out.println("1 : Paysan, 2 : Archer, 3 : Guerrier, 4 : Loup, 5 : Lapin");
         while (monde.joueur.perso.getPtVie()>0){
-            for (int i = 0; i< 100; i++){
             monde.TourDeJeu();
             }
-        }
-        System.out.println("Fin du jeu !");
+        System.out.println("Vous etes ko, fin du jeu !");
     }
 }
