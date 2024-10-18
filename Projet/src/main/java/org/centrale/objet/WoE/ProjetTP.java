@@ -28,5 +28,6 @@ public class ProjetTP {
             monde.TourDeJeu();
             }
         }
+        System.out.println("Fin du jeu !");
     }
 }

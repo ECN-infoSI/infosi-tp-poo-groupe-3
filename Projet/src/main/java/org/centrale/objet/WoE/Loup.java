@@ -52,6 +52,7 @@ public class Loup extends Monstre implements Combattant{
      * En cas de parade, on vérifie que les dégâts sont positifs
      * Si les ptVie tombent en dessous de 0 on les remets à 0.
      */
+    @Override
     public void combattre(Creature c){
         if (this.pos.distance(c.pos)==1.){
             Random genAl = new Random();

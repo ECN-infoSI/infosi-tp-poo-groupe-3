@@ -43,12 +43,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     protected int degaAtt;
 
        
-       
-    /**
-     * Jouabilité de la creature par un joueur
-     */
-    final boolean estJouable = false;
-       
     /**
      *
      * @param pV
