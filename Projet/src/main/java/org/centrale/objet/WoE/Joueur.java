@@ -114,4 +114,27 @@ public class Joueur {
             }
         }
     }
+    
+    public void afficherEffets(){
+        if (this.effets.isEmpty()){
+            System.out.println("Aucun effet en cours.");
+        } else {
+            Iterator<Utilisable> listIt = this.effets.iterator();
+            while (listIt.hasNext()){
+                Class classe = listIt.next().getClass();
+                String nClasse = classe.getName();
+                nClasse = nClasse.substring(23);
+                switch (nClasse){
+                    case "Carotte":
+                        Carotte c = (Carotte)listIt.next();
+                        System.out.println("Carotte : distance maximale d'attaque reduite de "+c.getIntensite());
+                        break;
+                    case "Lait":
+                        Lait l = (Lait)listIt.next();
+                        System.out.println("Lait : distance maximale d'attaque reduite de "+l.getIntensite());
+                }
+                
+            }
+        }
+    }
 }
