@@ -92,13 +92,19 @@ public class DatabaseTools {
      * On va chercher puis on renvoie l'id_joueur
      */
     public Integer getPlayerID(String nomJoueur, String password) {
+        
         if (this.login.equals(nomJoueur) && this.password.equals(password)){
             try{
-            String sql = "SELECT id_joueur FROM joueur WHERE nom_code="+nomJoueur+";";
-            PreparedStatement stmt = this.connection.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            int id = rs.getInt("id_joueur");
-            return id;
+                String sql = "SELECT mdp, id_joueur FROM joueur WHERE nom_code="+nomJoueur+";";
+                PreparedStatement stmt = this.connection.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery();
+                String mdp = rs.getString("mdp");
+                int id = rs.getInt("id_joueur");
+                if (mdp.equals(password)){
+                    return id;
+                } else {
+                    System.out.println("Mauvais identifiants.");
+                }
             } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -121,7 +127,8 @@ public class DatabaseTools {
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
         try{
-            String sql11 = "SELECT nom FROM partie WHERE id_joueur = "+idJoueur+" and nom = "+nomPartie+";";
+            String sql11 = "SELECT id_partie FROM partie WHERE id_joueur = "+idJoueur+" and nom = "+nomPartie+";";
+            System.out.println(sql11);
             PreparedStatement stmt11 = this.connection.prepareStatement(sql11);
             ResultSet rs11 = stmt11.executeQuery();
             if (!rs11.next()){

@@ -29,11 +29,12 @@ public class WorldOfECN {
 
         // Save world
         database.connect();
-        Integer playerId = database.getPlayerID("Saegusa", "Mayumi");
-        database.saveWorld(playerId, "Test Game 1", "Start", world);
+        Integer playerId = database.getPlayerID("nom de code", "super mot de passe");
+        
+        database.saveWorld(playerId, "partie1", "Start", world);
         
         // Retreive World
-        database.readWorld(playerId, "Test Game 1", "Start", world);
+        database.readWorld(playerId, "Test", "Start", world);
         database.disconnect();
     }
 }
