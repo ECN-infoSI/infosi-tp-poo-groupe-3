@@ -275,7 +275,7 @@ public class DatabaseTools {
      * On les ajoute dans le container du Monde
      */
     public void readWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
-        
+        connect();
         try {
             String sqlPerso = "SELECT nom, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleche, pos_x, pos_y, type.nom"
                     + "FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
