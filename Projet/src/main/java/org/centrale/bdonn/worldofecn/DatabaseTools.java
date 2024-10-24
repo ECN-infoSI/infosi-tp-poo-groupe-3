@@ -263,10 +263,10 @@ public class DatabaseTools {
                         String nomep = ((Objet)e).getNom();
                         Integer posxep = ((Objet)e).getPosition().getX();
                         Integer posyep = ((Objet)e).getPosition().getY();
-                        String sql11 = "INSERT INTO objet (nom, id_partie, id_sauv, id_perso, pos_x, pos_y, id_type)"
+                        String sql13 = "INSERT INTO objet (nom, id_partie, id_sauv, id_perso, pos_x, pos_y, id_type)"
                                 + "VALUES ("+nomep+", "+idPartie+", "+idSauv+", id_perso, "+posxep+", "+posyep+", "+indiceclasse+") ";
-                        PreparedStatement stmt11 = this.connection.prepareStatement(sql11);
-                        stmt11.executeUpdate();
+                        PreparedStatement stmt13 = this.connection.prepareStatement(sql13);
+                        stmt13.executeUpdate();
                         break;
                 }
             }
