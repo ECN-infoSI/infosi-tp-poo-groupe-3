@@ -123,23 +123,23 @@ public class DatabaseTools {
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
         try{
-            String sql11 = "SELECT nom FROM partie WHERE id_joueur = "+idJoueur+" and nom = "+nomPartie+";";
+            String sql11 = "SELECT nom FROM partie WHERE id_joueur = "+idJoueur+" and nom = '"+nomPartie+"';";
             PreparedStatement stmt11 = this.connection.prepareStatement(sql11);
             ResultSet rs11 = stmt11.executeQuery();
             if (!rs11.next()){
-                String sql12 = "INSERT INTO partie (nom, id_joueur) VALUES ("+nomPartie+", "+idJoueur+");";
+                String sql12 = "INSERT INTO partie (nom, id_joueur) VALUES ('"+nomPartie+"', "+idJoueur+");";
                 PreparedStatement stmt12 = this.connection.prepareStatement(sql12);
                 stmt12.executeUpdate();
             }
-            String sql1 = "SELECT id_partie FROM partie WHERE nom = "+nomPartie+" and id_joueur = "+idJoueur+";";
+            String sql1 = "SELECT id_partie FROM partie WHERE nom = '"+nomPartie+"' and id_joueur = "+idJoueur+";";
             PreparedStatement stmt1 = this.connection.prepareStatement(sql1);
             ResultSet rs = stmt1.executeQuery();
             int idPartie = rs.getInt("id_partie");
             boolean rapide = (nomSauvegarde == null);
-            String sql2 = "INSERT INTO sauvegarde (rapide, nom, id_partie) VALUES ("+rapide+", "+nomSauvegarde+", "+idPartie+");";
+            String sql2 = "INSERT INTO sauvegarde (rapide, nom, id_partie) VALUES ("+rapide+", '"+nomSauvegarde+"', "+idPartie+");";
             PreparedStatement stmt2 = this.connection.prepareStatement(sql2);
             stmt2.executeUpdate();
-            String sql3 = "SELECT id_sauv FROM sauvegarde WHERE nom = "+nomSauvegarde+" and id_partie = "+idPartie+";";
+            String sql3 = "SELECT id_sauv FROM sauvegarde WHERE nom = '"+nomSauvegarde+"' and id_partie = "+idPartie+";";
             PreparedStatement stmt3 = this.connection.prepareStatement(sql3);
             ResultSet rs3 = stmt3.executeQuery();
             int idSauv = rs3.getInt("id_sauv");
@@ -187,7 +187,7 @@ public class DatabaseTools {
                         Integer posxg = ((Personnage)e).getPosition().getX();
                         Integer posyg = ((Personnage)e).getPosition().getY();
                         String sql4 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
-                                + "VALUES ("+nomg+", "+idPartie+", "+idSauv+", "+pvg+", "+pourattg+", "+ptattg+", "+pourparg+", "+ptparg+", "+distmaxg+", NULL, "+posxg+", "+posyg+", "+indiceclasse+");";
+                                + "VALUES ('"+nomg+"', "+idPartie+", "+idSauv+", "+pvg+", "+pourattg+", "+ptattg+", "+pourparg+", "+ptparg+", "+distmaxg+", NULL, "+posxg+", "+posyg+", "+indiceclasse+");";
                         PreparedStatement stmt4 = this.connection.prepareStatement(sql4);
                         stmt4.executeUpdate();
                         break;
@@ -203,7 +203,7 @@ public class DatabaseTools {
                         Integer posxp = ((Personnage)e).getPosition().getX();
                         Integer posyp = ((Personnage)e).getPosition().getY();
                         String sql8 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
-                                + "VALUES ("+nomp+", "+idPartie+", "+idSauv+", "+pvp+", "+pourattp+", "+ptattp+", "+pourparp+", "+ptparp+", "+distmaxp+", NULL, "+posxp+", "+posyp+", "+indiceclasse+");";
+                                + "VALUES ('"+nomp+"', "+idPartie+", "+idSauv+", "+pvp+", "+pourattp+", "+ptattp+", "+pourparp+", "+ptparp+", "+distmaxp+", NULL, "+posxp+", "+posyp+", "+indiceclasse+");";
                         PreparedStatement stmt8 = this.connection.prepareStatement(sql8);
                         stmt8.executeUpdate();
                         break;
@@ -220,7 +220,7 @@ public class DatabaseTools {
                         Integer posxa = ((Personnage)e).getPosition().getX();
                         Integer posya = ((Personnage)e).getPosition().getY();
                         String sql7 = "INSERT INTO personnage (nom, id_partie, id_sauv, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleches, pos_x, pos_y, id_type) "
-                                + "VALUES ("+noma+", "+idPartie+", "+idSauv+", "+pva+", "+pouratta+", "+ptatta+", "+pourpara+", "+ptpara+", "+distmaxa+", "+nbflechesa+", "+posxa+", "+posya+", "+indiceclasse+");";
+                                + "VALUES ('"+noma+"', "+idPartie+", "+idSauv+", "+pva+", "+pouratta+", "+ptatta+", "+pourpara+", "+ptpara+", "+distmaxa+", "+nbflechesa+", "+posxa+", "+posya+", "+indiceclasse+");";
                         PreparedStatement stmt7 = this.connection.prepareStatement(sql7);
                         stmt7.executeUpdate();
                         break;
@@ -256,7 +256,7 @@ public class DatabaseTools {
                         Integer posxpo = ((Objet)e).getPosition().getX();
                         Integer posypo = ((Objet)e).getPosition().getY();
                         String sql6 = "INSERT INTO objet (nom, id_partie, id_sauv, id_perso, pos_x, pos_y, id_type)"
-                                + "VALUES ("+nompo+", "+idPartie+", "+idSauv+", id_perso, "+posxpo+", "+posypo+", "+indiceclasse+") ";
+                                + "VALUES ('"+nompo+"', "+idPartie+", "+idSauv+", id_perso, "+posxpo+", "+posypo+", "+indiceclasse+") ";
                         PreparedStatement stmt6 = this.connection.prepareStatement(sql6);
                         stmt6.executeUpdate();
                         break;
@@ -266,7 +266,7 @@ public class DatabaseTools {
                         Integer posxep = ((Objet)e).getPosition().getX();
                         Integer posyep = ((Objet)e).getPosition().getY();
                         String sql13 = "INSERT INTO objet (nom, id_partie, id_sauv, id_perso, pos_x, pos_y, id_type)"
-                                + "VALUES ("+nomep+", "+idPartie+", "+idSauv+", id_perso, "+posxep+", "+posyep+", "+indiceclasse+") ";
+                                + "VALUES ('"+nomep+"', "+idPartie+", "+idSauv+", id_perso, "+posxep+", "+posyep+", "+indiceclasse+") ";
                         PreparedStatement stmt13 = this.connection.prepareStatement(sql13);
                         stmt13.executeUpdate();
                         break;
@@ -289,26 +289,26 @@ public class DatabaseTools {
     public void readWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
         try {
             String sqlPerso = "SELECT nom, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleche, pos_x, pos_y, type.nom"
-                    + "FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
-                    + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
-                    + "JOIN Personnage ON personnage.id_sauve = sauvegarde.id_sauve"
-                    + "JOIN Type ON personnage.id_type = type.id_type"
-                    + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
-                    +"AND sauvegarde.nom = "+nomSauvegarde;
+                    + " FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+                    + " JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
+                    + " JOIN Personnage ON personnage.id_sauve = sauvegarde.id_sauve"
+                    + " JOIN Type ON personnage.id_type = type.id_type"
+                    + " WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = '"+nomPartie
+                    +"' AND sauvegarde.nom = '"+nomSauvegarde+"';";
             String sqlObjet = "SELECT nom, pos_x, pos_y, type.nom "
-                    + "FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
-                    + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
-                    + "JOIN Objet ON objet.id_sauve = sauvegarde.id_sauve"
-                    + "JOIN Type ON personnage.id_type = type.id_type"
-                    + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
-                    +"AND sauvegarde.nom = "+nomSauvegarde;
+                    + " FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+                    + " JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
+                    + " JOIN Objet ON objet.id_sauve = sauvegarde.id_sauve"
+                    + " JOIN Type ON personnage.id_type = type.id_type"
+                    + " WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = '"+nomPartie
+                    +"' AND sauvegarde.nom = '"+nomSauvegarde+"';";
             String sqlMonstre = "SELECT pv, pour_att, pt_att, pour_par, pos_x, pos_y, type.nom"
-                    + "FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
-                    + "JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
-                    + "JOIN Monstre ON monstre.id_sauve = sauvegarde.id_sauve"
-                    + "JOIN Type ON personnage.id_type = type.id_type"
-                    + "WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = "+nomPartie
-                    +"AND sauvegarde.nom = "+nomSauvegarde;
+                    + " FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
+                    + " JOIN Joueur ON joueur.id_joueur = partie.id_joueur"
+                    + " JOIN Monstre ON monstre.id_sauve = sauvegarde.id_sauve"
+                    + " JOIN Type ON personnage.id_type = type.id_type"
+                    + " WHERE joueur.id_joueur = "+idJoueur+" AND partie.nom = '"+nomPartie
+                    +"' AND sauvegarde.nom = '"+nomSauvegarde+"';";
             PreparedStatement stmt1 = this.connection.prepareStatement(sqlPerso);
             ResultSet rsPerso = stmt1.executeQuery();
             PreparedStatement stmt2 = this.connection.prepareStatement(sqlObjet);
@@ -402,7 +402,7 @@ public class DatabaseTools {
      */
     public void removeWorld(Integer idJoueur,String nomPartie,String nomSauvegarde){
         try{
-            String sql1 = "SELECT id_sauv FROM partie NATURAL JOIN sauvegarde WHERE partie.nom = "+nomPartie+" and id_joueur = "+idJoueur+" and sauvegarde.nom = "+nomSauvegarde+";";
+            String sql1 = "SELECT id_sauv FROM partie NATURAL JOIN sauvegarde WHERE partie.nom = '"+nomPartie+"' and id_joueur = "+idJoueur+" and sauvegarde.nom = '"+nomSauvegarde+"';";
             PreparedStatement stmt1 = this.connection.prepareStatement(sql1);
             ResultSet rs = stmt1.executeQuery();
             int idSauv = rs.getInt("id_sauv");
