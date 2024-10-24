@@ -120,10 +120,16 @@ public class DatabaseTools {
      * On rajoute dans les tables personnage, monstre et objet des copies des donnees avec lesquels on jouait avec le nouvel id_sauv
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
-        
         try{
+            String sql11 = "SELECT nom FROM partie WHERE id_joueur = "+idJoueur+" and nom = "+nomPartie+";";
+            PreparedStatement stmt11 = this.connection.prepareStatement(sql11);
+            ResultSet rs11 = stmt11.executeQuery();
+            if (!rs11.next()){
+                String sql12 = "INSERT INTO partie (nom, id_joueur) VALUES ("+nomPartie+", "+idJoueur+");";
+                PreparedStatement stmt12 = this.connection.prepareStatement(sql12);
+                stmt12.executeUpdate();
+            }
             String sql1 = "SELECT id_partie FROM partie WHERE nom = "+nomPartie+" and id_joueur = "+idJoueur+";";
-            
             PreparedStatement stmt1 = this.connection.prepareStatement(sql1);
             ResultSet rs = stmt1.executeQuery();
             int idPartie = rs.getInt("id_partie");
@@ -279,7 +285,6 @@ public class DatabaseTools {
      * On les ajoute dans le container du Monde
      */
     public void readWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
-        connect();
         try {
             String sqlPerso = "SELECT nom, pv, pour_att, pt_att, pour_par, pt_par, dist_max, nb_fleche, pos_x, pos_y, type.nom"
                     + "FROM Partie JOIN Sauvegarde ON partie.id_partie = sauvegarde.id_partie"
