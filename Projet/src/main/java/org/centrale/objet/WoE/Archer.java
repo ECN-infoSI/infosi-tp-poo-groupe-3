@@ -70,6 +70,11 @@ public class Archer extends Personnage implements Combattant{
         nbFleche = 0;
     }
     
+    /**
+     *
+     * @param monde
+     * @return
+     */
     public Archer archerAlea(World monde){
         Random genAl = new Random();        
         int pv = genAl.nextInt(12)+1;

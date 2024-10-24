@@ -25,7 +25,14 @@ public class World {
     private Integer width;
     private Integer height;
 
+    /**
+     *
+     */
     public List<ElementDeJeu> listElements;
+
+    /**
+     *
+     */
     public Joueur player;
 
     /**
@@ -63,6 +70,10 @@ public class World {
         return width;
     }
     
+    /**
+     *
+     * @param e
+     */
     public void addElement(ElementDeJeu e){
         this.listElements.add(e);
     }

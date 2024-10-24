@@ -34,7 +34,7 @@ public class DatabaseTools {
     public DatabaseTools() {
         try {
             // Get Properties file
-            ResourceBundle properties = ResourceBundle.getBundle(DatabaseTools.class.getPackage().getName() + ".database");
+            ResourceBundle properties = ResourceBundle.getBundle(DatabaseTools.class.getPackage().getName()+ ".database");
 
             // USE config parameters
             login = properties.getString("login");
@@ -42,7 +42,9 @@ public class DatabaseTools {
             String server = properties.getString("server");
             String database = properties.getString("database");
             url = "jdbc:postgresql://" + server + "/" + database;
-
+            
+            
+            
             // Mount driver
             Driver driver = DriverManager.getDriver(url);
             if (driver == null) {
@@ -118,8 +120,10 @@ public class DatabaseTools {
      * On rajoute dans les tables personnage, monstre et objet des copies des donnees avec lesquels on jouait avec le nouvel id_sauv
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
+        
         try{
             String sql1 = "SELECT id_partie FROM partie WHERE nom = "+nomPartie+" and id_joueur = "+idJoueur+";";
+            
             PreparedStatement stmt1 = this.connection.prepareStatement(sql1);
             ResultSet rs = stmt1.executeQuery();
             int idPartie = rs.getInt("id_partie");

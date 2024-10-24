@@ -15,30 +15,58 @@ public class NuageToxique extends Objet implements Deplacable{
     private int degatpartour;
     private int taille;
     
+    /**
+     *
+     */
     public NuageToxique(){
         super();
     }
     
+    /**
+     *
+     * @param n
+     * @param p
+     */
     public NuageToxique(String n, Point2D p){
         super(n, p);
     }
     
+    /**
+     *
+     * @param nt
+     */
     public NuageToxique(NuageToxique nt){
         super(nt.getNom(), nt.getPos());
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDegatpartour() {
         return degatpartour;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTaille() {
         return taille;
     }
 
+    /**
+     *
+     * @param degatpartour
+     */
     public void setDegatpartour(int degatpartour) {
         this.degatpartour = degatpartour;
     }
 
+    /**
+     *
+     * @param taille
+     */
     public void setTaille(int taille) {
         this.taille = taille;
     }

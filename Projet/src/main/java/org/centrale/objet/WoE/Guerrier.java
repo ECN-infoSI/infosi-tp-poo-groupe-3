@@ -38,6 +38,9 @@ public class Guerrier extends Personnage implements Combattant {
         super(g.getNom(), g.getPtVie(), g.getDegatAtt(), g.getPtPar(), g.getPageAtt(), g.getPagePar(), g.getDistAttMax(), new Point2D(g.getPos()));
     }
 
+    /**
+     *
+     */
     public Guerrier() {
         super();
     }

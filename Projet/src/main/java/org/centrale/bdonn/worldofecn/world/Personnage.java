@@ -28,66 +28,130 @@ public abstract class Personnage extends Creature {
      */
     protected int distAttMax;
 
+    /**
+     *
+     * @return
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDistAttMax() {
         return distAttMax;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPtVie() {
         return ptVie;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDegatAtt() {
         return degatAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPtPar() {
         return ptPar;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPagePar() {
         return pagePar;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPageAtt() {
         return pageAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDegaAtt() {
         return degaAtt;
     }
 
+    /**
+     *
+     * @param nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+    /**
+     *
+     * @param distAttMax
+     */
     public void setDistAttMax(int distAttMax) {
         this.distAttMax = distAttMax;
     }
 
+    /**
+     *
+     * @param ptVie
+     */
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
 
+    /**
+     *
+     * @param degatAtt
+     */
     public void setDegatAtt(int degatAtt) {
         this.degatAtt = degatAtt;
     }
 
+    /**
+     *
+     * @param ptPar
+     */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
 
+    /**
+     *
+     * @param pagePar
+     */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
     }
 
+    /**
+     *
+     * @param pageAtt
+     */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
     }
 
+    /**
+     *
+     * @param degaAtt
+     */
     public void setDegaAtt(int degaAtt) {
         this.degaAtt = degaAtt;
     }

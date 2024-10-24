@@ -10,6 +10,9 @@ package org.centrale.objet.WoE;
  */
 public class Carotte extends Nourriture implements Utilisable{
     
+    /**
+     *
+     */
     public Carotte(){
         super();
     }
@@ -35,6 +38,12 @@ public class Carotte extends Nourriture implements Utilisable{
     /*
     * @p Personnage affecte par le bonus/malus
     */
+
+    /**
+     *
+     * @param p
+     */
+
     @Override
     public void affecter(Personnage p){
         p.distAttMax = p.distAttMax + this.getIntensite();
@@ -43,6 +52,12 @@ public class Carotte extends Nourriture implements Utilisable{
     /*
     * @p Personnage affecte par le bonus/malus
     */
+
+    /**
+     *
+     * @param p
+     */
+
     @Override
     public void desaffecter(Personnage p){
         p.distAttMax = p.distAttMax - this.getIntensite();

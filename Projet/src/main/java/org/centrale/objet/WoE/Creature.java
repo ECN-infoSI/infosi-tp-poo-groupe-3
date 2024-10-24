@@ -73,6 +73,10 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
         pageAtt = 0;
         }
     
+    /**
+     *
+     * @param c
+     */
     public Creature(Creature c){
         super(c.getPos());
         ptVie = c.getPtVie();

@@ -16,9 +16,21 @@ public class World {
      *
      */
     public ArrayList<Creature> structcrea;
+
+    /**
+     *
+     */
     public ArrayList<Objet> structobj;
     final int taille = 20;
+
+    /**
+     *
+     */
     public Joueur joueur;
+
+    /**
+     *
+     */
     public NuageToxique tcloud;
 
     /** 

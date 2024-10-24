@@ -28,10 +28,18 @@ public abstract class Objet extends ElementDeJeu{
         nom = "";
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     *
+     * @param nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }

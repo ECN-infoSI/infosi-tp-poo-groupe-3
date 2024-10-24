@@ -14,14 +14,25 @@ public class ElementDeJeu {
     */
     protected Point2D pos;
     
+    /**
+     *
+     */
     public ElementDeJeu(){
         pos = new Point2D();
     }
     
+    /**
+     *
+     * @param p
+     */
     public ElementDeJeu(Point2D p){
         pos = p;
     }
     
+    /**
+     *
+     * @param edj
+     */
     public ElementDeJeu(ElementDeJeu edj){
         pos = edj.getPos();
     }
