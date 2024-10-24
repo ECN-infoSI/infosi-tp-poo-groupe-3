@@ -101,9 +101,11 @@ public class DatabaseTools {
             return id;
             } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
             }
+        }else{
+            return null;
         }
-        return null;
     }
 
     /**
