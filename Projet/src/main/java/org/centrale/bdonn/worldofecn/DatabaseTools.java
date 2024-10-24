@@ -92,14 +92,19 @@ public class DatabaseTools {
      * On va chercher puis on renvoie l'id_joueur
      */
     public Integer getPlayerID(String nomJoueur, String password) {
-        
-        if (this.login.equals(nomJoueur) && this.password.equals(password)){
+     
             try{
-                String sql = "SELECT mdp, id_joueur FROM joueur WHERE nom_code="+nomJoueur+";";
+                String sql = "SELECT mdp, id_joueur FROM joueur WHERE nom_code='"+nomJoueur+"';";
                 PreparedStatement stmt = this.connection.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery();
-                String mdp = rs.getString("mdp");
-                int id = rs.getInt("id_joueur");
+                String mdp = "";
+                int id = 0;
+                
+                while (rs.next()){
+                    mdp = rs.getString(1);
+                    id = rs.getInt(2);
+                }
+                
                 if (mdp.equals(password)){
                     return id;
                 } else {
@@ -108,10 +113,8 @@ public class DatabaseTools {
             } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-            }
-        }else{
-            return null;
         }
+        return null;
     }
 
     /**
@@ -129,8 +132,7 @@ public class DatabaseTools {
      */
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
         try{
-            String sql11 = "SELECT id_partie FROM partie WHERE id_joueur = "+idJoueur+" and nom = "+nomPartie+";";
-            System.out.println(sql11);
+            String sql11 = "SELECT id_partie FROM partie WHERE id_joueur = "+idJoueur+" and nom = '"+nomPartie+"';";
             PreparedStatement stmt11 = this.connection.prepareStatement(sql11);
             ResultSet rs11 = stmt11.executeQuery();
             if (!rs11.next()){
@@ -138,12 +140,17 @@ public class DatabaseTools {
                 PreparedStatement stmt12 = this.connection.prepareStatement(sql12);
                 stmt12.executeUpdate();
             }
-            String sql1 = "SELECT id_partie FROM partie WHERE nom = "+nomPartie+" and id_joueur = "+idJoueur+";";
+            String sql1 = "SELECT id_partie FROM partie WHERE nom = '"+nomPartie+"' and id_joueur = "+idJoueur+";";
             PreparedStatement stmt1 = this.connection.prepareStatement(sql1);
             ResultSet rs = stmt1.executeQuery();
-            int idPartie = rs.getInt("id_partie");
-            boolean rapide = (nomSauvegarde == null);
-            String sql2 = "INSERT INTO sauvegarde (rapide, nom, id_partie) VALUES ("+rapide+", "+nomSauvegarde+", "+idPartie+");";
+            int idPartie = 0;
+            boolean rapide = false;
+            while (rs.next()){
+                idPartie = rs.getInt("id_partie");
+                rapide = (nomSauvegarde == null);
+            }
+            
+            String sql2 = "INSERT INTO sauvegarde (rapide, nom, id_partie) VALUES ("+rapide+", '"+nomSauvegarde+"', "+idPartie+");";
             PreparedStatement stmt2 = this.connection.prepareStatement(sql2);
             stmt2.executeUpdate();
             String sql3 = "SELECT id_sauv FROM sauvegarde WHERE nom = "+nomSauvegarde+" and id_partie = "+idPartie+";";

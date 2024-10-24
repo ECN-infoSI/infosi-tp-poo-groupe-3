@@ -30,7 +30,7 @@ public class WorldOfECN {
         // Save world
         database.connect();
         Integer playerId = database.getPlayerID("nom de code", "super mot de passe");
-        
+        System.out.println(playerId);
         database.saveWorld(playerId, "partie1", "Start", world);
         
         // Retreive World
