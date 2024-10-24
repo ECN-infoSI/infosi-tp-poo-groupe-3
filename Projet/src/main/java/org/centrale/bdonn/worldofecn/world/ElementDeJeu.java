@@ -18,10 +18,17 @@ import java.util.Random;
 public abstract class ElementDeJeu {
     private Point2D position;
 
+    /**
+     *
+     * @param position
+     */
     public ElementDeJeu(Point2D position) {
         this.position = position;
     }
 
+    /**
+     *
+     */
     public ElementDeJeu() {
     }
     
@@ -36,10 +43,18 @@ public abstract class ElementDeJeu {
         this.position = new Point2D(rand.nextInt(world.getWidth()), rand.nextInt(world.getHeight()));
     }
 
+    /**
+     *
+     * @return
+     */
     public Point2D getPosition() {
         return position;
     }
 
+    /**
+     *
+     * @param position
+     */
     public void setPosition(Point2D position) {
         this.position = position;
     }

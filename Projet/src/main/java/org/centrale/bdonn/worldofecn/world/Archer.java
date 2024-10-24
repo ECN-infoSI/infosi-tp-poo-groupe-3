@@ -19,10 +19,18 @@ public class Archer extends Personnage {
      */
     private int nbFleche;
 
+    /**
+     *
+     * @return
+     */
     public int getNbFleche() {
         return nbFleche;
     }
 
+    /**
+     *
+     * @param nbFleche
+     */
     public void setNbFleche(int nbFleche) {
         this.nbFleche = nbFleche;
     }

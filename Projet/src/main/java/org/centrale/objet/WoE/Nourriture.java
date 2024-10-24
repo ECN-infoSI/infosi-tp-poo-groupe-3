@@ -14,6 +14,9 @@ public class Nourriture extends Objet{
     
     private int duree;
   
+    /**
+     *
+     */
     public Nourriture(){
         super();
         intensite = 0;
@@ -44,18 +47,34 @@ public class Nourriture extends Objet{
         duree = d;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDuree() {
         return duree;
     }
 
+    /**
+     *
+     * @param duree
+     */
     public void setDuree(int duree) {
         this.duree = duree;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIntensite() {
         return intensite;
     }
 
+    /**
+     *
+     * @param intensite
+     */
     public void setIntensite(int intensite) {
         this.intensite = intensite;
     }

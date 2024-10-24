@@ -15,6 +15,10 @@ public class Joueur {
     private String nom;
     private String login;
     private String password;
+
+    /**
+     *
+     */
     public Personnage personnage;
     
     /**

@@ -9,5 +9,10 @@ package org.centrale.objet.WoE;
  * @author titou
  */
 public interface Combattant{
+
+    /**
+     *
+     * @param c
+     */
     public void combattre(Creature c);
 }

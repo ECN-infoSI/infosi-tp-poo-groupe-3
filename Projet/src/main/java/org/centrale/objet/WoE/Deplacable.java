@@ -9,5 +9,9 @@ package org.centrale.objet.WoE;
  * @author titou
  */
 public interface Deplacable {
+
+    /**
+     *
+     */
     public void deplace();
 }

@@ -12,12 +12,25 @@ import java.util.Scanner;
  * @author thoma
  */
 public class Joueur {
+
+    /**
+     *
+     */
     public Personnage perso;
     
+    /**
+     *
+     */
     public ArrayList<Utilisable> effets;
     
+    /**
+     *
+     */
     public ArrayList<Utilisable> inventaire;
     
+    /**
+     *
+     */
     public Joueur(){
         this.effets = new ArrayList();
         this.inventaire = new ArrayList();

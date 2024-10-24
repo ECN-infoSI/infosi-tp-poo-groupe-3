@@ -10,6 +10,9 @@ package org.centrale.objet.WoE;
  */
 public class Lait extends Nourriture implements Utilisable{
     
+    /**
+     *
+     */
     public Lait(){
         super();
     }
